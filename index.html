@@ -1163,3 +1163,1396 @@ function clearAllData() {
 </script>
 </body>
 </html>
+
+
+<!-- ================= SPIDER-VERSE QUIZ ================= -->
+
+<section id="quiz" class="page">
+
+  <div class="quiz-container">
+
+    <h1>🕷️ THE MULTIVERSE QUIZ</h1>
+
+    <p class="quiz-subtitle">
+
+      Choose your topic. Set your challenge. Test your knowledge.
+
+    </p>
+
+    <!-- QUIZ SETUP -->
+
+    <div id="quiz-setup">
+
+      <label for="quiz-topic">Choose your quiz topic</label>
+
+      <select id="quiz-topic">
+
+        <option value="spider">🕷️ Spider-Verse</option>
+
+        <option value="world">🌍 Things Around Us</option>
+
+        <option value="science">🔬 Science</option>
+
+        <option value="history">📜 History</option>
+
+        <option value="geography">🗺️ Geography</option>
+
+        <option value="maths">➗ Mathematics</option>
+
+        <option value="general">🧠 General Knowledge</option>
+
+        <option value="mixed">🎲 Mixed Quiz</option>
+
+      </select>
+
+      <label for="quiz-length">How many questions?</label>
+
+      <select id="quiz-length">
+
+        <option value="5">5 questions · Quick</option>
+
+        <option value="10" selected>10 questions · Standard</option>
+
+        <option value="15">15 questions · Challenge</option>
+
+        <option value="20">20 questions · Expert</option>
+
+      </select>
+
+      <label for="quiz-seconds">Time allowed per question</label>
+
+      <select id="quiz-seconds">
+
+        <option value="10">10 seconds · Fast</option>
+
+        <option value="20" selected>20 seconds · Normal</option>
+
+        <option value="30">30 seconds · Relaxed</option>
+
+        <option value="0">No time limit</option>
+
+      </select>
+
+    </div>
+
+    <!-- TIMER AND START BUTTON AT THE TOP -->
+
+    <div class="quiz-topbar">
+
+      <div class="quiz-timer-box">
+
+        <span>⏱️ TIME</span>
+
+        <strong id="quiz-timer">20</strong>
+
+      </div>
+
+      <button id="quiz-start" type="button" onclick="startMultiverseQuiz()">
+
+        ▶ START QUIZ
+
+      </button>
+
+    </div>
+
+    <div id="quiz-game" hidden>
+
+      <div class="quiz-stats">
+
+        <span id="quiz-progress">Question 1</span>
+
+        <span id="quiz-score">Score: 0</span>
+
+      </div>
+
+      <div class="quiz-progress-track">
+
+        <div id="quiz-progress-fill"></div>
+
+      </div>
+
+      <h2 id="quiz-question"></h2>
+
+      <div id="quiz-options"></div>
+
+      <p id="quiz-feedback" aria-live="polite"></p>
+
+      <p id="quiz-auto-note">Choose an answer to continue automatically.</p>
+
+    </div>
+
+    <!-- FINAL RESULTS -->
+
+    <div id="quiz-results" hidden>
+
+      <h2>🏆 QUIZ COMPLETE!</h2>
+
+      <p id="quiz-final-score"></p>
+
+      <p id="quiz-percentage"></p>
+
+      <h3 id="quiz-rank"></h3>
+
+      <button type="button" onclick="resetMultiverseQuiz()">
+
+        🔄 PLAY AGAIN
+
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<style>
+
+.quiz-container {
+
+  max-width: 760px;
+
+  margin: 28px auto;
+
+  padding: 25px;
+
+  color: #fff;
+
+  background: rgba(7, 20, 38, .96);
+
+  border: 2px solid #5c8dff;
+
+  border-radius: 20px;
+
+  box-shadow: 0 0 25px rgba(92,141,255,.2);
+
+}
+
+.quiz-container h1 {
+
+  color: #a9d4ff;
+
+  text-align: center;
+
+  font-size: clamp(23px, 5vw, 36px);
+
+}
+
+.quiz-subtitle {
+
+  text-align: center;
+
+  color: #bdcce2;
+
+  line-height: 1.6;
+
+  margin-bottom: 25px;
+
+}
+
+#quiz-setup {
+
+  display: grid;
+
+  gap: 10px;
+
+}
+
+#quiz-setup label {
+
+  margin-top: 10px;
+
+  font-weight: bold;
+
+  color: #a9d4ff;
+
+}
+
+#quiz-setup select {
+
+  width: 100%;
+
+  padding: 13px;
+
+  border: 1px solid #42699c;
+
+  border-radius: 10px;
+
+  color: white;
+
+  background: #102746;
+
+  font-size: 15px;
+
+}
+
+.quiz-topbar {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 14px;
+
+  margin: 24px 0;
+
+  padding: 14px;
+
+  border: 1px solid #29476e;
+
+  border-radius: 14px;
+
+  background: #091a30;
+
+}
+
+.quiz-timer-box {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+
+  min-width: 75px;
+
+  color: #a9d4ff;
+
+}
+
+.quiz-timer-box strong {
+
+  font-size: 27px;
+
+  color: white;
+
+}
+
+#quiz-start,
+
+#quiz-results button {
+
+  padding: 13px 19px;
+
+  border: 0;
+
+  border-radius: 10px;
+
+  color: #071426;
+
+  background: #a9d4ff;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+}
+
+#quiz-start {
+
+  flex: 1;
+
+}
+
+#quiz-start:hover,
+
+#quiz-results button:hover {
+
+  background: #d5eaff;
+
+}
+
+.quiz-stats {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+  color: #a9d4ff;
+
+  margin-bottom: 12px;
+
+}
+
+.quiz-progress-track {
+
+  height: 8px;
+
+  overflow: hidden;
+
+  background: #182d4c;
+
+  border-radius: 10px;
+
+  margin-bottom: 24px;
+
+}
+
+#quiz-progress-fill {
+
+  width: 0%;
+
+  height: 100%;
+
+  background: linear-gradient(90deg,#5c8dff,#d16bff);
+
+  transition: width .25s;
+
+}
+
+#quiz-question {
+
+  line-height: 1.5;
+
+  margin-bottom: 20px;
+
+}
+
+#quiz-options {
+
+  display: grid;
+
+  gap: 11px;
+
+}
+
+.quiz-option {
+
+  width: 100%;
+
+  padding: 14px;
+
+  text-align: left;
+
+  color: white;
+
+  background: #102746;
+
+  border: 1px solid #42699c;
+
+  border-radius: 11px;
+
+  font-size: 15px;
+
+  cursor: pointer;
+
+}
+
+.quiz-option:hover:not(:disabled) {
+
+  background: #1d3d66;
+
+  border-color: #a9d4ff;
+
+}
+
+.quiz-option:disabled {
+
+  cursor: default;
+
+  opacity: 1;
+
+}
+
+.quiz-option.correct {
+
+  background: #164c3b;
+
+  border-color: #55e6a5;
+
+}
+
+.quiz-option.wrong {
+
+  background: #602b3a;
+
+  border-color: #ff8298;
+
+}
+
+#quiz-feedback {
+
+  min-height: 24px;
+
+  line-height: 1.5;
+
+  margin-top: 18px;
+
+}
+
+#quiz-auto-note {
+
+  color: #9eb5d4;
+
+  font-size: 13px;
+
+}
+
+#quiz-results {
+
+  text-align: center;
+
+  padding: 15px 0;
+
+}
+
+#quiz-results h2 {
+
+  color: #a9d4ff;
+
+}
+
+#quiz-results button {
+
+  margin-top: 15px;
+
+}
+
+@media(max-width: 480px) {
+
+  .quiz-container {
+
+    padding: 17px;
+
+  }
+
+  .quiz-topbar {
+
+    padding: 10px;
+
+    gap: 10px;
+
+  }
+
+  #quiz-start {
+
+    padding: 12px 8px;
+
+    font-size: 13px;
+
+  }
+
+}
+
+</style>
+
+<script>
+
+const multiverseQuestionBank = {
+
+  spider: [
+
+    {
+
+      q: "What is the real name of the original Spider-Man?",
+
+      a: ["Peter Parker", "Harry Osborn", "Eddie Brock", "Matt Murdock"],
+
+      c: 0,
+
+      e: "Peter Parker is the original Spider-Man."
+
+    },
+
+    {
+
+      q: "What is Miles Morales known for becoming?",
+
+      a: ["Iron Man", "Spider-Man", "Daredevil", "Doctor Strange"],
+
+      c: 1,
+
+      e: "Miles Morales becomes Spider-Man in his universe."
+
+    },
+
+    {
+
+      q: "What warns Spider-Man about nearby danger?",
+
+      a: ["Spider-Sense", "Super hearing", "Time travel", "Invisibility"],
+
+      c: 0,
+
+      e: "Spider-Sense alerts Spider-Man to danger."
+
+    },
+
+    {
+
+      q: "Who is known as Ghost-Spider?",
+
+      a: ["Gwen Stacy", "Felicia Hardy", "May Parker", "Jessica Jones"],
+
+      c: 0,
+
+      e: "Gwen Stacy is known as Ghost-Spider."
+
+    },
+
+    {
+
+      q: "What does Spider-Man commonly use to swing between buildings?",
+
+      a: ["Metal chains", "Webs", "Magnetic cables", "Parachutes"],
+
+      c: 1,
+
+      e: "Spider-Man swings using webs."
+
+    },
+
+    {
+
+      q: "What is the name of Miles Morales' uncle?",
+
+      a: ["Aaron Davis", "Ben Parker", "Tony Stark", "George Stacy"],
+
+      c: 0,
+
+      e: "Aaron Davis is Miles Morales' uncle."
+
+    },
+
+    {
+
+      q: "What is the name of Peter Parker's newspaper?",
+
+      a: ["Daily Bugle", "Daily Planet", "New York Times", "The Chronicle"],
+
+      c: 0,
+
+      e: "The Daily Bugle frequently employs Peter as a photographer."
+
+    },
+
+    {
+
+      q: "Which city is strongly associated with Spider-Man?",
+
+      a: ["New York City", "London", "Wakanda", "Gotham City"],
+
+      c: 0,
+
+      e: "New York City is Spider-Man's best-known home."
+
+    }
+
+  ],
+
+  world: [
+
+    {
+
+      q: "Which household appliance is mainly used to keep food cold?",
+
+      a: ["Oven", "Refrigerator", "Kettle", "Toaster"],
+
+      c: 1,
+
+      e: "A refrigerator keeps food cool to slow spoilage."
+
+    },
+
+    {
+
+      q: "Which material is commonly used to make window panes?",
+
+      a: ["Glass", "Cotton", "Cardboard", "Wool"],
+
+      c: 0,
+
+      e: "Glass allows light to pass through a window."
+
+    },
+
+    {
+
+      q: "What should you do before crossing a road?",
+
+      a: ["Look both ways", "Close your eyes", "Run without checking", "Follow any stranger"],
+
+      c: 0,
+
+      e: "Check for traffic in both directions before crossing safely."
+
+    },
+
+    {
+
+      q: "Which item is best for measuring body temperature?",
+
+      a: ["Ruler", "Thermometer", "Compass", "Measuring cup"],
+
+      c: 1,
+
+      e: "A thermometer measures temperature."
+
+    },
+
+    {
+
+      q: "Which of these is a renewable energy source?",
+
+      a: ["Coal", "Sunlight", "Petrol", "Natural gas"],
+
+      c: 1,
+
+      e: "Sunlight is naturally replenished."
+
+    },
+
+    {
+
+      q: "Which bin is generally used for paper recycling where recycling is available?",
+
+      a: ["Paper recycling bin", "Food waste bin", "Toilet", "Sink"],
+
+      c: 0,
+
+      e: "Clean paper can often be recycled in a designated paper bin."
+
+    },
+
+    {
+
+      q: "Which tool is used to tighten a screw?",
+
+      a: ["Screwdriver", "Paintbrush", "Spoon", "Comb"],
+
+      c: 0,
+
+      e: "A screwdriver turns screws."
+
+    },
+
+    {
+
+      q: "What is the safest way to handle an unknown electrical fault?",
+
+      a: ["Touch exposed wires", "Pour water on it", "Keep away and tell an adult", "Pull wires out"],
+
+      c: 2,
+
+      e: "Keep clear and get help from a qualified person."
+
+    }
+
+  ],
+
+  science: [
+
+    {
+
+      q: "Which planet is known as the Red Planet?",
+
+      a: ["Venus", "Mars", "Jupiter", "Mercury"],
+
+      c: 1,
+
+      e: "Iron-rich dust gives Mars its reddish appearance."
+
+    },
+
+    {
+
+      q: "Which gas do plants absorb during photosynthesis?",
+
+      a: ["Oxygen", "Carbon dioxide", "Helium", "Hydrogen"],
+
+      c: 1,
+
+      e: "Plants use carbon dioxide during photosynthesis."
+
+    },
+
+    {
+
+      q: "What is the boiling point of pure water at sea level?",
+
+      a: ["0°C", "50°C", "100°C", "200°C"],
+
+      c: 2,
+
+      e: "Pure water boils at about 100°C at standard atmospheric pressure."
+
+    },
+
+    {
+
+      q: "Which organ pumps blood around the human body?",
+
+      a: ["Lungs", "Heart", "Stomach", "Kidneys"],
+
+      c: 1,
+
+      e: "The heart pumps blood through the circulatory system."
+
+    },
+
+    {
+
+      q: "What force pulls objects towards Earth?",
+
+      a: ["Gravity", "Friction", "Magnetism", "Sound"],
+
+      c: 0,
+
+      e: "Gravity attracts objects with mass toward Earth."
+
+    },
+
+    {
+
+      q: "What is the basic unit of life?",
+
+      a: ["Atom", "Cell", "Organ", "Tissue"],
+
+      c: 1,
+
+      e: "Cells are the basic structural and functional units of living things."
+
+    },
+
+    {
+
+      q: "Which state of matter has a fixed volume but no fixed shape?",
+
+      a: ["Solid", "Liquid", "Gas", "Plasma only"],
+
+      c: 1,
+
+      e: "A liquid has a fixed volume and takes the shape of its container."
+
+    },
+
+    {
+
+      q: "Which part of a plant usually absorbs water from the soil?",
+
+      a: ["Flower", "Leaf", "Root", "Fruit"],
+
+      c: 2,
+
+      e: "Roots absorb water and minerals from the soil."
+
+    }
+
+  ],
+
+  history: [
+
+    {
+
+      q: "In which year did South Africa become a democracy with its first inclusive national election?",
+
+      a: ["1910", "1948", "1994", "2004"],
+
+      c: 2,
+
+      e: "South Africa held its first inclusive democratic national election in 1994."
+
+    },
+
+    {
+
+      q: "Who was South Africa's first democratically elected president?",
+
+      a: ["Nelson Mandela", "Thabo Mbeki", "Oliver Tambo", "F. W. de Klerk"],
+
+      c: 0,
+
+      e: "Nelson Mandela became president in 1994."
+
+    },
+
+    {
+
+      q: "What is history mainly the study of?",
+
+      a: ["Past events", "Future weather", "Only mathematics", "Space travel"],
+
+      c: 0,
+
+      e: "History investigates and interprets the human past."
+
+    },
+
+    {
+
+      q: "Which source is a primary historical source?",
+
+      a: ["A diary written at the time", "A modern textbook summary", "A recent review of a film", "A fictional story written today"],
+
+      c: 0,
+
+      e: "A diary written during the period is a direct historical source."
+
+    },
+
+    {
+
+      q: "What was apartheid in South Africa?",
+
+      a: ["A system of racial segregation", "A voting system for everyone", "A farming tool", "A peace treaty"],
+
+      c: 0,
+
+      e: "Apartheid was a system of legally enforced racial segregation and discrimination."
+
+    },
+
+    {
+
+      q: "Which organisation led the struggle against apartheid and later became a governing party?",
+
+      a: ["African National Congress", "United Nations only", "League of Nations", "European Union"],
+
+      c: 0,
+
+      e: "The ANC was a major movement in the struggle against apartheid."
+
+    }
+
+  ],
+
+  geography: [
+
+    {
+
+      q: "What is the capital city of South Africa where the Union Buildings are located?",
+
+      a: ["Pretoria", "Durban", "Gqeberha", "Kimberley"],
+
+      c: 0,
+
+      e: "Pretoria is the administrative capital and home of the Union Buildings."
+
+    },
+
+    {
+
+      q: "Which is the largest ocean on Earth?",
+
+      a: ["Atlantic", "Indian", "Pacific", "Arctic"],
+
+      c: 2,
+
+      e: "The Pacific Ocean is the largest."
+
+    },
+
+    {
+
+      q: "What does a map scale help you calculate?",
+
+      a: ["Real-world distance", "Air temperature", "Population age", "Rainfall colour"],
+
+      c: 0,
+
+      e: "A map scale relates map distances to actual distances."
+
+    },
+
+    {
+
+      q: "Which direction is opposite to north?",
+
+      a: ["East", "West", "South", "North-east"],
+
+      c: 2,
+
+      e: "South is opposite north."
+
+    },
+
+    {
+
+      q: "What is the imaginary line at 0° latitude called?",
+
+      a: ["Equator", "Prime Meridian", "Tropic of Capricorn", "Arctic Circle"],
+
+      c: 0,
+
+      e: "The Equator divides Earth into the Northern and Southern Hemispheres."
+
+    },
+
+    {
+
+      q: "Which instrument measures air pressure?",
+
+      a: ["Barometer", "Thermometer", "Rain gauge", "Compass"],
+
+      c: 0,
+
+      e: "A barometer measures atmospheric pressure."
+
+    }
+
+  ],
+
+  maths: [
+
+    {
+
+      q: "What is 12 × 8?",
+
+      a: ["86", "96", "108", "88"],
+
+      c: 1,
+
+      e: "12 × 8 = 96."
+
+    },
+
+    {
+
+      q: "A triangle has angles of 50° and 60°. What is the third angle?",
+
+      a: ["60°", "70°", "80°", "90°"],
+
+      c: 1,
+
+      e: "Triangle angles total 180°. 180° − 50° − 60° = 70°."
+
+    },
+
+    {
+
+      q: "Convert 250 cm³ to millilitres.",
+
+      a: ["25 mL", "250 mL", "2 500 mL", "0.25 mL"],
+
+      c: 1,
+
+      e: "One cubic centimetre is equal to one millilitre."
+
+    },
+
+    {
+
+      q: "What is the square root of 144?",
+
+      a: ["10", "11", "12", "14"],
+
+      c: 2,
+
+      e: "12 × 12 = 144."
+
+    },
+
+    {
+
+      q: "A rectangle is 7 cm long and 4 cm wide. What is its area?",
+
+      a: ["11 cm²", "22 cm²", "28 cm²", "14 cm²"],
+
+      c: 2,
+
+      e: "Area = length × width = 7 × 4 = 28 cm²."
+
+    },
+
+    {
+
+      q: "What is 3/4 written as a percentage?",
+
+      a: ["25%", "50%", "75%", "80%"],
+
+      c: 2,
+
+      e: "3 ÷ 4 = 0.75, which is 75%."
+
+    }
+
+  ],
+
+  general: [
+
+    {
+
+      q: "How many days are there in a leap year?",
+
+      a: ["364", "365", "366", "367"],
+
+      c: 2,
+
+      e: "A leap year has 366 days."
+
+    },
+
+    {
+
+      q: "Which language is mainly spoken in Brazil?",
+
+      a: ["Spanish", "Portuguese", "French", "Italian"],
+
+      c: 1,
+
+      e: "Portuguese is Brazil's official language."
+
+    },
+
+    {
+
+      q: "Which instrument has keys, pedals and strings?",
+
+      a: ["Piano", "Flute", "Drum", "Trumpet"],
+
+      c: 0,
+
+      e: "A piano uses keys to operate hammers that strike strings."
+
+    },
+
+    {
+
+      q: "How many sides does a hexagon have?",
+
+      a: ["Five", "Six", "Seven", "Eight"],
+
+      c: 1,
+
+      e: "A hexagon has six sides."
+
+    },
+
+    {
+
+      q: "Which star is closest to Earth?",
+
+      a: ["Sirius", "The Sun", "Polaris", "Betelgeuse"],
+
+      c: 1,
+
+      e: "The Sun is the star closest to Earth."
+
+    },
+
+    {
+
+      q: "Which continent is South Africa part of?",
+
+      a: ["Asia", "Europe", "Africa", "South America"],
+
+      c: 2,
+
+      e: "South Africa is in Africa."
+
+    }
+
+  ]
+
+};
+
+let multiverseQuestions = [];
+
+let multiverseIndex = 0;
+
+let multiverseScore = 0;
+
+let multiverseTimeLeft = 20;
+
+let multiverseTimer = null;
+
+let multiverseAdvanceTimer = null;
+
+let multiverseLocked = false;
+
+let multiverseSettings = {};
+
+function startMultiverseQuiz() {
+
+  clearInterval(multiverseTimer);
+
+  clearTimeout(multiverseAdvanceTimer);
+
+  const topic = document.getElementById("quiz-topic").value;
+
+  const length = Number(document.getElementById("quiz-length").value);
+
+  const seconds = Number(document.getElementById("quiz-seconds").value);
+
+  let pool;
+
+  if (topic === "mixed") {
+
+    pool = Object.keys(multiverseQuestionBank)
+
+      .flatMap(key => multiverseQuestionBank[key]);
+
+  } else {
+
+    pool = [...(multiverseQuestionBank[topic] || [])];
+
+  }
+
+  // Shuffle the questions so each round feels different.
+
+  pool = pool.sort(() => Math.random() - 0.5);
+
+  multiverseQuestions = pool.slice(0, Math.min(length, pool.length));
+
+  multiverseIndex = 0;
+
+  multiverseScore = 0;
+
+  multiverseSettings = { seconds };
+
+  if (!multiverseQuestions.length) return;
+
+  document.getElementById("quiz-setup").hidden = true;
+
+  document.getElementById("quiz-game").hidden = false;
+
+  document.getElementById("quiz-results").hidden = true;
+
+  document.getElementById("quiz-start").textContent = "QUIZ RUNNING";
+
+  showMultiverseQuestion();
+
+}
+
+function showMultiverseQuestion() {
+
+  clearInterval(multiverseTimer);
+
+  clearTimeout(multiverseAdvanceTimer);
+
+  if (multiverseIndex >= multiverseQuestions.length) {
+
+    finishMultiverseQuiz();
+
+    return;
+
+  }
+
+  multiverseLocked = false;
+
+  const item = multiverseQuestions[multiverseIndex];
+
+  document.getElementById("quiz-question").textContent = item.q;
+
+  document.getElementById("quiz-progress").textContent =
+
+    `Question ${multiverseIndex + 1} of ${multiverseQuestions.length}`;
+
+  document.getElementById("quiz-score").textContent =
+
+    `Score: ${multiverseScore}`;
+
+  document.getElementById("quiz-progress-fill").style.width =
+
+    `${(multiverseIndex / multiverseQuestions.length) * 100}%`;
+
+  document.getElementById("quiz-feedback").textContent = "";
+
+  document.getElementById("quiz-auto-note").textContent =
+
+    "Choose an answer. The next question loads automatically.";
+
+  const options = document.getElementById("quiz-options");
+
+  options.innerHTML = "";
+
+  item.a.forEach((answer, index) => {
+
+    const button = document.createElement("button");
+
+    button.type = "button";
+
+    button.className = "quiz-option";
+
+    button.textContent = `${String.fromCharCode(65 + index)}. ${answer}`;
+
+    button.addEventListener("click", () => answerMultiverseQuestion(index));
+
+    options.appendChild(button);
+
+  });
+
+  multiverseTimeLeft = multiverseSettings.seconds;
+
+  updateMultiverseTimer();
+
+  if (multiverseTimeLeft > 0) {
+
+    multiverseTimer = setInterval(() => {
+
+      multiverseTimeLeft--;
+
+      updateMultiverseTimer();
+
+      if (multiverseTimeLeft <= 0) {
+
+        clearInterval(multiverseTimer);
+
+        answerMultiverseQuestion(-1);
+
+      }
+
+    }, 1000);
+
+  }
+
+}
+
+function updateMultiverseTimer() {
+
+  document.getElementById("quiz-timer").textContent =
+
+    multiverseSettings.seconds === 0 ? "∞" : multiverseTimeLeft;
+
+}
+
+function answerMultiverseQuestion(selected) {
+
+  if (multiverseLocked) return;
+
+  multiverseLocked = true;
+
+  clearInterval(multiverseTimer);
+
+  const item = multiverseQuestions[multiverseIndex];
+
+  const buttons = document.querySelectorAll("#quiz-options .quiz-option");
+
+  buttons.forEach((button, index) => {
+
+    button.disabled = true;
+
+    if (index === item.c) {
+
+      button.classList.add("correct");
+
+    } else if (index === selected) {
+
+      button.classList.add("wrong");
+
+    }
+
+  });
+
+  if (selected === item.c) {
+
+    multiverseScore++;
+
+    document.getElementById("quiz-feedback").textContent =
+
+      "✅ Correct! " + item.e;
+
+  } else if (selected === -1) {
+
+    document.getElementById("quiz-feedback").textContent =
+
+      "⏰ Time's up! " + item.e;
+
+  } else {
+
+    document.getElementById("quiz-feedback").textContent =
+
+      "❌ Not quite. " + item.e;
+
+  }
+
+  document.getElementById("quiz-score").textContent =
+
+    `Score: ${multiverseScore}`;
+
+  document.getElementById("quiz-auto-note").textContent =
+
+    "Moving to the next question...";
+
+  // Automatically move forward after showing feedback.
+
+  multiverseAdvanceTimer = setTimeout(() => {
+
+    multiverseIndex++;
+
+    showMultiverseQuestion();
+
+  }, 1800);
+
+}
+
+function finishMultiverseQuiz() {
+
+  clearInterval(multiverseTimer);
+
+  clearTimeout(multiverseAdvanceTimer);
+
+  document.getElementById("quiz-game").hidden = true;
+
+  document.getElementById("quiz-results").hidden = false;
+
+  document.getElementById("quiz-progress-fill").style.width = "100%";
+
+  document.getElementById("quiz-timer").textContent = "✓";
+
+  document.getElementById("quiz-start").textContent = "▶ START QUIZ";
+
+  const total = multiverseQuestions.length;
+
+  const percentage = Math.round((multiverseScore / total) * 100);
+
+  document.getElementById("quiz-final-score").textContent =
+
+    `You scored ${multiverseScore} out of ${total} questions.`;
+
+  document.getElementById("quiz-percentage").textContent =
+
+    `Accuracy: ${percentage}%`;
+
+  let rank;
+
+  if (percentage >= 90) {
+
+    rank = "🕷️ Multiverse Legend";
+
+  } else if (percentage >= 70) {
+
+    rank = "⚡ Elite Web-Slinger";
+
+  } else if (percentage >= 50) {
+
+    rank = "🕸️ City Defender";
+
+  } else {
+
+    rank = "🦸 Rookie Hero — train and try again!";
+
+  }
+
+  document.getElementById("quiz-rank").textContent = rank;
+
+}
+
+function resetMultiverseQuiz() {
+
+  clearInterval(multiverseTimer);
+
+  clearTimeout(multiverseAdvanceTimer);
+
+  document.getElementById("quiz-setup").hidden = false;
+
+  document.getElementById("quiz-game").hidden = true;
+
+  document.getElementById("quiz-results").hidden = true;
+
+  document.getElementById("quiz-start").textContent = "▶ START QUIZ";
+
+  document.getElementById("quiz-timer").textContent =
+
+    document.getElementById("quiz-seconds").value === "0"
+
+      ? "∞"
+
+      : document.getElementById("quiz-seconds").value;
+
+}
+
+</script>
