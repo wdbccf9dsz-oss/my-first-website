@@ -1,300 +1,1165 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#080d20">
-<title>My Spider-Verse</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#050716">
+<title>My Spider-Verse 🕷️</title>
+
 <style>
-:root{--bg:#070b1c;--panel:#101a38;--blue:#45caff;--red:#ff456d;--purple:#b76cff;--white:#f5f7ff;--muted:#b8c3e7;--accent:#45caff}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--white);font-family:system-ui,-apple-system,sans-serif;background-size:cover;background-position:center;background-attachment:fixed}
-button,input,textarea,select{font:inherit}button{cursor:pointer;color:white;background:#121d3d;border:1px solid #465b91;border-radius:10px;padding:10px 14px}button:hover{border-color:var(--accent);transform:translateY(-1px)}button:disabled{opacity:.4;cursor:not-allowed}input,textarea,select{display:block;width:100%;margin:8px 0 14px;padding:12px;color:white;background:#080e22;border:1px solid #465b91;border-radius:10px}textarea{min-height:110px;resize:vertical}label{font-size:14px;color:#dce5ff}a{color:var(--blue)}.city{position:fixed;inset:0;z-index:-2;overflow:hidden;background:radial-gradient(ellipse at 80% 10%,#49265e,transparent 40%),radial-gradient(ellipse at 15% 40%,#123c77,transparent 45%),linear-gradient(#11142e,#080d20 70%,#03050d)}.moon{position:absolute;top:8%;right:18%;width:100px;height:100px;border-radius:50%;background:#c8b7ff;box-shadow:0 0 65px #a48cff;animation:moonGlow 4s ease-in-out infinite alternate}.skyline{position:absolute;bottom:0;width:100%;height:48%;display:flex;align-items:end;gap:4px}.building{flex:1;min-width:8px;height:60%;background:repeating-linear-gradient(0deg,#0a1028 0 12px,#244b7d 13px 15px);border-top:2px solid #4775b5}.building:nth-child(3n){height:90%}.building:nth-child(4n){height:75%}.building:nth-child(5n){height:100%}.building:nth-child(2n){height:55%}.web{position:absolute;inset:0;opacity:.08;background:repeating-conic-gradient(from 10deg at 90% 0%,transparent 0deg 10deg,#c4b5ff 10.2deg 10.5deg,transparent 11deg 20deg)}
-.topbar{position:sticky;top:0;z-index:10;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:14px;background:#070b1cee;border-bottom:1px solid #334879;backdrop-filter:blur(12px)}.brand{font-weight:950;letter-spacing:2px}.brand span{color:var(--red)}nav{display:flex;flex-wrap:wrap;gap:6px}nav button{font-size:12px;padding:8px 10px}.hero{min-height:85vh;display:flex;align-items:center;padding:45px 7%}.intro{max-width:900px}.eyebrow{color:var(--accent);letter-spacing:4px;font-size:12px}h1{font-size:clamp(45px,10vw,100px);line-height:.95;letter-spacing:-3px;margin:18px 0;animation:welcome 1s both}h1 span{color:var(--red);text-shadow:0 0 25px #ff456d66}p{line-height:1.65}.muted{color:var(--muted)}.primary{background:linear-gradient(120deg,#15345b,#38194d);border-color:var(--accent);font-weight:bold;padding:13px 18px}.red{border-color:var(--red)}.purple{border-color:var(--purple)}.portals,.grid2,.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.portals{margin-top:28px}.portal,.panel,.chapter,.music-card{background:#0c1530ed;border:1px solid #354879;border-radius:16px;padding:18px}.portal{text-align:left;animation:rise .6s both}.portal strong,.portal small{display:block}.portal small{color:var(--muted);margin-top:7px;line-height:1.5}.portal:nth-child(3n+1){border-color:var(--red)}.portal:nth-child(3n+2){border-color:var(--blue)}.portal:nth-child(3n){border-color:var(--purple)}.page{display:none;padding:30px 5% 70px;min-height:80vh}.page.active{display:block;animation:fade .35s ease}.page-inner{max-width:1100px;margin:auto}.page-head{border-bottom:1px solid #354879;margin-bottom:24px;padding-bottom:15px}h2{font-size:clamp(30px,6vw,52px);margin:8px 0}h3{margin-top:0}.panel{margin:15px 0}.chapter{margin:15px 0}.chapter.chapter-hidden{display:none}.chapter-nav{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0}.chapter-nav button{flex:1 1 90px}.chapter-nav .chapter-current{border-color:var(--accent);background:linear-gradient(120deg,#15345b,#38194d);box-shadow:0 0 12px #27c9ff44}.chapter-progress{flex:1 1 100%;color:var(--muted);font-size:13px}.chapter h3{color:#a7dfff}.chapter p{color:#d8def4}.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid3{grid-template-columns:repeat(3,minmax(0,1fr))}.music-card{display:block;text-decoration:none;color:white}.music-card small{color:var(--blue)}.music-card p{color:var(--muted)}.music-card:nth-child(3n+2){border-color:var(--purple)}.music-card:nth-child(3n){border-color:var(--red)}.controls{display:flex;flex-wrap:wrap;gap:8px}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row>*{flex:1}.avatar-preview{display:grid;place-items:center;min-height:210px;margin:15px 0;border:1px dashed #6174a9;border-radius:15px;background:radial-gradient(circle,#302054,#080e22)}.minifig{display:flex;flex-direction:column;align-items:center;filter:drop-shadow(0 0 14px var(--suit));animation:bob 2.4s ease-in-out infinite}.lego-head{width:68px;height:62px;border:4px solid #10172d;border-radius:17px 17px 12px 12px;background:var(--suit);display:grid;place-items:center;font-size:28px;position:relative}.lego-stud{position:absolute;top:-12px;width:24px;height:12px;background:var(--suit);border:3px solid #10172d;border-radius:5px 5px 0 0}.lego-body{width:82px;height:66px;border:4px solid #10172d;border-radius:12px 12px 6px 6px;background:var(--suit);display:grid;place-items:center;font-size:26px}.lego-legs{display:flex;gap:5px}.lego-legs span{width:35px;height:43px;border:4px solid #10172d;border-radius:4px 4px 8px 8px;background:var(--suit)}.health-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.meter{height:13px;border:1px solid #59658c;border-radius:20px;overflow:hidden;background:#28162f}.meter div{height:100%;width:100%;background:linear-gradient(90deg,#ff315a,#ff9860);transition:width .15s}.meter.blue div{background:linear-gradient(90deg,#25bfff,#8cecff)}.arena{height:430px;max-height:60vh;min-height:300px;position:relative;overflow:hidden;margin:15px 0;border:2px solid var(--purple);border-radius:16px;background:linear-gradient(transparent 65%,#14274b 65%),radial-gradient(ellipse at 50% 15%,#46235f,#101638 70%);touch-action:none;user-select:none}.arena:after{content:"";position:absolute;inset:65% -20% -40%;background:linear-gradient(#29478066 1px,transparent 1px),linear-gradient(90deg,#29478066 1px,transparent 1px);background-size:30px 25px;transform:perspective(160px) rotateX(25deg);pointer-events:none}.fighter,.boss{position:absolute;display:grid;place-items:center;transform:translate(-50%,-50%);border-radius:50%;z-index:2}.fighter{left:50%;top:78%;width:48px;height:48px;font-size:25px;background:#07152d;border:2px solid var(--blue);box-shadow:0 0 17px var(--blue)}.fighter.attacking{animation:attack .3s}.boss{left:50%;top:23%;width:78px;height:78px;font-size:38px;background:#28112d;border:3px solid var(--red);box-shadow:0 0 25px var(--red);animation:bob 1.4s infinite}.projectile,.webshot{position:absolute;z-index:4;width:14px;height:14px;border-radius:50%;pointer-events:none}.projectile{width:22px;height:22px;background:radial-gradient(circle at 35% 30%,#fff4f4 0 8%,#ffb0b9 12%,#ff315a 42%,#a90035 75%);border:2px solid #ffd0d7;box-shadow:0 0 9px #ff315a,0 0 22px #ff315a,0 0 38px #ff315a;z-index:7}.projectile:after{content:"";position:absolute;width:30px;height:7px;left:-26px;top:6px;border-radius:10px;background:linear-gradient(90deg,transparent,#ff456d99);transform:rotate(-20deg)}.webshot{width:15px;height:15px;background:#a9f0ff;border:2px solid #fff;box-shadow:0 0 10px #25bfff,0 0 20px #25bfff;z-index:6}.boss{z-index:5;outline:3px solid #ff456d66;outline-offset:5px}.arena .warning{z-index:8;background:#120a20aa;padding:12px 0;top:42%;font-size:clamp(14px,3vw,22px);letter-spacing:1px}.warning{display:none;position:absolute;z-index:5;top:45%;width:100%;text-align:center;font-weight:900;color:#ff8ca4;text-shadow:0 0 10px red;animation:pulse .35s infinite alternate}.overlay{display:none;position:absolute;z-index:6;inset:0;place-items:center;text-align:center;padding:20px;background:#050817eF}.overlay-inner{max-width:400px}.mission-work{display:none}.mission-work.active{display:block}canvas{display:block;width:100%;height:300px;background:white;border-radius:10px;touch-action:none}.location-card{min-height:115px;text-align:left;background:linear-gradient(140deg,#14244a,#0b1128);border-color:#3b639e}.location-card span{display:block;font-size:28px}.location-card strong{display:block;margin:6px 0}.city-map{position:relative;overflow:hidden;min-height:330px;border:1px solid #4a6393;border-radius:16px;background:linear-gradient(35deg,transparent 47%,#51617a 48% 52%,transparent 53%),linear-gradient(145deg,transparent 43%,#51617a 44% 49%,transparent 50%),#10203b}.map-building{position:absolute;padding:12px;background:#1a3260;border:1px solid #5c7bb2;border-radius:8px;text-align:center;box-shadow:0 5px 15px #0005}.map-building.home{left:8%;top:12%}.map-building.school{right:8%;top:16%}.map-building.work{left:12%;bottom:12%}.map-building.shop{right:8%;bottom:13%}.map-player{position:absolute;left:50%;top:48%;font-size:32px;transform:translate(-50%,-50%);animation:bob 1.5s infinite}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:30;padding:12px 17px;background:#18274a;border:1px solid var(--accent);border-radius:12px;display:none;max-width:90%}.camera-panel{padding:14px}.camera-panel input[type=range]{width:100%;accent-color:var(--accent)}.city-map{isolation:isolate}.map-player{z-index:3;transition:left .15s ease,top .15s ease;will-change:left,top}.map-building{z-index:2}footer{text-align:center;color:var(--muted);padding:30px 15px;border-top:1px solid #26385f}
-@keyframes moonGlow{to{box-shadow:0 0 95px #a48cff;transform:scale(1.06)}}@keyframes welcome{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@keyframes fade{from{opacity:0}to{opacity:1}}@keyframes bob{50%{translate:0 -7px}}@keyframes pulse{to{opacity:.45}}@keyframes attack{50%{transform:translate(-50%,-50%) scale(1.5) rotate(-12deg)}}@media(max-width:700px){.portals,.grid3{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}.hero{padding:35px 6%}.topbar{justify-content:center}nav{justify-content:center}.arena{height:380px}}@media(max-width:430px){.portals,.grid3{grid-template-columns:1fr}}
-
-/* MY SPIDER-VERSE VISUAL OVERHAUL */
-:root{--bg:#050716;--panel:rgba(5,10,30,.88);--blue:#27c9ff;--red:#ff285f;--purple:#c52cff;--white:#f4f6ff;--muted:#b7c8ee;--accent:#ff2c8a}
-body{background:#050716;color:var(--white);font-family:"Trebuchet MS",system-ui,sans-serif}
-body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 15%,rgba(28,63,150,.35),transparent 45%),radial-gradient(ellipse at 85% 70%,rgba(157,16,93,.22),transparent 38%),linear-gradient(180deg,#030512 0%,#090c24 55%,#03040c 100%)}
-header,.topbar,nav{backdrop-filter:blur(14px)}
-.panel,.card,.music-card,.location-card,.story-card,.mission-card{background:linear-gradient(145deg,rgba(8,15,39,.94),rgba(4,7,22,.96));border:1px solid rgba(39,201,255,.65);box-shadow:0 0 0 1px rgba(197,44,255,.12),0 8px 28px rgba(0,0,0,.3),0 0 20px rgba(39,201,255,.07);border-radius:15px}
-h1,h2,.brand{letter-spacing:.02em;text-shadow:0 0 22px rgba(255,40,95,.24)}
-button,.button{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
-button:hover,.button:hover{box-shadow:0 0 18px rgba(255,44,138,.24)}
-.page-head h2{color:#ff4b91}
-.city-map{position:relative;min-height:300px;overflow:hidden;border:1px solid #2677bd;border-radius:16px;background:linear-gradient(180deg,rgba(11,20,56,.18),rgba(3,5,20,.35)),repeating-linear-gradient(90deg,transparent 0 55px,rgba(45,102,176,.12) 56px 58px),linear-gradient(180deg,#171a48,#091329 75%,#070916);box-shadow:inset 0 0 40px rgba(34,102,255,.13)}
-.city-map:before{content:"";position:absolute;inset:auto 0 0;height:70%;background:repeating-linear-gradient(90deg,transparent 0 18px,rgba(5,8,24,.8) 19px 24px),linear-gradient(0deg,#070916,transparent);opacity:.8;pointer-events:none}
-.map-building{z-index:1;position:absolute;min-width:78px;padding:13px 8px;text-align:center;border:1px solid rgba(58,180,255,.7);border-radius:10px;background:linear-gradient(150deg,rgba(26,39,83,.95),rgba(7,10,28,.95));box-shadow:0 0 18px rgba(39,201,255,.12);font-size:13px}
-.map-building.home{left:5%;bottom:12%}.map-building.school{left:29%;top:14%}.map-building.work{right:27%;bottom:12%}.map-building.shop{right:5%;top:17%}
-.map-player{position:absolute;z-index:3;left:47%;top:48%;font-size:30px;filter:drop-shadow(0 0 10px #ff2c8a);transition:left .35s ease,top .35s ease}
-.city-route{height:3px;background:linear-gradient(90deg,#ff285f,#c52cff,#27c9ff);border-radius:99px;margin:12px 0}
-.city-hud{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
-.city-stat{flex:1;min-width:100px;padding:12px;border:1px solid rgba(197,44,255,.55);border-radius:12px;background:rgba(5,9,26,.78)}
-.city-stat strong{display:block;color:#64dcff;font-size:1.15rem}
-.city-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;max-width:320px;margin:12px auto}
-.city-controls button{min-height:48px;font-size:18px;border-color:#bc3cff;background:#101331}
-.city-controls .blank{visibility:hidden}
-.city-log{max-height:130px;overflow:auto;padding:10px;border-radius:10px;background:rgba(0,0,0,.22);font-size:13px}
-.location-card{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;min-height:105px}
-.location-card strong{font-size:16px}.location-card small{color:var(--muted)}
-@media(max-width:650px){.city-map{min-height:270px}.map-building{min-width:62px;font-size:11px;padding:9px 4px}.map-player{font-size:25px}.city-stat{min-width:42%}}
-
-
-/* 3D LEGO CITY update */
-.city-map{
- min-height:440px!important;
- perspective:1000px;
- background:
- linear-gradient(90deg,transparent 48%,#34476a 48% 52%,transparent 52%),
- linear-gradient(0deg,transparent 47%,#34476a 47% 53%,transparent 53%),
- radial-gradient(ellipse at 50% 40%,#384f82 0,#17284d 42%,#070c20 100%)!important;
- box-shadow:inset 0 0 55px #030611,0 15px 35px #0008;
+:root {
+  --bg:#050716;
+  --panel:rgba(8,15,39,.94);
+  --blue:#27c9ff;
+  --pink:#ff2c8a;
+  --purple:#c52cff;
+  --white:#f4f6ff;
+  --muted:#b7c8ee;
 }
-.city-map:before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
- background:repeating-linear-gradient(90deg,transparent 0 95px,#08132b 96px 101px),repeating-linear-gradient(0deg,transparent 0 78px,#08132b 79px 84px)}
-.map-building{
- z-index:2;min-width:92px!important;min-height:82px;display:flex;flex-direction:column;align-items:center;justify-content:center;
- background:linear-gradient(135deg,#355b91,#14264b 65%,#080f27)!important;
- border:2px solid #69d9ff!important;border-radius:7px!important;
- box-shadow:5px 7px 0 #050817,9px 12px 15px #0008,inset 0 0 0 3px #ffffff0d!important;
- transform:perspective(400px) rotateY(-7deg) rotateX(2deg);
- font-weight:900;text-shadow:0 2px 4px #000;
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  margin:0;
+  color:var(--white);
+  font-family:"Trebuchet MS",system-ui,sans-serif;
+  background:
+    radial-gradient(ellipse at 20% 20%,#142d65,transparent 42%),
+    radial-gradient(ellipse at 80% 70%,#50133e,transparent 40%),
+    linear-gradient(180deg,#030512,#090c24 55%,#03040c);
+  background-attachment:fixed;
 }
-.map-building.home{left:7%;top:12%}.map-building.school{right:7%;top:12%}.map-building.work{left:8%;bottom:12%}.map-building.shop{right:7%;bottom:12%}
-.map-player{
- z-index:5;width:48px;height:90px;left:50%;top:51%;font-size:0;
- transform:translate(-50%,-50%);
- transition:left .22s ease,top .22s ease;
- filter:drop-shadow(0 12px 7px #0009);
+button,input,textarea,select { font:inherit; }
+button {
+  color:white;
+  background:#101b3b;
+  border:1px solid #42618f;
+  border-radius:10px;
+  padding:11px 14px;
+  cursor:pointer;
+  transition:.2s;
 }
-.city-minifig{width:48px;height:88px;position:relative;animation:figWalk .42s infinite alternate;transform-style:preserve-3d}
-.city-minifig .fighead{position:absolute;top:0;left:9px;width:30px;height:29px;border:2px solid #11182a;border-radius:8px 8px 6px 6px;background:var(--suit,#e52c55);box-shadow:inset -5px -3px #0002,3px 2px 0 #ffffff22;display:grid;place-items:center;font-size:15px}
-.city-minifig .figstud{position:absolute;top:-5px;left:17px;width:14px;height:7px;border:2px solid #11182a;border-radius:4px 4px 0 0;background:var(--suit,#e52c55)}
-.city-minifig .figtorso{position:absolute;top:30px;left:4px;width:40px;height:31px;border:2px solid #11182a;border-radius:7px 7px 4px 4px;background:linear-gradient(120deg,var(--suit,#e52c55),#151c39);display:grid;place-items:center;font-size:19px;box-shadow:inset -5px -3px #0003}
-.city-minifig .figarm{position:absolute;top:33px;width:8px;height:26px;border:2px solid #11182a;border-radius:4px;background:var(--suit,#e52c55)}
-.city-minifig .figarm.left{left:-3px;transform:rotate(12deg)}.city-minifig .figarm.right{right:-3px;transform:rotate(-12deg)}
-.city-minifig .figleg{position:absolute;top:60px;width:17px;height:27px;border:2px solid #11182a;border-radius:3px 3px 5px 5px;background:var(--suit,#e52c55);box-shadow:inset -4px 0 #0003}
-.city-minifig .figleg.left{left:6px}.city-minifig .figleg.right{right:6px}
-.city-controls button{box-shadow:0 4px 0 #050817,0 8px 16px #0007}
-.portal{box-shadow:0 8px 0 #050817,0 14px 24px #0007,inset 0 0 20px #2c68a322;transform:translateZ(0)}
-.portal:hover{transform:perspective(600px) rotateX(2deg) translateY(-3px)}
-.panel,.chapter,.music-card{box-shadow:0 7px 0 #030611,0 13px 26px #0005,inset 0 0 25px #284b8015}
-@keyframes figWalk{from{transform:rotateY(-3deg) translateY(0)}to{transform:rotateY(4deg) translateY(-2px)}}
-@media(max-width:650px){.city-map{min-height:380px!important}.map-building{min-width:65px!important;min-height:65px;font-size:11px;padding:7px 3px}.map-player{transform:translate(-50%,-50%) scale(.82)}}
-
-
-/* Separate creative areas and clearer minifigure details */
-#drawingStudio canvas{display:block;width:100%;height:auto;min-height:220px;background:#f8fafc;border:2px solid #9bdcff;border-radius:12px;touch-action:none}
-#confessions .city-log{min-height:100px;max-height:280px;overflow:auto;padding:12px;white-space:normal}
-#confessions input[type=checkbox]{width:auto;display:inline-block;margin-right:8px}
-#confessions label{line-height:1.6}
-.lego-head{position:relative;background:linear-gradient(#ffdb9b,#f4b96c);border:3px solid #111827;border-radius:10px 10px 14px 14px;min-height:48px;color:#111827;font-size:18px;display:flex;align-items:center;justify-content:center}
-.lego-head:after{content:'â  â';position:absolute;top:15px;left:0;right:0;color:#111827;letter-spacing:5px;font-size:13px;text-align:center}
-.lego-body{position:relative;overflow:hidden;border:3px solid #111827!important;border-radius:8px 8px 13px 13px;background-image:repeating-linear-gradient(45deg,transparent 0 8px,rgba(255,255,255,.22) 8px 11px)!important}
-
-
-/* Clear, illustrated boss battle characters */
-.fighter,.boss{border-radius:0;background:transparent;border:0;box-shadow:none;overflow:visible}
-.fighter{width:92px;height:132px;z-index:4;filter:drop-shadow(0 0 12px #45caff)}
-.boss{width:118px;height:142px;z-index:5;filter:drop-shadow(0 0 15px #ff315a);animation:bob 1.4s infinite}
-.fighter .character-head,.boss .character-head{position:absolute;left:50%;top:0;transform:translateX(-50%);width:62px;height:55px;border:3px solid #080d20;border-radius:45% 45% 38% 38%;}
-.fighter .character-head{background:repeating-linear-gradient(35deg,#d91f42 0 8px,#8b102a 9px 11px);}
-.fighter .character-head:before,.fighter .character-head:after{content:"";position:absolute;top:22px;width:20px;height:10px;background:#f7fbff;border:2px solid #071225;transform:skew(-25deg);}
-.fighter .character-head:before{left:6px}.fighter .character-head:after{right:6px;transform:skew(25deg)}
-.fighter .character-body{position:absolute;top:49px;left:14px;width:64px;height:51px;border:3px solid #071225;border-radius:15px 15px 8px 8px;background:linear-gradient(120deg,#e72d4f,#8f102d);}
-.fighter .character-body:before{content:"â³";position:absolute;inset:5px;display:grid;place-items:center;color:#d9f8ff;font-size:24px;text-shadow:0 0 5px #fff}
-.fighter .character-arm{position:absolute;top:55px;left:0;width:18px;height:49px;background:#d91f42;border:3px solid #071225;border-radius:12px;transform:rotate(18deg)}
-.fighter .character-arm.right{left:auto;right:0;transform:rotate(-25deg)}
-.fighter .character-leg{position:absolute;top:92px;left:22px;width:22px;height:37px;border:3px solid #071225;border-radius:4px 4px 8px 8px;background:#172d59}
-.fighter .character-leg.right{left:49px}
-.boss .character-head{width:83px;height:73px;top:0;border-radius:42% 42% 35% 35%;background:radial-gradient(circle at 50% 30%,#653a80,#24102f 72%);border:4px solid #ff456d;}
-.boss .character-head:before,.boss .character-head:after{content:"";position:absolute;top:29px;width:23px;height:13px;background:#ff315a;box-shadow:0 0 12px #ff315a;transform:skew(-20deg)}
-.boss .character-head:before{left:12px}.boss .character-head:after{right:12px;transform:skew(20deg)}
-.boss .character-body{position:absolute;top:65px;left:17px;width:84px;height:57px;border:4px solid #ff456d;border-radius:18px 18px 8px 8px;background:linear-gradient(135deg,#35133e,#0b1028);}
-.boss .character-body:before,.boss .character-body:after{content:"";position:absolute;top:7px;width:14px;height:50px;background:#ff315a;opacity:.85;filter:drop-shadow(0 0 5px #ff315a)}
-.boss .character-body:before{left:-13px;transform:rotate(25deg)}.boss .character-body:after{right:-13px;transform:rotate(-25deg)}
-.boss .character-leg{position:absolute;top:112px;left:29px;width:24px;height:25px;border:3px solid #ff456d;border-radius:4px 4px 8px 8px;background:#24102f}
-.boss .character-leg.right{left:65px}
-.arena{background:radial-gradient(ellipse at 50% 20%,#35264f,#101638 65%,#080d20);}
-.arena .warning{background:#260716eF;border:2px solid #ff456d;border-radius:10px;max-width:92%;left:4%;box-shadow:0 0 24px #ff315a88}
-.image-preview{display:none;width:100%;max-width:100%;max-height:65vh;object-fit:contain;image-rendering:auto;border:1px solid #465b91;border-radius:12px;margin:14px 0;background:#080e22}
-
-
-/* SPIRAL WAVES, UPDATED TYPE, AND RESPONSIVE BOX FIXES */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Nunito+Sans:wght@400;500;600;700;800&display=swap');
-:root{--wave-blue:rgba(39,201,255,.18);--wave-pink:rgba(255,40,138,.13);--wave-purple:rgba(160,73,255,.16)}
-html,body{max-width:100%;overflow-x:hidden}
-body{font-family:'Nunito Sans',system-ui,-apple-system,sans-serif;background:#050716;}
-h1,h2,h3,.brand,.eyebrow,.portal strong,.page-head h2{font-family:'Orbitron','Trebuchet MS',system-ui,sans-serif}
-body:before{content:"";position:fixed;inset:-35%;z-index:-1;pointer-events:none;background:repeating-radial-gradient(ellipse at 50% 50%,transparent 0 18px,var(--wave-blue) 19px 21px,transparent 22px 38px),repeating-conic-gradient(from 15deg at 50% 50%,transparent 0deg 9deg,var(--wave-purple) 9.2deg 9.8deg,transparent 10deg 18deg),radial-gradient(ellipse at 25% 20%,rgba(16,36,99,.9),transparent 50%),radial-gradient(ellipse at 80% 70%,rgba(97,12,87,.75),transparent 52%),#050716;background-size:100% 100%;animation:spiralDrift 28s linear infinite;opacity:.95}
-.city{display:none!important}
-@keyframes spiralDrift{0%{transform:rotate(0deg) scale(1)}50%{transform:rotate(180deg) scale(1.08)}100%{transform:rotate(360deg) scale(1)}}
-*,*:before,*:after{box-sizing:border-box}
-main,section,.page-inner,.intro,.panel,.chapter,.portal,.music-card,.grid2,.grid3,.portals,.controls,.row,.health-grid{min-width:0;max-width:100%}
-.panel,.chapter,.portal,.music-card,.page-head{overflow-wrap:anywhere;word-break:normal}
-.grid2>*,.grid3>*,.portals>*,.health-grid>*{min-width:0;max-width:100%}
-button{max-width:100%;white-space:normal;overflow-wrap:anywhere;line-height:1.35}
-.controls{align-items:stretch}
-.controls>button{flex:0 1 auto;min-width:0}
-input,textarea,select{min-width:0;max-width:100%}
-#confessions input[type=checkbox]{width:auto;display:inline-block}
-.topbar{min-width:0}
-nav{min-width:0;max-width:100%}
-.arena{height:clamp(400px,58vh,540px);max-height:none;min-height:400px;overflow:hidden;isolation:isolate}
-.fighter,.boss{display:block;border:0;border-radius:0;background:transparent;box-shadow:none;outline:0;overflow:visible}
-.fighter{width:92px;height:132px;left:50%;top:78%;z-index:5;filter:drop-shadow(0 0 12px #45caff)}
-.boss{width:118px;height:142px;left:50%;top:23%;z-index:5;filter:drop-shadow(0 0 15px #ff315a);animation:bob 1.4s infinite}
-.fighter .character-head{background:repeating-linear-gradient(35deg,var(--hero-suit,#d91f42) 0 8px,#8b102a 9px 11px)}
-.fighter .character-body{background:linear-gradient(120deg,var(--hero-suit,#e72d4f),#8f102d)}
-.fighter .character-arm{background:var(--hero-suit,#d91f42)}
-.fighter .character-leg{background:var(--hero-accent,#172d59)}
-.boss .character-head{background:radial-gradient(circle at 50% 30%,#653a80,#24102f 72%)}
-.warning{left:3%!important;width:94%!important;padding:14px 10px!important;border:2px solid #ff456d;border-radius:12px;background:#250616f2;box-shadow:0 0 26px #ff315a99;white-space:normal;line-height:1.35}
-.attack-telegraph{display:none;position:absolute;z-index:7;height:7px;transform-origin:0 50%;border-radius:99px;background:#ff315a;box-shadow:0 0 8px #ff315a,0 0 20px #ff315a;pointer-events:none;opacity:.95}
-.arena-label{position:absolute;top:10px;right:12px;z-index:2;color:#9ce8ff;font-size:11px;letter-spacing:2px;font-weight:900}
-#difficulty{font-weight:800;border-color:var(--accent)}
-@media(max-width:700px){.portals,.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}.grid2{grid-template-columns:minmax(0,1fr)}.topbar{align-items:flex-start}nav{justify-content:flex-start}.arena{height:470px;min-height:470px}.fighter{transform:translate(-50%,-50%) scale(.82)}.boss{transform:translate(-50%,-50%) scale(.82)}}
-@media(max-width:480px){.portals,.grid3{grid-template-columns:minmax(0,1fr)}.page{padding-left:4%;padding-right:4%}.panel,.chapter{padding:14px}.controls>button{flex:1 1 44%}.topbar{padding:10px}}
-
+button:hover {
+  border-color:var(--pink);
+  box-shadow:0 0 15px #ff2c8a33;
+}
+button:disabled { opacity:.4; cursor:not-allowed; }
+input,textarea,select {
+  width:100%;
+  margin:8px 0 14px;
+  padding:12px;
+  color:white;
+  background:#070d21;
+  border:1px solid #42618f;
+  border-radius:10px;
+}
+input[type="checkbox"],input[type="range"] { width:auto; }
+input[type="color"] { min-height:44px; }
+textarea { min-height:120px; resize:vertical; }
+label { color:#dce5ff; font-size:14px; }
+a { color:var(--blue); }
+p { line-height:1.75; }
+h1,h2,h3 { line-height:1.2; }
+h2 { font-size:clamp(30px,6vw,48px); }
+h3 { color:#a7dfff; }
+.muted { color:var(--muted); }
+.accent { color:var(--pink); }
+.primary {
+  background:linear-gradient(120deg,#15345b,#38194d);
+  border-color:var(--blue);
+  font-weight:bold;
+}
+.topbar {
+  position:sticky;
+  top:0;
+  z-index:1000;
+  padding:13px;
+  background:rgba(5,7,22,.97);
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid #334879;
+}
+.brand {
+  text-align:center;
+  font-weight:950;
+  font-size:22px;
+  letter-spacing:3px;
+  margin:3px 0 13px;
+}
+.brand span { color:var(--pink); }
+nav {
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:8px;
+  max-width:1200px;
+  margin:auto;
+}
+nav button {
+  width:100%;
+  min-height:43px;
+  font-size:12px;
+  padding:9px 5px;
+}
+.page {
+  display:none;
+  min-height:80vh;
+  padding:28px 5% 65px;
+  animation:fade .3s ease;
+}
+.page.active { display:block; }
+.page-inner { max-width:1100px; margin:auto; }
+.page-head {
+  margin-bottom:25px;
+  padding-bottom:15px;
+  border-bottom:1px solid #354879;
+}
+.page-head h2 { color:#ff4b91; margin-bottom:8px; }
+.hero {
+  min-height:60vh;
+  display:flex;
+  align-items:center;
+  padding:35px 2%;
+}
+.intro { max-width:900px; }
+.eyebrow {
+  color:var(--blue);
+  letter-spacing:4px;
+  font-size:12px;
+  font-weight:bold;
+}
+.hero h1 {
+  font-size:clamp(48px,10vw,100px);
+  line-height:.95;
+  letter-spacing:-3px;
+  margin:18px 0;
+}
+.hero h1 span {
+  color:var(--pink);
+  text-shadow:0 0 25px #ff456d66;
+}
+.panel,.portal,.chapter,.music-card {
+  background:var(--panel);
+  border:1px solid #354879;
+  border-radius:16px;
+  padding:18px;
+  box-shadow:0 8px 25px #0003;
+}
+.panel { margin:15px 0; }
+.portals,.grid2,.grid3 {
+  display:grid;
+  gap:14px;
+}
+.portals { grid-template-columns:repeat(3,minmax(0,1fr)); margin:25px 0; }
+.grid2 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.grid3 { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.portal {
+  width:100%;
+  text-align:left;
+  min-height:135px;
+}
+.portal strong,.portal small { display:block; }
+.portal strong { font-size:17px; }
+.portal small { margin-top:8px; color:var(--muted); line-height:1.5; }
+.portal:nth-child(3n+1) { border-color:var(--pink); }
+.portal:nth-child(3n+2) { border-color:var(--blue); }
+.portal:nth-child(3n) { border-color:var(--purple); }
+.row,.controls {
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  align-items:center;
+}
+.row > * { flex:1; min-width:0; }
+.divider { border:0; border-top:1px solid #354879; margin:22px 0; }
+.tag {
+  display:inline-block;
+  border:1px solid var(--purple);
+  color:#e0b6ff;
+  border-radius:99px;
+  padding:5px 10px;
+  font-size:12px;
+}
+.chapter { margin:15px 0; line-height:1.8; }
+.chapter h3 { color:var(--blue); }
+.chapter-nav { display:flex; flex-wrap:wrap; gap:8px; margin:18px 0; }
+.chapter-nav button { flex:1 1 90px; }
+.chapter-nav button.current { border-color:var(--pink); background:linear-gradient(120deg,#15345b,#38194d); }
+.chapter-hidden { display:none !important; }
+.chapter-progress { width:100%; padding:8px; color:var(--muted); text-align:center; }
+.music-card { display:block; color:white; text-decoration:none; margin:10px 0; }
+.music-card small { color:var(--blue); }
+.music-card p { color:var(--muted); }
+.meter {
+  height:14px;
+  border:1px solid #52648e;
+  border-radius:20px;
+  overflow:hidden;
+  background:#24152d;
+}
+.meter div { height:100%; width:100%; background:linear-gradient(90deg,#ff315a,#ff9860); transition:width .2s; }
+.meter.blue div { background:linear-gradient(90deg,#25bfff,#8cecff); }
+.arena {
+  height:360px;
+  position:relative;
+  overflow:hidden;
+  margin:15px 0;
+  border:2px solid var(--purple);
+  border-radius:16px;
+  background:linear-gradient(transparent 65%,#14274b 65%),radial-gradient(ellipse at 50% 15%,#46235f,#101638 70%);
+  touch-action:manipulation;
+}
+.fighter,.boss {
+  position:absolute;
+  display:grid;
+  place-items:center;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+}
+.fighter {
+  left:50%; top:78%; width:50px; height:50px; font-size:26px;
+  background:#07152d; border:2px solid var(--blue); box-shadow:0 0 17px var(--blue);
+}
+.boss {
+  left:50%; top:23%; width:78px; height:78px; font-size:38px;
+  background:#28112d; border:3px solid var(--pink); box-shadow:0 0 25px var(--pink);
+  animation:float 1.5s infinite ease-in-out;
+}
+.warning {
+  display:none; position:absolute; top:43%; width:100%; text-align:center;
+  font-weight:900; color:#ff8ca4; font-size:clamp(16px,3vw,25px);
+  text-shadow:0 0 10px red;
+}
+.overlay {
+  display:none; position:absolute; inset:0; z-index:5; place-items:center;
+  text-align:center; padding:20px; background:#050817ee;
+}
+.overlay.show { display:grid; }
+.avatar-preview {
+  display:grid; place-items:center; min-height:220px; margin:15px 0;
+  border:1px dashed #6174a9; border-radius:15px;
+  background:radial-gradient(circle,#302054,#080e22);
+}
+.minifig { display:flex; flex-direction:column; align-items:center; filter:drop-shadow(0 0 14px var(--suit,#27c9ff)); }
+.fig-head,.fig-body,.fig-leg { background:var(--suit,#27c9ff); border:4px solid #10172d; }
+.fig-head { width:68px; height:62px; border-radius:17px 17px 12px 12px; display:grid; place-items:center; font-size:28px; }
+.fig-body { width:82px; height:66px; border-radius:12px; display:grid; place-items:center; font-size:26px; }
+.fig-legs { display:flex; gap:5px; }
+.fig-leg { width:35px; height:43px; border-radius:5px; }
+canvas { display:block; width:100%; height:300px; background:white; border-radius:10px; touch-action:none; }
+.toast {
+  display:none; position:fixed; bottom:18px; left:50%; transform:translateX(-50%);
+  z-index:2000; padding:12px 17px; background:#18274a;
+  border:1px solid var(--blue); border-radius:12px; max-width:90%;
+}
+footer { text-align:center; color:var(--muted); padding:30px 15px; border-top:1px solid #26385f; }
+@keyframes fade { from {opacity:0} to {opacity:1} }
+@keyframes float { 50% {transform:translateY(-8px)} }
+@media(max-width:750px) {
+  nav { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .portals,.grid3,.grid2 { grid-template-columns:1fr; }
+  .page { padding:20px 4% 50px; }
+  .hero { min-height:50vh; }
+  .arena { height:330px; }
+}
 </style>
 </head>
+
 <body>
-<div class="spiral-backdrop" aria-hidden="true"></div>
-<header class="topbar"><div class="brand">MY <span>SPIDER</span>-VERSE</div><nav><button onclick="openPage('home')">Home</button><button onclick="openPage('story')">My Story</button><button onclick="openPage('music')">Music</button><button onclick="openPage('game')">Boss Mode</button><button onclick="openPage('heroLab')">Hero Lab</button><button onclick="openPage('missions')">Missions</button><button onclick="openPage('confessions')">Confessions</button><button onclick="openPage('settings')">Settings</button></nav></header>
-<main>
-<section id="home" class="hero page active"><div class="intro"><div class="eyebrow">YOUR CITY. YOUR RULES. YOUR UNIVERSE.</div><h1>WELCOME TO<br>YOUR <span>SPIDER-VERSE.</span></h1><p>Every universe has secrets. Every hero has a story. Create your minifigure, build your soundtrack, solve mysteries and face The Glitch.</p><button class="primary" onclick="openPage('story')">ENTER THE STORY â</button> <div class="portals"><button class="portal" onclick="openPage('story')"><span>ð</span><strong>ð THE MYSTERY</strong><small>Read all six chapters of The Midnight Signal.</small></button><button class="portal" onclick="openPage('music')"><span>ð§</span><strong>ð§ YOUR SOUNDTRACK</strong><small>Build a playlist around your own vibe.</small></button><button class="portal" onclick="openPage('game')"><span>âï¸</span><strong>ð® BOSS MODE</strong><small>Watch the Glitch's attacks and dodge them.</small></button><button class="portal" onclick="openPage('heroLab')"><span>ð·ï¸</span><strong>ð·ï¸ HERO LAB</strong><small>Build a LEGO-style Spider-person.</small></button><button class="portal" onclick="openPage('missions')"><span>ð§©</span><strong>ð§© DAILY MISSIONS</strong><small>Activate puzzles and earn points.</small></button></div><div class="portals" style="margin-top:14px">
-<button class="portal" onclick="openPage('settings')"><span>ð¼ï¸</span><strong>ð¼ï¸ BACKGROUND STUDIO</strong><small>Import a picture from your gallery and customise your universe.</small></button>
-<button class="portal" onclick="openPage('missions')"><span>ð§©</span><strong>ð§© PUZZLE ROOM</strong><small>Try riddles, unlock missions and earn points.</small></button>
-<button class="portal" onclick="openPage('settings')"><span>âï¸</span><strong>âï¸ CUSTOMISE</strong><small>Change your theme and background options.</small></button>
-<button class="portal" onclick="openPage('storyCreator')"><span>âï¸</span><strong>STORY CREATOR</strong><small>Write a brand-new story separately from The Midnight Signal.</small></button>
-<button class="portal" onclick="openPage('drawingStudio')"><span>ð¨</span><strong>DRAWING STUDIO</strong><small>Open your own canvas and make artwork.</small></button>
-<button class="portal" onclick="openPage('confessions')"><span>ð¬</span><strong>PRIVATE CONFESSIONS</strong><small>Ask the bot for support or leave a message for the creator.</small></button>
-</div></div></section>
-<section id="story" class="page"><div class="page-inner"><div class="page-head"><div class="eyebrow">CLASSIFIED CITY FILES</div><h2>The Midnight Signal</h2><p class="muted">Your original mystery story. Six chapters are waiting.</p></div>
-<div class="chapter-nav" id="chapterNav" aria-label="Chapter navigation">
-<button type="button" onclick="changeChapter(-1)" id="previousChapter">â PREVIOUS</button>
-<button type="button" onclick="goToChapter(0)" data-chapter-button="0">1</button>
-<button type="button" onclick="goToChapter(1)" data-chapter-button="1">2</button>
-<button type="button" onclick="goToChapter(2)" data-chapter-button="2">3</button>
-<button type="button" onclick="goToChapter(3)" data-chapter-button="3">4</button>
-<button type="button" onclick="goToChapter(4)" data-chapter-button="4">5</button>
-<button type="button" onclick="goToChapter(5)" data-chapter-button="5">6</button>
-<button type="button" onclick="changeChapter(1)" id="nextChapter">NEXT â</button>
-<div class="chapter-progress" id="chapterProgress" aria-live="polite">Chapter 1 of 6</div>
+<header class="topbar">
+  <div class="brand">MY <span>SPIDER</span>-VERSE 🕷️</div>
+  <nav aria-label="Main navigation">
+    <button onclick="openPage('home')">🏠 Home</button>
+    <button onclick="openPage('story')">📖 My Story</button>
+    <button onclick="openPage('music')">🎧 Music</button>
+    <button onclick="openPage('game')">⚔️ Boss Mode</button>
+    <button onclick="openPage('heroLab')">🕷️ Hero Lab</button>
+    <button onclick="openPage('missions')">🧩 Missions</button>
+    <button onclick="openPage('storyCreator')">✍️ Story Creator</button>
+    <button onclick="openPage('drawingStudio')">🎨 Drawing Studio</button>
+    <button onclick="openPage('confessions')">💬 Confessions</button>
+    <button onclick="openPage('settings')">⚙️ Settings</button>
+  </nav>
+</header>
+
+<!-- HOME -->
+<section id="home" class="page active">
+<div class="page-inner">
+  <div class="hero">
+    <div class="intro">
+      <div class="eyebrow">YOUR UNIVERSE. YOUR RULES.</div>
+      <h1>WELCOME TO<br>MY <span>SPIDER-VERSE</span></h1>
+      <p class="muted">Every universe has a story. Every hero has a beginning. This is your own corner of the multiverse: create a hero, write your story, challenge a boss, discover missions and build something that feels like you.</p>
+      <div class="controls">
+        <button class="primary" onclick="openPage('story')">📖 Enter My Story</button>
+        <button onclick="openPage('game')">⚔️ Face The Glitch</button>
+        <button onclick="openPage('heroLab')">🕷️ Build My Hero</button>
+      </div>
+    </div>
+  </div>
+  <div class="page-head">
+    <h2>Choose Your Portal</h2>
+    <p class="muted">Each button opens its own page.</p>
+  </div>
+  <div class="portals">
+    <button class="portal" onclick="openPage('story')"><strong>📖 My Story</strong><small>Read six longer chapters about a mysterious signal and a city that needs a hero.</small></button>
+    <button class="portal" onclick="openPage('music')"><strong>🎧 Music Room</strong><small>Build a soundtrack for training, exploring and winning your next mission.</small></button>
+    <button class="portal" onclick="openPage('game')"><strong>⚔️ Boss Mode</strong><small>Battle The Glitch, dodge attacks and shoot web blasts.</small></button>
+    <button class="portal" onclick="openPage('heroLab')"><strong>🕷️ Hero Lab</strong><small>Choose a suit colour, symbol and hero name.</small></button>
+    <button class="portal" onclick="openPage('missions')"><strong>🧩 Missions</strong><small>Explore your mission board, solve clues and track progress.</small></button>
+    <button class="portal" onclick="openPage('storyCreator')"><strong>✍️ Story Creator</strong><small>Write your own Spider-Verse scene and save it in this browser.</small></button>
+    <button class="portal" onclick="openPage('drawingStudio')"><strong>🎨 Drawing Studio</strong><small>Draw a mask, suit design, logo or anything else you imagine.</small></button>
+    <button class="portal" onclick="openPage('confessions')"><strong>💬 Confessions</strong><small>Write thoughts for yourself. Entries are stored in this browser.</small></button>
+    <button class="portal" onclick="openPage('settings')"><strong>⚙️ Settings</strong><small>Change the colours or choose your own background.</small></button>
+  </div>
+  <div class="panel">
+    <span class="tag">MULTIVERSE MESSAGE</span>
+    <h3>🕸️ You don't need to be fearless to be a hero.</h3>
+    <p class="muted">Sometimes being a hero means moving forward while you are still figuring things out. Your story is allowed to change as you do.</p>
+  </div>
 </div>
-<div class="chapter"><h3>CHAPTER ONE â THE CITY THAT FORGOT</h3><p>At exactly 11:47 p.m., every screen in the city went black. Phones stopped working. Traffic lights froze. The enormous digital clock above Central Station displayed a single symbol: a white spider surrounded by a circle of blue light.</p><p>Most people thought it was a power failure. But you noticed something different. Every screen came back on at the same moment, and every screen showed the same sentence: <em>WE REMEMBER WHAT YOU FORGOT.</em></p><p>You had seen that symbol before. It was drawn on a page in an old notebook hidden in your home for years. The notebook belonged to someone whose name your family refused to mention.</p></div>
-<div class="chapter"><h3>CHAPTER TWO â THE ROOFTOP</h3><p>You followed the signal through empty streets until it led you to an abandoned building overlooking the city. The elevator had no power, so you climbed the stairs. At the top, a window stood open to the cold night air.</p><p>A figure waited on the roof. Their suit shimmered with red and blue light, and a thin silver thread stretched from their wrist to the tower across the street.</p><p>"You're late," the stranger said. "Who are you?" you asked. They looked toward the skyline. "Someone who tried to save this city once. Someone who failed."</p></div>
-<div class="chapter"><h3>CHAPTER THREE â THE MISSING MINUTE</h3><p>The stranger explained that a minute had disappeared from every clock in the city. Not just a minute of time, but a memory shared by thousands of people. Nobody could remember what happened at 11:47 p.m. the previous night.</p><p>A machine called the Memory Engine sat beneath Central Station. It was designed to store memories safely, but someone had changed its purpose. It was now collecting memories and turning them into energy.</p><p>The stranger handed you a small device. A blue light pulsed inside it. "The machine recognises you. I don't know why. But if you want answers, you need to reach its control room."</p></div>
-<div class="chapter"><h3>CHAPTER FOUR â THE GLITCH</h3><p>The entrance to the underground station was covered in strange digital symbols. As you stepped closer, the symbols rearranged themselves into a face made of static.</p><p>"You should have stayed forgotten," it said. The ground shook. Lights burst into life, revealing a tall figure surrounded by broken pieces of glowing code.</p><p>The figure called itself The Glitch. It claimed the city was safer without its painful memories. It wanted to remove every mistake, every loss and every difficult truth. You realised that it wasn't trying to destroy the city. It was trying to control what everyone was allowed to remember.</p></div>
-<div class="chapter"><h3>CHAPTER FIVE â THE CHOICE</h3><p>The Memory Engine filled the room with thousands of tiny lights. Each light represented a memory: a birthday, an apology, a friendship, a mistake, a moment someone wished they could change.</p><p>The Glitch offered you a deal. You could erase every painful memory in your own life and never feel that pain again. All you had to do was leave the machine running.</p><p>For a moment, you considered it. But you remembered that difficult experiences could also teach people, connect them and help them understand each other. A perfect memory was not the same thing as a perfect life.</p></div>
-<div class="chapter"><h3>CHAPTER SIX â BEFORE THE SUNRISE</h3><p>The battle began when you refused the offer. The Glitch unleashed waves of red energy, and the entire control room shook. You dodged, fought back and used the blue device to interrupt the machine.</p><p>With one final strike, the machine shut down. The lights returned to the city. Memories flowed back to their owners, and the missing minute appeared on every clock.</p><p>The stranger stood beside you as the sun rose behind the skyline. "You saved them," they said. You looked at the city below. "We saved them."</p><p>The stranger smiled, then disappeared into the morning mist. Your device blinked once more. A new message appeared: <strong>UNIVERSE 02 DETECTED.</strong></p><p>The city was safe. But somewhere beyond it, another signal was waiting.</p></div>
-</div></section>
-<section id="music" class="page"><div class="page-inner"><div class="page-head"><div class="eyebrow">YOUR UNIVERSE HAS A SOUNDTRACK</div><h2>Music Room ð§</h2><p class="muted">Create and edit a playlist that fits your vibe. Songs open as searches in Spotify; this page does not stream copyrighted songs itself.</p></div><div class="panel"><h3>Choose your vibe</h3><div class="controls"><button onclick="setVibe('Happy','happy upbeat pop')">âï¸ Happy</button><button onclick="setVibe('Chill','chill feel good R&B')">ð Chill</button><button onclick="setVibe('Confident','confident hype music')">â¡ Confident</button><button onclick="setVibe('Focus','instrumental focus music')">ð¯ Focus</button><button onclick="setVibe('Party','upbeat amapiano party')">ð Party</button><button onclick="setVibe('Nostalgic','2000s nostalgic hits')">ð¼ Nostalgic</button></div><p id="vibeLabel" class="muted">Current vibe: Happy</p><label for="songTitle">Song title</label><input id="songTitle" placeholder="Song name"><label for="songArtist">Artist</label><input id="songArtist" placeholder="Artist name"><div class="controls"><button class="primary" onclick="addSong()">ADD TO MY PLAYLIST</button><button onclick="savePlaylist()">SAVE PLAYLIST</button><button onclick="loadPlaylist()">LOAD SAVED PLAYLIST</button></div><div id="playlist" class="panel"><p class="muted">Your playlist is empty. Add a song above.</p></div><button onclick="openSpotifyVibe()">OPEN MY VIBE ON SPOTIFY â</button></div><div class="grid3"><a class="music-card" target="_blank" rel="noopener" href="https://open.spotify.com/search/happy%20pop">âï¸<h3>DAYLIGHT</h3><p>Bright, upbeat music.</p><small>EXPLORE â</small></a><a class="music-card" target="_blank" rel="noopener" href="https://open.spotify.com/search/feel%20good%20R%26B">ð<h3>BLUE HOUR</h3><p>Feel-good R&B.</p><small>EXPLORE â</small></a><a class="music-card" target="_blank" rel="noopener" href="https://open.spotify.com/search/upbeat%20amapiano">ð<h3>CITY LIGHTS</h3><p>Rhythm for the streets.</p><small>EXPLORE â</small></a></div></div></section>
-<section id="game" class="page"><div class="page-inner"><div class="page-head"><div class="eyebrow">BOSS MODE Â· FINAL BATTLE</div><h2>Defeat The Glitch</h2><p class="muted">Watch the warning, move around, attack when the boss is open, and dodge red projectiles.</p></div><div class="panel"><label for="difficulty">Difficulty</label><select id="difficulty" onchange="toast('Difficulty set to '+this.options[this.selectedIndex].text+'. Restart the battle to apply it.')"><option value="easy" selected>ð¢ Easy</option><option value="medium">ðµ Medium</option><option value="hard">ð  Hard</option><option value="extreme">â ï¸ Extremely Hard</option></select><div class="health-grid"><div><strong>YOUR HEALTH</strong><div id="heroHealthText">â¥ â¥ â¥ â¥</div><div class="meter blue"><div id="heroHealthBar"></div></div></div><div><strong>THE GLITCH</strong><div id="bossHealthText">100%</div><div class="meter"><div id="bossHealthBar"></div></div></div></div><p>Score: <strong id="score">0</strong> Â· Boss phase: <strong id="phase">1</strong></p><div class="arena" id="arena"><div class="arena-label">THE GLITCH ARENA</div><div class="attack-telegraph" id="attackTelegraph"></div><div class="boss" id="boss" aria-label="The Glitch boss"><span class="character-head"></span><span class="character-body"></span><span class="character-leg"></span><span class="character-leg right"></span></div><div class="fighter" id="fighter" aria-label="Your spider hero"><span class="character-head"></span><span class="character-body"></span><span class="character-arm"></span><span class="character-arm right"></span><span class="character-leg"></span><span class="character-leg right"></span></div><div class="warning" id="warning">WARNING!</div><div class="overlay" id="gameOverlay"><div class="overlay-inner"><h2 id="resultTitle">READY?</h2><p id="resultText">The city needs you.</p><button class="primary" onclick="startBattle()">FIGHT AGAIN</button><button onclick="openPage('home')">EXIT</button></div></div></div><div class="controls"><button class="primary" onclick="attackBoss()">ð¸ï¸ WEB ATTACK</button><button class="red" onclick="dodge()">ð¨ DODGE</button><button onclick="startBattle()">â» RESTART</button><button onclick="openPage('home')">EXIT BOSS MODE</button></div><p class="muted">iPad: drag your finger around the arena to move. Tap Web Attack to shoot. Tap Dodge to avoid danger briefly.</p></div></div></section>
-<section id="heroLab" class="page"><div class="page-inner"><div class="page-head"><div class="eyebrow">BUILD YOUR MINIFIGURE</div><h2>Hero Lab ð·ï¸</h2><p class="muted">Choose a Spider-person inspiration, then customise your LEGO-style character. Your hero appears in Boss Mode.</p></div><div class="grid2"><div class="panel"><label for="characterChoice">Spider-person</label><select id="characterChoice" onchange="selectCharacter()"><option value="Miles Morales">Miles Morales</option><option value="Gwen Stacy">Gwen Stacy</option><option value="Peter Parker">Peter Parker</option><option value="Peter B. Parker">Peter B. Parker</option><option value="Spider-Man 2099">Spider-Man 2099</option><option value="Venom-inspired hero">Venom-inspired hero</option><option value="Create your own">Create your own</option></select><label for="heroName">Your hero name</label><input id="heroName" maxlength="40" placeholder="e.g. Night Web"><label for="heroColour">Suit colour</label><input id="heroColour" type="color" value="#e52c55" oninput="changeSuit()"><label for="heroAccent">Accent colour</label><input id="heroAccent" type="color" value="#45caff" oninput="changeSuit()"><label for="heroSymbol">Chest symbol</label><select id="heroSymbol"><option>ð·ï¸</option><option>â¡</option><option>ð</option><option>ð¥</option><option>â­</option><option>ðº</option><option>ð¦</option><option>â ï¸</option></select><label for="heroPower">Special ability</label><select id="heroPower"><option>Web control</option><option>Super speed</option><option>Camouflage</option><option>Bio-electric blasts</option><option>Spider-sense</option><option>Portal jumping</option><option>Energy shields</option><option>Symbiote tendrils</option></select><label for="heroOrigin">Origin story</label><textarea id="heroOrigin" placeholder="Where did your hero come from?"></textarea><button class="primary" onclick="createHero()">SAVE MY HERO</button><button onclick="saveHero()">DOWNLOAD PROFILE</button></div><div class="panel"><h3>Your LEGO-style hero</h3><div class="avatar-preview"><div class="minifig" id="minifig" style="--suit:#e52c55"><div class="lego-head"><span class="lego-stud"></span><span id="figFace">â</span></div><div class="lego-body" id="figBody">ð·ï¸</div><div class="lego-legs"><span></span><span></span></div></div></div><div id="heroProfile" class="muted">Choose a character and customise your minifigure.</div><button onclick="openPage('game')">USE HERO IN BOSS MODE</button></div></div></div></section>
-<section id="missions" class="page"><div class="page-inner"><div class="page-head"><div class="eyebrow">DAILY PUZZLE FILES</div><h2>Missions & Mysteries ð§©</h2><p class="muted">Activate a mission to unlock its puzzle. Correct answers earn points. The daily puzzle changes by date.</p></div><div class="panel"><div class="row"><div><strong>Mission points:</strong> <span id="missionPoints">0</span> â­</div><div><strong>Daily streak:</strong> <span id="streak">0</span> days</div></div><h3 id="missionTitle">Today's encrypted message</h3><p id="missionIntro">Activate the mission to reveal the puzzle.</p><button class="primary" id="activateMission" onclick="activateDailyMission()">ACTIVATE MISSION</button><div id="missionPuzzle" style="display:none"><p id="riddle"></p><label for="missionAnswer">Your answer</label><input id="missionAnswer" placeholder="Think carefully..."><button onclick="submitAnswer()">SUBMIT ANSWER</button><p id="missionFeedback" class="muted"></p><button onclick="showHint()">REQUEST A HINT (costs no points)</button><p id="missionHint" class="muted"></p></div></div><div class="grid3"><div class="panel"><h3>âï¸ Writing Station</h3><p class="muted">Write a scene, poem, diary entry or new chapter.</p><button onclick="chooseMission('write')">START WRITING</button></div><div class="panel"><h3>ð¨ Drawing Machine</h3><p class="muted">Draw, erase, clear and save your own artwork.</p><button onclick="chooseMission('draw')">START DRAWING</button></div><div class="panel"><h3>ð¤ Creative Studio</h3><p class="muted">Plan a comic, song, film or game.</p><button onclick="chooseMission('create')">START CREATING</button></div></div><div class="panel mission-work" id="work-write"><h3>Writing Station</h3><label for="writingTitle">Title</label><input id="writingTitle" placeholder="Give your creation a title"><label for="writingText">Your writing</label><textarea id="writingText" placeholder="Start writing here..."></textarea><button class="primary" onclick="downloadFields('writingTitle','writingText','my-story.txt')">DOWNLOAD WRITING</button><button onclick="saveFields('writingTitle','writingText','writing')">SAVE IN THIS BROWSER</button></div><div class="panel mission-work" id="work-draw"><h3>Drawing Machine</h3><p class="muted">Choose a colour, draw with your finger or stylus, erase, clear, and download.</p><div class="controls"><button onclick="setPen('#111827')">Black</button><button onclick="setPen('#e52c55')">Red</button><button onclick="setPen('#168eea')">Blue</button><button onclick="setPen('#8e4bdb')">Purple</button><button onclick="setPen('#1eaa87')">Green</button><button onclick="setEraser()">Eraser</button><button onclick="clearCanvas()">Clear</button></div><br><canvas id="drawCanvas" width="900" height="500"></canvas><br><button class="primary" onclick="downloadDrawing()">DOWNLOAD DRAWING</button></div><div class="panel mission-work" id="work-create"><h3>Creative Studio</h3><label for="projectType">Project type</label><select id="projectType"><option>Song idea</option><option>Short film</option><option>Comic book</option><option>Character design</option><option>Game idea</option><option>Video concept</option></select><label for="projectTitle">Project title</label><input id="projectTitle" placeholder="Name your project"><label for="projectPlan">Your plan</label><textarea id="projectPlan" placeholder="Describe your idea and first step"></textarea><button class="primary" onclick="downloadFields('projectTitle','projectPlan','creative-project.txt')">DOWNLOAD PLAN</button><button onclick="saveFields('projectTitle','projectPlan','project')">SAVE IN THIS BROWSER</button></div></div></section>
-<section id="storyCreator" class="page"><div class="page-inner"><div class="page-head"><div class="eyebrow">YOUR OWN ORIGINALS</div><h2>Story Creator âï¸</h2><p class="muted">This is separate from My Story. The Midnight Signal stays as the six-chapter story to read.</p></div><div class="panel"><label for="newStoryTitle">Story title</label><input id="newStoryTitle" placeholder="Give your story a title"><label for="newStoryText">Your story</label><textarea id="newStoryText" rows="12" placeholder="Start a completely new story here..."></textarea><button class="primary" onclick="downloadFields('newStoryTitle','newStoryText','my-original-story.txt')">DOWNLOAD MY STORY</button><button onclick="saveFields('newStoryTitle','newStoryText','original-story')">SAVE ON THIS DEVICE</button></div></div></section>
-<section id="drawingStudio" class="page"><div class="page-inner"><div class="page-head"><div class="eyebrow">MAKE SOMETHING</div><h2>Drawing Studio ð¨</h2><p class="muted">Draw with your finger or stylus. Your drawing tools are separate from missions.</p></div><div class="panel"><div class="controls"><button onclick="setPen('#111827')">Black</button><button onclick="setPen('#e52c55')">Red</button><button onclick="setPen('#168eea')">Blue</button><button onclick="setPen('#8e4bdb')">Purple</button><button onclick="setPen('#1eaa87')">Green</button><button onclick="setEraser()">Eraser</button><button onclick="clearCanvas()">Clear</button></div><canvas id="drawCanvas" width="900" height="500"></canvas><p><button class="primary" onclick="downloadDrawing()">DOWNLOAD DRAWING</button></p></div></div></section>
-<section id="confessions" class="page"><div class="page-inner"><div class="page-head"><div class="eyebrow">A QUIET CORNER</div><h2>Private Confessions ð¬</h2><p class="muted">You can talk to the support bot, or choose to send a message for the creator to read.</p></div><div class="grid2"><div class="panel"><h3>Talk to the support bot</h3><p class="muted">The bot offers general, kind suggestions. It is not a therapist and cannot contact emergency services.</p><div id="botChat" class="city-log" aria-live="polite">Bot: You can start with whatever feels easiest to say. What has been on your mind?</div><label for="botMessage">Your message</label><textarea id="botMessage" placeholder="You can keep it general. Avoid names, addresses or other identifying details."></textarea><button class="primary" onclick="sendBotMessage()">ASK THE BOT</button></div><div class="panel"><h3>Leave a message for the creator</h3><p class="muted">Optional. You can leave this unchecked if you only want to talk to the bot.</p><label for="confessionText">What would you like the creator to know?</label><textarea id="confessionText" placeholder="Write only what you feel comfortable sharing."></textarea><label><input type="checkbox" id="shareWithCreator"> I understand this message is being saved for the website creator in this browser demo.</label><button class="primary" onclick="submitConfession()">SEND TO CREATOR INBOX</button><p id="confessionStatus" class="muted" aria-live="polite"></p><p class="muted"><strong>Privacy note:</strong> This version is a prototype. Messages are stored only in this browser on this device. They do not automatically reach the creator from other visitors' devices. A real private inbox needs a secure backend, access controls and a privacy notice. Do not use this for urgent or identifying information.</p></div></div></div></section>
-<section id="settings" class="page"><div class="page-inner"><div class="page-head"><div class="eyebrow">MAKE THIS UNIVERSE YOURS</div><h2>Website Settings âï¸</h2><p class="muted">These settings change the overall website background and colour theme.</p></div><div class="panel"><label for="siteTheme">Website theme</label><select id="siteTheme" onchange="applyTheme(this.value)"><option value="blue">Spider Blue</option><option value="red">Spider Red</option><option value="purple">Cosmic Purple</option><option value="green">Emerald City</option><option value="gold">Solar Gold</option></select><label for="backgroundUpload">Choose a background picture from your iPad</label><input id="backgroundUpload" type="file" accept="image/*" onchange="setBackground(event)"><label for="backgroundFit">Background display</label><select id="backgroundFit" onchange="applyBackgroundFit(this.value)"><option value="cover">Fill screen (may crop edges)</option><option value="contain">Show the whole picture</option><option value="100% 100%">Stretch to screen</option></select><img id="backgroundPreview" class="image-preview" alt="Preview of your chosen background"><div class="controls"><button class="primary" onclick="saveBackgroundChoice()">SAVE BACKGROUND</button><button onclick="removeBackground()">REMOVE CUSTOM BACKGROUND</button></div><p class="muted">Original image files are used without resizing or JPEG compression. Very large images can still exceed your browserâs storage limit. Backgrounds are saved only in this browser on this device.</p></div><div class="panel" style="margin-top:16px"><h3>Creator inbox (this browser demo)</h3><p class="muted">Messages saved on this device appear here. This is not a cross-visitor inbox.</p><div id="creatorInbox" class="city-log">No messages saved on this device.</div><button onclick="renderConfessionInbox()">REFRESH INBOX</button><button class="red" onclick="clearConfessionInbox()">CLEAR DEMO INBOX</button></div></div></section>
-</main><footer>MY SPIDER-VERSE Â· AN ORIGINAL PERSONAL PROJECT<p>Make your choices. Build your universe.</p></footer><div class="toast" id="toast"></div>
+</section>
+
+<!-- MY STORY -->
+<section id="story" class="page">
+<div class="page-inner">
+  <div class="page-head">
+    <span class="tag">ORIGINAL SPIDER-VERSE STORY</span>
+    <h2>📖 The Midnight Signal</h2>
+    <p class="muted">Six chapters. One city. A signal that should not exist.</p>
+  </div>
+  <div class="panel">
+    <h3>Before you begin...</h3>
+    <p>New York had always been loud. Sirens, trains, people arguing on street corners, music coming from open windows. But lately, there had been another sound beneath it all: a strange electronic pulse that only a few people seemed able to hear.</p>
+    <p>You were not looking to become a hero. You were trying to understand why the city felt different, why the lights flickered whenever you walked past, and why a mysterious symbol kept appearing in places where nobody remembered painting it.</p>
+  </div>
+
+  <div class="chapter-nav" id="chapterButtons">
+    <button onclick="goToChapter(0)">Chapter 1</button>
+    <button onclick="goToChapter(1)">Chapter 2</button>
+    <button onclick="goToChapter(2)">Chapter 3</button>
+    <button onclick="goToChapter(3)">Chapter 4</button>
+    <button onclick="goToChapter(4)">Chapter 5</button>
+    <button onclick="goToChapter(5)">Chapter 6</button>
+    <div class="chapter-progress" id="chapterProgress">Chapter 1 of 6</div>
+  </div>
+
+  <article class="chapter" id="chapter-0">
+    <span class="tag">CHAPTER ONE</span>
+    <h3>THE CITY THAT NEVER SLEEPS</h3>
+    <p>The first signal appeared at 11:47 p.m. on a Tuesday. You remembered the exact time because you had checked your phone while walking home, annoyed that the battery was nearly dead. The streets were damp from an earlier rain, and every traffic light painted the pavement in streaks of red, yellow and green.</p>
+    <p>Then every screen on the block went black. The advertisement above the bus stop disappeared. The corner shop's television switched off. Even the digital clock outside the pharmacy froze. For three seconds, the entire street seemed to hold its breath.</p>
+    <p>A blue symbol flashed across the screens: a circle crossed by three sharp lines, shaped almost like a spiderweb. A low pulse travelled through the air. You felt it in your chest before you heard it in your ears. Then the lights returned, the traffic moved again, and everyone carried on as if nothing had happened.</p>
+    <p>Everyone except you. Your phone had recorded something your eyes had barely caught. When you replayed the video, the symbol appeared clearly for one frame. Under it was a line of text: <strong>UNIVERSE CONNECTION: UNSTABLE.</strong></p>
+    <p>You searched the words online. Nothing useful appeared. You tried different spellings, checked local news and watched the video again. Each time, the same symbol flashed. You were about to give up when your phone vibrated with a message from an unknown number.</p>
+    <p>It contained only seven words: <em>“If you can see it, run.”</em> Before you could reply, another pulse rolled across the city. Somewhere above the rooftops, something answered.</p>
+  </article>
+
+  <article class="chapter chapter-hidden" id="chapter-1">
+    <span class="tag">CHAPTER TWO</span>
+    <h3>THE STRANGER ON THE ROOFTOP</h3>
+    <p>You should have gone straight home. That was the sensible choice, and you knew it. Instead, you followed the sound of the signal through an alley and up a metal staircase attached to an old apartment building. Each step groaned under your shoes.</p>
+    <p>At the top, the city stretched out beneath you. The skyline glowed against the clouds, but a patch of darkness moved between two buildings where no shadow should have been. It looked like a hole cut into the night itself. Blue sparks flickered along its edges.</p>
+    <p>Someone stood near the rooftop ledge. They wore a dark suit with bright lines running down the arms and across the mask. Their face was hidden, but their posture suggested they had been waiting for you. One gloved hand held a small device that flashed in time with the strange signal.</p>
+    <p>“You heard it,” the stranger said. It was not a question. You asked who they were and why they had sent the message. They looked towards the dark opening in the sky.</p>
+    <p>“My name doesn't matter yet. What matters is that the signal found you before the thing on the other side did.” The stranger explained that the opening was a fracture between realities. Every pulse made it wider, and every time it widened, pieces of another world leaked into this one.</p>
+    <p>You asked why you could see it when everyone else seemed unaware. The stranger studied you for a moment. “Because something crossed over a long time ago. It left a mark on this universe. And somehow, that mark is connected to you.”</p>
+    <p>Before you could ask another question, the rooftop shook. A black shape slipped through the fracture and landed on the water tower. It had glowing eyes and moved like a corrupted video. The stranger raised their device. “Stay behind me.”</p>
+    <p>But the symbol on your phone began to shine through the screen. Your hands tingled. A thin blue thread shot from your wrist and attached itself to a chimney across the roof. You stared at it, unable to explain what you had just done.</p>
+    <p>The stranger slowly turned towards you. “Well,” they said, “that changes everything.”</p>
+  </article>
+
+  <article class="chapter chapter-hidden" id="chapter-2">
+    <span class="tag">CHAPTER THREE</span>
+    <h3>THE POWER YOU DIDN'T ASK FOR</h3>
+    <p>The creature lunged. You reacted without thinking. The blue thread tightened, pulling you sideways just before the creature struck the rooftop where you had been standing. Gravel scattered into the air. Your heart raced so hard that you could hear it over the wind.</p>
+    <p>“Move!” the stranger shouted. You tried to run, but your feet left the ground. For one impossible second, you were hanging above the roof with a web stretched between your wrist and the chimney. Then you swung forward, crashed into a ventilation unit and landed in a heap.</p>
+    <p>It was not graceful. It was not heroic. It hurt, and the stranger had to pull you upright before the creature noticed you again. Still, the web had appeared because you had needed it. That thought was almost more frightening than the monster.</p>
+    <p>The stranger introduced themselves as a guardian from another universe. They had been tracking the fracture for weeks, trying to stop it from swallowing pieces of different realities. The creature was called a Glitch: a living error that could distort anything it touched.</p>
+    <p>“Your abilities are reacting to the fracture,” the guardian explained. “That doesn't mean you understand them. And it definitely doesn't mean you're ready to fight something like that.”</p>
+    <p>You almost laughed at the idea of being ready. A few minutes earlier, you had been checking your phone and thinking about what to eat. Now you were on a rooftop with a stranger from another universe, a monster that could bend reality and a new ability that did not come with instructions.</p>
+    <p>The guardian handed you a small wrist device. It displayed a map of the city with several blinking points. “These are places where the signal is strongest. We need to investigate them before the fracture spreads. You need practice, and I need someone who can sense the signal without a machine.”</p>
+    <p>You could refuse. You could walk away and try to return to normal. But the creature had already crossed into your world, and pretending nothing was happening would not make it disappear.</p>
+    <p>“Teach me,” you said. The guardian nodded once. “Then lesson one: don't confuse having power with knowing how to use it.”</p>
+  </article>
+
+  <article class="chapter chapter-hidden" id="chapter-3">
+    <span class="tag">CHAPTER FOUR</span>
+    <h3>TRAINING ABOVE THE CITY</h3>
+    <p>Training began before sunrise. The guardian chose an abandoned construction site with high platforms, hanging beams and enough open space to practise without breaking every window nearby. You expected dramatic lessons about courage and responsibility. Instead, the first task was learning how to land without falling over.</p>
+    <p>The first hour was a disaster. Your webs attached to the wrong surfaces. You swung too far, stopped too late and once ended up hanging upside down from a sign. The guardian did not laugh, which somehow made the situation worse. They simply asked you to try again.</p>
+    <p>Slowly, you began to understand the rhythm. Aim first. Trust the line, but pay attention to where it leads. Keep your eyes open. Your powers responded to intention, but they still required practice. A strong web was useless if you sent it towards a surface that could not hold your weight.</p>
+    <p>Between exercises, the guardian showed you recordings of other universes. Some were bright and peaceful. Others had cities built beneath enormous glass domes, or trains that travelled through the sky. In one recording, the same blue symbol appeared on a wall. The image broke apart before the guardian could explain it.</p>
+    <p>“The signal is older than this fracture,” they admitted. “Someone or something has been trying to connect these worlds for a long time. I thought I was tracking the source. Now I think the source may be tracking us.”</p>
+    <p>That evening, you finally managed a clean swing from one platform to another. Your feet touched the ground, your knees bent, and you stayed upright. The guardian gave a small approving nod. It was not a grand celebration, but you found yourself smiling.</p>
+    <p>For the first time since the signal appeared, you felt less like a person caught in the middle of something impossible and more like someone who could make a choice. You still did not know why the powers had chosen you. You did know that you could learn.</p>
+    <p>Then the wrist device sounded an alarm. Every blinking point on the map turned red at once. Across the city, the fracture had begun opening in several places. The guardian looked at you. “Training is over. We have our first real mission.”</p>
+  </article>
+
+  <article class="chapter chapter-hidden" id="chapter-4">
+    <span class="tag">CHAPTER FIVE</span>
+    <h3>THE NIGHT EVERYTHING CHANGED</h3>
+    <p>The first fracture opened above the train station. The second appeared near the river. A third flickered over the shopping district, scattering strange blue reflections across the windows. The guardian sent you towards the station while they investigated the other signals. You were supposed to observe, gather information and call for help if the Glitch appeared.</p>
+    <p>It appeared before you reached the stairs.</p>
+    <p>The creature had grown larger since the rooftop encounter. Its outline shifted between different shapes, as if several versions of it were trying to occupy the same space. Every time it moved, the lights above the platform flickered. People were rushing towards the exits, confused by the sudden power failure.</p>
+    <p>Your first instinct was to chase the creature. You wanted to prove that the training had worked. But you heard a child crying near the ticket gates, and you saw an elderly man struggling to move through the crowd. The Glitch was dangerous, but so was the panic spreading around it.</p>
+    <p>You changed direction. Web lines caught a falling sign before it hit the floor. Another web pulled a loose barrier away from the crowd. You guided people towards the exit, trying to sound calmer than you felt. Your hands shook, but the webs held.</p>
+    <p>By the time you turned back, the Glitch had reached the train tracks. A wave of distorted energy travelled down the platform. The station lights blinked out, and for a moment you saw another city through the walls: the same station, but empty, flooded with violet light and covered in the blue symbol.</p>
+    <p>The guardian's voice crackled through your wrist device. “Don't attack its centre. The signal is protecting it. Find the anchor keeping the fracture open.” You looked around and noticed a pulsing crystal shape floating above the tracks.</p>
+    <p>The Glitch turned towards you. You wanted to run. Instead, you fired two webs at the ceiling beams and swung over the platform. The creature struck at you, but you changed direction at the last second. You landed beside the anchor and wrapped it in web after web until its light began to dim.</p>
+    <p>The fracture folded in on itself with a sound like glass humming. The Glitch dissolved into harmless sparks. For a moment, the station was silent. Then the lights came back, the trains started moving, and the city continued.</p>
+    <p>You had protected people without defeating the creature through strength alone. You had noticed what needed doing and made a choice. When the guardian arrived, they looked at the sealed fracture, then at you. “You're learning,” they said.</p>
+    <p>Your wrist device lit up one last time. A new message appeared beneath the blue symbol: <strong>CONNECTION ESTABLISHED.</strong> The guardian's expression changed. “That isn't our system,” they whispered. “Something just noticed you.”</p>
+  </article>
+
+  <article class="chapter chapter-hidden" id="chapter-5">
+    <span class="tag">CHAPTER SIX</span>
+    <h3>THE HERO YOU CHOOSE TO BE</h3>
+    <p>Morning arrived with a pale pink glow over the rooftops. The city looked ordinary again, but you knew better than to trust appearances. You sat on the edge of a building with the guardian, watching the first trains cross the bridges. Your suit was scuffed, your arms ached from swinging and your phone had finally given up and died.</p>
+    <p>The guardian explained that closing one fracture had only stopped one opening. The message on your device meant the source had recognised the connection between you and the signal. It might be looking for you. It might even be trying to communicate. Nobody knew whether that was a warning or an invitation.</p>
+    <p>You thought about the night before: the frightened people at the station, the falling sign, the moment you had nearly chased the Glitch instead of helping those who needed you. You had not done everything perfectly. You had been scared, made mistakes and needed help. But you had stayed long enough to make a difference.</p>
+    <p>“What happens now?” you asked. The guardian looked across the skyline. “Now you decide what kind of hero you want to be. You can keep learning. You can investigate the signal. You can help protect this city. But nobody else gets to make that choice for you.”</p>
+    <p>You stood and tested the web-shooters. A blue thread stretched from your wrist to a rooftop antenna, steady and bright. Below, the streets were filling with people heading to school, work and places they had promised to be. Most of them would never know what had happened beneath the station the night before.</p>
+    <p>Maybe that was part of the job. A hero did not always get applause. Sometimes the reward was simply seeing people get home safely. You pulled your mask into place and looked towards the tallest building in the city. Somewhere beyond it, another pulse answered the one inside your wrist device.</p>
+    <p>You took a running step, fired a web and leapt into the morning. The first swing was uneven. The second was better. By the third, you were moving above the streets with the wind rushing past your mask and the whole city opening beneath you.</p>
+    <p>You still did not know who had sent the signal. You did not know how many universes were connected to it, or what waited beyond the next fracture. But you were no longer just a witness to the mystery. You were part of the story now, and you had a say in how it would end.</p>
+    <p><strong>Every universe has a story. This one is yours. To be continued… 🕷️</strong></p>
+  </article>
+
+  <div class="chapter-nav">
+    <button id="previousChapter" onclick="changeChapter(-1)">⬅️ Previous</button>
+    <button class="primary" id="nextChapter" onclick="changeChapter(1)">Next Chapter ➡️</button>
+  </div>
+  <button onclick="openPage('storyCreator')">✍️ Write your own next chapter</button>
+</div>
+</section>
+
+<!-- MUSIC -->
+<section id="music" class="page">
+<div class="page-inner">
+  <div class="page-head"><span class="tag">YOUR SOUNDTRACK</span><h2>🎧 Music Room</h2><p class="muted">Music for exploring, training, swinging through the city and celebrating a win.</p></div>
+  <div class="panel">
+    <h3>🎵 Choose the mood</h3>
+    <div class="controls">
+      <button onclick="setMusicMood('energy')">⚡ High Energy</button>
+      <button onclick="setMusicMood('chill')">🌆 Chill City</button>
+      <button onclick="setMusicMood('focus')">🎯 Focus Mode</button>
+      <button onclick="setMusicMood('victory')">🏆 Victory</button>
+    </div>
+    <p id="musicMoodText" class="muted">Choose a mood to get a soundtrack idea.</p>
+  </div>
+  <div class="grid2">
+    <div class="music-card"><h3>⚡ Swing Through the City</h3><small>ENERGY / MOVEMENT</small><p>Upbeat pop, energetic electronic music and fast-paced instrumentals for city exploration.</p><a href="https://open.spotify.com/" target="_blank" rel="noopener">Open Spotify ↗</a></div>
+    <div class="music-card"><h3>🌈 Bright Side of the Multiverse</h3><small>HAPPY / FEEL-GOOD</small><p>Catchy hooks, colourful production and songs that make a normal day feel like a montage.</p><a href="https://music.youtube.com/" target="_blank" rel="noopener">Open YouTube Music ↗</a></div>
+    <div class="music-card"><h3>🌆 Neon Rooftops</h3><small>CHILL / NIGHT DRIVE</small><p>Laid-back beats, smooth R&B and atmospheric sounds for rooftop moments.</p><a href="https://open.spotify.com/" target="_blank" rel="noopener">Find a playlist ↗</a></div>
+    <div class="music-card"><h3>🏆 Mission Complete</h3><small>VICTORY / CONFIDENCE</small><p>Big choruses and confident beats for when the boss is defeated and the city is safe.</p><a href="https://music.youtube.com/" target="_blank" rel="noopener">Find victory songs ↗</a></div>
+  </div>
+  <div class="panel">
+    <h3>🎶 Build your own playlist</h3>
+    <label for="playlistName">Playlist name</label><input id="playlistName" placeholder="e.g. Spider-Verse: Level Up">
+    <label for="playlistSongs">Songs and artists</label><textarea id="playlistSongs" placeholder="Write one song per line..."></textarea>
+    <div class="controls"><button class="primary" onclick="savePlaylist()">💾 Save playlist</button><button onclick="loadPlaylist()">📂 Load playlist</button><button onclick="clearPlaylist()">🗑️ Clear fields</button></div>
+    <p id="playlistStatus" class="muted">Your playlist can be saved in this browser.</p>
+  </div>
+</div>
+</section>
+
+<!-- BOSS MODE -->
+<section id="game" class="page">
+<div class="page-inner">
+  <div class="page-head"><span class="tag">COMBAT SIMULATOR</span><h2>⚔️ Boss Mode: The Glitch</h2><p class="muted">Watch the warning, dodge incoming attacks and hit the boss with web shots.</p></div>
+  <div class="panel">
+    <div class="row">
+      <div><label for="difficulty">Difficulty</label><select id="difficulty"><option value="easy">Friendly Neighbourhood</option><option value="normal" selected>Spider-Level</option><option value="hard">Across the Spider-Verse</option></select></div>
+      <div><label>Your health</label><div class="meter blue"><div id="heroHealthBar"></div></div><p id="heroHealthText">100 / 100</p></div>
+      <div><label>Boss health</label><div class="meter"><div id="bossHealthBar"></div></div><p id="bossHealthText">100 / 100</p></div>
+    </div>
+    <div class="controls"><button class="primary" onclick="startBattle()">▶️ Start / Restart</button><button onclick="stopBattle()">⏸️ Stop battle</button></div>
+    <p id="battleStatus" class="muted">Prepare yourself. Press Start when you're ready.</p>
+  </div>
+  <div class="arena" id="arena">
+    <div class="boss" id="bossCharacter">👾</div>
+    <div class="warning" id="bossWarning">⚠️ INCOMING ATTACK! DODGE!</div>
+    <div class="fighter" id="heroCharacter">🕷️</div>
+    <div class="overlay" id="battleOverlay"><div><h2 id="battleResult">🏆 Victory!</h2><p id="battleResultText">The city is safe for now.</p><button class="primary" onclick="startBattle()">🔁 Play again</button></div></div>
+  </div>
+  <div class="grid3"><button onclick="dodge('left')">⬅️ Dodge left</button><button onclick="shootWeb()">🕸️ Shoot web</button><button onclick="dodge('right')">Dodge right ➡️</button></div>
+  <div class="panel"><h3>How to play</h3><p>1. Start the battle.</p><p>2. When the warning appears, dodge left or right.</p><p>3. Use Shoot Web to damage The Glitch.</p><p>4. If your health reaches zero, the battle ends. Defeat the boss to win.</p></div>
+</div>
+</section>
+
+<!-- HERO LAB -->
+<section id="heroLab" class="page">
+<div class="page-inner">
+  <div class="page-head"><span class="tag">CREATE YOUR HERO</span><h2>🕷️ Hero Lab</h2><p class="muted">Design your own hero and preview a simple minifigure.</p></div>
+  <div class="grid2">
+    <div class="panel">
+      <label for="heroName">Hero name</label><input id="heroName" placeholder="e.g. Neon Web">
+      <label for="suitColor">Suit colour</label><select id="suitColor"><option value="#27c9ff">Electric blue</option><option value="#ff285f">Spider red</option><option value="#c52cff">Cosmic purple</option><option value="#21d98b">Neon green</option><option value="#f4f6ff">White frost</option><option value="#20243c">Midnight black</option><option value="#ff9d2e">Solar orange</option></select>
+      <label for="heroSymbol">Chest symbol</label><select id="heroSymbol"><option value="🕷️">Spider</option><option value="⚡">Lightning</option><option value="🌙">Moon</option><option value="⭐">Star</option><option value="🕸️">Web</option><option value="🔥">Flame</option><option value="💎">Crystal</option></select>
+      <label for="heroPower">Special ability</label><select id="heroPower"><option>Web Swinging</option><option>Electric Webs</option><option>Shadow Camouflage</option><option>Portal Jump</option><option>Super Speed</option><option>Spider Sense</option></select>
+      <label for="heroBio">Hero backstory</label><textarea id="heroBio" placeholder="Where did your hero come from? What are they protecting?"></textarea>
+      <div class="controls"><button class="primary" onclick="updateHero()">✨ Create hero</button><button onclick="saveHero()">💾 Save hero</button><button onclick="loadHero()">📂 Load hero</button></div>
+    </div>
+    <div class="panel">
+      <h3>Your hero preview</h3>
+      <div class="avatar-preview"><div class="minifig" id="heroPreview" style="--suit:#27c9ff"><div class="fig-head">😎</div><div class="fig-body">🕷️</div><div class="fig-legs"><div class="fig-leg"></div><div class="fig-leg"></div></div></div></div>
+      <h3 id="heroPreviewName">Your Hero</h3><p id="heroPreviewPower" class="muted">Special ability: Web Swinging</p><p id="heroPreviewBio" class="muted">Your hero's story will appear here.</p><p id="heroStatus" class="muted">Your design is ready to customise.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- MISSIONS -->
+<section id="missions" class="page">
+<div class="page-inner">
+  <div class="page-head"><span class="tag">MISSION CONTROL</span><h2>🧩 Missions & Mysteries</h2><p class="muted">Choose a mission, solve the clue and track your progress.</p></div>
+  <div class="grid2">
+    <div class="panel"><span class="tag">MISSION 01</span><h3>🔵 The Blue Signal</h3><p>Find out why the strange blue symbol appears around the city.</p><p><strong>Clue:</strong> It appears whenever the lights flicker.</p><label><input type="checkbox" class="mission-check"> Mark mission complete</label></div>
+    <div class="panel"><span class="tag">MISSION 02</span><h3>🕸️ Web Practice</h3><p>Practise aiming your web at stable surfaces and landing safely.</p><p><strong>Clue:</strong> A good hero thinks before swinging.</p><label><input type="checkbox" class="mission-check"> Mark mission complete</label></div>
+    <div class="panel"><span class="tag">MISSION 03</span><h3>👾 Track The Glitch</h3><p>Study the boss's attack pattern and find a chance to strike.</p><p><strong>Clue:</strong> The warning comes before the attack.</p><label><input type="checkbox" class="mission-check"> Mark mission complete</label></div>
+    <div class="panel"><span class="tag">MISSION 04</span><h3>🌌 Multiverse Mystery</h3><p>Write a theory about who is sending the signal and what they want.</p><p><strong>Clue:</strong> The signal appeared before the fracture opened.</p><label><input type="checkbox" class="mission-check"> Mark mission complete</label></div>
+  </div>
+  <div class="panel"><h3>📊 Your progress</h3><div class="meter blue"><div id="missionProgressBar" style="width:0%"></div></div><p id="missionProgressText">0 of 4 missions complete</p><button onclick="resetMissions()">🔄 Reset missions</button></div>
+  <div class="panel"><h3>🔎 Your own mystery</h3><label for="mysteryTitle">Mystery title</label><input id="mysteryTitle" placeholder="Give your mystery a name"><label for="mysteryClue">Write your clue or theory</label><textarea id="mysteryClue" placeholder="What do you think is happening?"></textarea><button class="primary" onclick="saveMystery()">💾 Save mystery</button><p id="mysteryStatus" class="muted">Your mystery can be saved in this browser.</p></div>
+</div>
+</section>
+
+<!-- STORY CREATOR -->
+<section id="storyCreator" class="page">
+<div class="page-inner">
+  <div class="page-head"><span class="tag">YOUR IMAGINATION</span><h2>✍️ Story Creator</h2><p class="muted">Create a new chapter, a hero origin story or an alternate ending.</p></div>
+  <div class="panel">
+    <label for="storyTitle">Story title</label><input id="storyTitle" placeholder="e.g. The Return of the Glitch">
+    <label for="storyCharacter">Main character</label><input id="storyCharacter" placeholder="Who is the story about?">
+    <label for="storySetting">Where does it happen?</label><input id="storySetting" placeholder="A rooftop, another universe, the city...">
+    <label for="storyText">Your story</label><textarea id="storyText" style="min-height:240px" placeholder="It started on a night when..."></textarea>
+    <div class="controls"><button class="primary" onclick="saveStory()">💾 Save story</button><button onclick="loadStory()">📂 Load saved story</button><button onclick="downloadStory()">⬇️ Download story</button><button onclick="clearStory()">🗑️ Clear editor</button></div>
+    <p id="storyStatus" class="muted">Your writing can be saved in this browser.</p>
+  </div>
+  <div class="panel"><h3>💡 Story prompts</h3><div class="controls"><button onclick="usePrompt('A mysterious portal opens above the school.')">🌌 A new portal</button><button onclick="usePrompt('My hero discovers that their best friend has a secret.')">🕵️ A secret</button><button onclick="usePrompt('The Glitch returns, but this time it asks for help.')">👾 An unexpected twist</button><button onclick="usePrompt('My hero wakes up in a universe where nobody knows them.')">🪞 Another universe</button></div></div>
+</div>
+</section>
+
+<!-- DRAWING STUDIO -->
+<section id="drawingStudio" class="page">
+<div class="page-inner">
+  <div class="page-head"><span class="tag">ARTIST MODE</span><h2>🎨 Drawing Studio</h2><p class="muted">Draw a suit, create a logo or sketch your own universe.</p></div>
+  <div class="panel">
+    <label for="brushColor">Pen colour</label><input type="color" id="brushColor" value="#172a65">
+    <label for="brushSize">Brush size</label><input type="range" id="brushSize" min="1" max="30" value="5">
+    <div class="controls"><button onclick="setDrawTool('pen')">✏️ Pen</button><button onclick="setDrawTool('eraser')">🧽 Eraser</button><button onclick="undoDrawing()">↩️ Undo</button><button onclick="clearDrawing()">🗑️ Clear canvas</button><button class="primary" onclick="saveDrawing()">💾 Save drawing</button><button onclick="downloadDrawing()">⬇️ Download PNG</button></div>
+    <p id="drawingStatus" class="muted">Draw using your finger or a mouse.</p>
+    <canvas id="drawingCanvas" width="1000" height="600"></canvas>
+  </div>
+</div>
+</section>
+
+<!-- CONFESSIONS -->
+<section id="confessions" class="page">
+<div class="page-inner">
+  <div class="page-head"><span class="tag">YOUR PRIVATE CORNER</span><h2>💬 Confessions</h2><p class="muted">A space to put your thoughts into words without needing to make them perfect.</p></div>
+  <div class="panel">
+    <h3>📝 Dear diary...</h3>
+    <label for="confessionTitle">Entry title</label><input id="confessionTitle" placeholder="A thought, a feeling, a moment...">
+    <label for="confessionText">What is on your mind?</label><textarea id="confessionText" style="min-height:220px" placeholder="Write whatever you need to get out of your head..."></textarea>
+    <div class="controls"><button class="primary" onclick="saveConfession()">🔒 Save entry</button><button onclick="loadConfession()">📂 Load entry</button><button onclick="clearConfession()">🗑️ Clear fields</button></div>
+    <p id="confessionStatus" class="muted">Entries are stored in this browser on this device. This is not a password-protected or encrypted diary.</p>
+  </div>
+  <div class="panel"><h3>🌱 A reminder</h3><p>You do not have to solve every problem in one sitting. Sometimes writing down what happened, what you felt and what you need next is enough for a starting point.</p></div>
+</div>
+</section>
+
+<!-- SETTINGS -->
+<section id="settings" class="page">
+<div class="page-inner">
+  <div class="page-head"><span class="tag">MAKE IT YOURS</span><h2>⚙️ Settings</h2><p class="muted">Personalise the look of your Spider-Verse website.</p></div>
+  <div class="panel"><h3>🌈 Choose your accent colour</h3><label for="accentColor">Accent colour</label><input type="color" id="accentColor" value="#ff2c8a"><button class="primary" onclick="applyAccent()">Apply colour</button> <button onclick="resetAccent()">Reset colours</button></div>
+  <div class="panel"><h3>🌌 Your own background</h3><p class="muted">Choose an image saved on your device. The image is used as your background in this browser.</p><label for="backgroundFile">Choose a background image</label><input id="backgroundFile" type="file" accept="image/*"><div class="controls"><button class="primary" onclick="applyBackground()">🖼️ Apply background</button><button onclick="resetBackground()">Reset background</button></div><p id="backgroundStatus" class="muted">No custom background selected.</p></div>
+  <div class="panel"><h3>💾 Your saved data</h3><p class="muted">Your creations are saved in this browser. They may not appear on another device or after browser data is cleared.</p><button class="primary" onclick="exportData()">⬇️ Export website data</button> <button onclick="clearAllData()">🗑️ Clear saved website data</button><p id="settingsStatus" class="muted"></p></div>
+</div>
+</section>
+
+<footer>
+  <p>🕷️ MY SPIDER-VERSE</p>
+  <p class="muted">Your universe. Your story. Your next adventure.</p>
+  <button onclick="openPage('home')">🏠 Back to Home</button>
+</footer>
+<div class="toast" id="toast"></div>
+
 <script>
-const $=id=>document.getElementById(id);
-function openPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));$(id)?.classList.add('active');if(id!=='game')stopBattle();window.scrollTo({top:0,behavior:'smooth'});}
-let currentChapter=0;
-function getChapters(){return Array.from(document.querySelectorAll('#story .chapter'));}
-function goToChapter(index){const chapters=getChapters();if(!chapters.length)return;currentChapter=Math.max(0,Math.min(chapters.length-1,Number(index)||0));chapters.forEach((chapter,i)=>{chapter.classList.toggle('chapter-hidden',i!==currentChapter);chapter.setAttribute('aria-hidden',i!==currentChapter?'true':'false');});document.querySelectorAll('[data-chapter-button]').forEach(button=>{const active=Number(button.dataset.chapterButton)===currentChapter;button.classList.toggle('chapter-current',active);button.setAttribute('aria-current',active?'step':'false');});$('chapterProgress').textContent='Chapter '+(currentChapter+1)+' of '+chapters.length+' Â· '+chapters[currentChapter].querySelector('h3').textContent.replace(/^CHAPTER\s+[A-Z]+\s*[â-]\s*/,'');$('previousChapter').disabled=currentChapter===0;$('nextChapter').disabled=currentChapter===chapters.length-1;}
-function changeChapter(amount){goToChapter(currentChapter+amount);}
+/* GENERAL HELPERS */
+const $ = id => document.getElementById(id);
 
-let toastTimer;function toast(m){const b=$('toast');b.textContent=m;b.style.display='block';clearTimeout(toastTimer);toastTimer=setTimeout(()=>b.style.display='none',2400);}
-function downloadBlob(content,filename,type='text/plain'){const blob=new Blob([content],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1200);}
-function downloadField(id,file){downloadBlob($(id).value||'No notes yet',file);toast('Download started.');}
-function downloadFields(tid,cid,file){downloadBlob(($(tid).value||'My creation')+'\n\n'+$(cid).value,file);toast('Download started.');}
-function saveFields(tid,cid,key){try{localStorage.setItem('sv-'+key,JSON.stringify({title:$(tid).value,content:$(cid).value}));toast('Saved in this browser.');}catch(e){toast('Storage unavailable. Download your work instead.');}}
-let vibe='Happy',vibeQuery='happy upbeat pop',songs=[];
-function setVibe(name,query){vibe=name;vibeQuery=query;$('vibeLabel').textContent='Current vibe: '+name;const themes={Happy:'blue',Chill:'purple',Confident:'red',Focus:'green',Party:'gold',Nostalgic:'purple'};applyTheme(themes[name]||'blue');renderPlaylist();}
-function addSong(){const title=$('songTitle').value.trim(),artist=$('songArtist').value.trim();if(!title){toast('Enter a song title first.');return;}songs.push({title,artist});$('songTitle').value='';$('songArtist').value='';renderPlaylist();savePlaylist();}
-function renderPlaylist(){const box=$('playlist');if(!songs.length){box.innerHTML='<p class="muted">Your playlist is empty. Add a song above.</p>';return;}box.innerHTML='';songs.forEach((s,i)=>{const row=document.createElement('div');row.className='panel';const name=document.createElement('strong');name.textContent=(i+1)+'. '+s.title;const artist=document.createElement('p');artist.className='muted';artist.textContent=s.artist||'Artist not added';const controls=document.createElement('div');controls.className='controls';const open=document.createElement('button');open.textContent='Search on Spotify â';open.onclick=()=>window.open('https://open.spotify.com/search/'+encodeURIComponent(s.title+' '+s.artist),'_blank','noopener');const up=document.createElement('button');up.textContent='â';up.disabled=i===0;up.onclick=()=>{[songs[i-1],songs[i]]=[songs[i],songs[i-1]];renderPlaylist();savePlaylist()};const down=document.createElement('button');down.textContent='â';down.disabled=i===songs.length-1;down.onclick=()=>{[songs[i+1],songs[i]]=[songs[i],songs[i+1]];renderPlaylist();savePlaylist()};const del=document.createElement('button');del.textContent='Remove';del.onclick=()=>{songs.splice(i,1);renderPlaylist();savePlaylist()};controls.append(open,up,down,del);row.append(name,artist,controls);box.append(row);});}
-function savePlaylist(){try{localStorage.setItem('sv-playlist',JSON.stringify({songs,vibe,vibeQuery}));toast('Playlist saved on this device.');}catch(e){toast('Could not save.');}}
-function loadPlaylist(){try{const d=JSON.parse(localStorage.getItem('sv-playlist')||'null');if(!d){toast('No saved playlist yet.');return;}songs=d.songs||[];vibe=d.vibe||'Happy';vibeQuery=d.vibeQuery||'happy pop';$('vibeLabel').textContent='Current vibe: '+vibe;renderPlaylist();toast('Playlist loaded.');}catch(e){toast('Could not load playlist.');}}
-function openSpotifyVibe(){window.open('https://open.spotify.com/search/'+encodeURIComponent(vibeQuery),'_blank','noopener');}
-let suitColour='#e52c55',accentColour='#45caff',heroCharacter='Miles Morales';
-const presets={'Miles Morales':['#171b2b','#e52c55','ð·ï¸','Bio-electric blasts'],'Gwen Stacy':['#f2f4ff','#ff6baf','ð¸ï¸','Super speed'],'Peter Parker':['#e52c55','#168eea','ð·ï¸','Spider-sense'],'Peter B. Parker':['#e52c55','#168eea','ð·ï¸','Web control'],'Spider-Man 2099':['#123e88','#e52c55','ð·ï¸','Portal jumping'],'Venom-inspired hero':['#171727','#e8edf8','â ï¸','Symbiote tendrils']};
-function selectCharacter(){heroCharacter=$('characterChoice').value;const p=presets[heroCharacter];if(p){$('heroColour').value=p[0];$('heroAccent').value=p[1];$('heroSymbol').value=p[2];$('heroPower').value=p[3];}changeSuit();$('heroName').value=heroCharacter==='Create your own'?'':' '+heroCharacter;$('heroName').value=$('heroName').value.trim();createHero();}
-function changeSuit(){suitColour=$('heroColour').value;accentColour=$('heroAccent').value;$('minifig').style.setProperty('--suit',suitColour);$('figBody').style.background=`linear-gradient(135deg,${suitColour},${accentColour})`;document.querySelectorAll('.lego-legs span').forEach(x=>x.style.background=suitColour);}
-function createHero(){const name=$('heroName').value.trim()||heroCharacter;const symbol=$('heroSymbol').value;const power=$('heroPower').value;$('figBody').textContent=symbol;$('figFace').textContent='â';$('heroProfile').textContent=`${name} Â· Inspired by ${heroCharacter} Â· Power: ${power} Â· Suit: ${suitColour}`;$('cityHeroName').textContent=name;$('fighter').textContent=symbol;try{localStorage.setItem('sv-hero',JSON.stringify({name,heroCharacter,suitColour,accentColour,symbol,power,origin:$('heroOrigin').value}));}catch(e){}toast('Hero saved.');}
-function saveHero(){downloadBlob(`HERO PROFILE\nName: ${$('heroName').value||heroCharacter}\nInspired by: ${heroCharacter}\nSuit colour: ${suitColour}\nAccent colour: ${accentColour}\nSymbol: ${$('heroSymbol').value}\nPower: ${$('heroPower').value}\nOrigin: ${$('heroOrigin').value}`,'my-hero-profile.txt');}
-function applyTheme(theme){const themes={blue:'#45caff',red:'#ff456d',purple:'#b76cff',green:'#4de0b2',gold:'#ffd166'};document.documentElement.style.setProperty('--accent',themes[theme]||themes.blue);try{localStorage.setItem('sv-theme',theme);}catch(e){}}
-let chosenBackgroundBlob=null,backgroundObjectUrl=null;
-function openBackgroundDB(){return new Promise((resolve,reject)=>{const req=indexedDB.open('MySpiderVerseImages',1);req.onupgradeneeded=()=>{const db=req.result;if(!db.objectStoreNames.contains('images'))db.createObjectStore('images');};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});}
-async function storeBackgroundBlob(blob){const db=await openBackgroundDB();return new Promise((resolve,reject)=>{const tx=db.transaction('images','readwrite');tx.objectStore('images').put(blob,'site-background');tx.oncomplete=()=>{db.close();resolve(true)};tx.onerror=()=>{db.close();reject(tx.error)};});}
-async function readBackgroundBlob(){const db=await openBackgroundDB();return new Promise((resolve,reject)=>{const tx=db.transaction('images','readonly');const req=tx.objectStore('images').get('site-background');req.onsuccess=()=>{const v=req.result||null;db.close();resolve(v)};req.onerror=()=>{db.close();reject(req.error)};});}
-async function setBackground(e){const file=e.target.files&&e.target.files[0];if(!file)return;if(!file.type.startsWith('image/')){toast('Please choose an image file.');return;}if(backgroundObjectUrl)URL.revokeObjectURL(backgroundObjectUrl);chosenBackgroundBlob=file;backgroundObjectUrl=URL.createObjectURL(file);const preview=$('backgroundPreview');preview.src=backgroundObjectUrl;preview.style.display='block';preview.style.imageRendering='auto';document.body.style.backgroundImage=`linear-gradient(#070b1c66,#070b1c99),url("${backgroundObjectUrl}")`;document.body.style.backgroundSize=$('backgroundFit')?.value||'cover';document.body.style.backgroundPosition='center';document.body.style.backgroundRepeat='no-repeat';toast(`Preview loaded: ${file.name} Â· ${file.type||'image'} Â· ${Math.round(file.size/1024)} KB. Tap SAVE BACKGROUND.`);}
-function applyBackgroundFit(value){document.body.style.backgroundSize=value;try{localStorage.setItem('sv-background-fit',value)}catch(e){}}
-async function saveBackgroundChoice(){if(!chosenBackgroundBlob){toast('Choose a picture first.');return;}try{await storeBackgroundBlob(chosenBackgroundBlob);applyBackgroundFit($('backgroundFit').value);toast('Full-quality background saved in this browser.');}catch(err){toast('The image is previewed but this browser could not save it. Try a smaller original file.');}}
-async function restoreSavedBackground(){try{const blob=await readBackgroundBlob();if(!blob)return;if(backgroundObjectUrl)URL.revokeObjectURL(backgroundObjectUrl);backgroundObjectUrl=URL.createObjectURL(blob);document.body.style.backgroundImage=`linear-gradient(#070b1c66,#070b1c99),url("${backgroundObjectUrl}")`;const fit=localStorage.getItem('sv-background-fit')||'cover';if($('backgroundFit'))$('backgroundFit').value=fit;document.body.style.backgroundSize=fit;const preview=$('backgroundPreview');if(preview){preview.src=backgroundObjectUrl;preview.style.display='block';preview.style.imageRendering='auto';}}catch(e){/* IndexedDB may be unavailable in private browsing. */}}
-async function removeBackground(){document.body.style.backgroundImage='';if(backgroundObjectUrl){URL.revokeObjectURL(backgroundObjectUrl);backgroundObjectUrl=null;}chosenBackgroundBlob=null;try{const db=await openBackgroundDB();await new Promise((resolve,reject)=>{const tx=db.transaction('images','readwrite');tx.objectStore('images').delete('site-background');tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)});db.close();localStorage.removeItem('sv-background-fit');}catch(e){}$('backgroundUpload').value='';$('backgroundPreview').removeAttribute('src');$('backgroundPreview').style.display='none';toast('Custom background removed.');}
-const puzzles=[{q:'I have streets but no cars, buildings but no people, and a place for you to find your way. What am I?',a:['map','a map'],hint:'You can use it to navigate a city.'},{q:'The more you take, the more you leave behind. What are they?',a:['footsteps','steps'],hint:'Think about walking through the city.'},{q:'I can be cracked, made, told and played. What am I?',a:['joke','a joke'],hint:'It might make you laugh.'},{q:'What has keys but cannot open a door?',a:['piano','a piano','keyboard','a keyboard'],hint:'It can make music.'},{q:'I get bigger the more you take away from me. What am I?',a:['hole','a hole'],hint:'Think of digging.'}];let activePuzzle=null,missionPoints=0,missionSolved=false;
-function activateDailyMission(){const day=Math.floor(Date.now()/86400000);activePuzzle=puzzles[day%puzzles.length];missionSolved=false;$('missionTitle').textContent='DAILY MISSION Â· '+new Date().toLocaleDateString();$('missionIntro').textContent='Mission activated. Read the riddle carefully; you only get one correct completion today.';$('riddle').textContent=activePuzzle.q;$('missionPuzzle').style.display='block';$('activateMission').disabled=true;$('missionFeedback').textContent='';$('missionHint').textContent='';try{if(localStorage.getItem('sv-solved-day')===String(day)){missionSolved=true;$('missionFeedback').textContent='You have already completed todayâs mission.';}}catch(e){}}
-function submitAnswer(){if(!activePuzzle){toast('Activate the mission first.');return;}if(missionSolved){$('missionFeedback').textContent='This daily mission is already complete.';return;}const ans=$('missionAnswer').value.trim().toLowerCase().replace(/[.!?]/g,'');if(activePuzzle.a.includes(ans)){missionSolved=true;missionPoints+=10;$('missionPoints').textContent=missionPoints;$('missionFeedback').textContent='Correct! +10 mission points. Come back tomorrow for a new puzzle.';try{localStorage.setItem('sv-solved-day',String(Math.floor(Date.now()/86400000)));localStorage.setItem('sv-mission-points',String(missionPoints));}catch(e){}toast('Mission complete!');}else{$('missionFeedback').textContent='Not quite. Think it through, or request a hint.';}}
-function showHint(){if(activePuzzle)$('missionHint').textContent='Hint: '+activePuzzle.hint;}
-function chooseMission(kind){document.querySelectorAll('.mission-work').forEach(x=>x.classList.remove('active'));$('work-'+kind)?.classList.add('active');$('work-'+kind)?.scrollIntoView({behavior:'smooth',block:'start'});}
-const canvas=$('drawCanvas'),ctx=canvas.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.lineCap='round';ctx.lineJoin='round';let pen='#111827',drawing=false,lastPoint=null;function setPen(c){pen=c;toast('Pen colour selected.');}function setEraser(){pen='#ffffff';toast('Eraser selected.');}function canvasPoint(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*canvas.width/r.width,y:(e.clientY-r.top)*canvas.height/r.height};}
-canvas.addEventListener('pointerdown',e=>{e.preventDefault();drawing=true;lastPoint=canvasPoint(e);try{canvas.setPointerCapture(e.pointerId);}catch(err){}});canvas.addEventListener('pointermove',e=>{if(!drawing)return;e.preventDefault();const p=canvasPoint(e);ctx.strokeStyle=pen;ctx.lineWidth=pen==='#ffffff'?30:7;ctx.beginPath();ctx.moveTo(lastPoint.x,lastPoint.y);ctx.lineTo(p.x,p.y);ctx.stroke();lastPoint=p;});['pointerup','pointercancel','lostpointercapture'].forEach(n=>canvas.addEventListener(n,()=>{drawing=false;lastPoint=null;}));function clearCanvas(){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);toast('Canvas cleared.');}function downloadDrawing(){canvas.toBlob(b=>{if(!b){toast('Could not create image.');return;}const u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download='my-spiderverse-drawing.png';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);},'image/png');}
-let running=false,frame=null,score=0,heroHP=4,maxHeroHP=4,bossHP=100,heroX=.5,heroY=.78,shots=[],lastTime=0,attackTimer=0,patternTimer=0,pattern=0,invulnerable=0,swipe=null;const arena=$('arena'),fighter=$('fighter'),boss=$('boss'),overlay=$('gameOverlay'),warning=$('warning');
-const levels={easy:{hp:7,interval:1.75,shot:150,delay:1250},medium:{hp:5,interval:1.15,shot:210,delay:1000},hard:{hp:3,interval:.82,shot:280,delay:850},extreme:{hp:2,interval:.62,shot:350,delay:700}};
-function settings(){return levels[$('difficulty').value]||levels.medium;}function stopBattle(){running=false;if(frame)cancelAnimationFrame(frame);frame=null;}function clearShots(){shots.forEach(s=>s.el.remove());shots=[];}
-function updateHud(){$('heroHealthText').textContent='â¥ '.repeat(Math.max(0,heroHP))+'â¡ '.repeat(Math.max(0,maxHeroHP-heroHP));$('heroHealthBar').style.width=(heroHP/maxHeroHP*100)+'%';$('bossHealthText').textContent=bossHP+'%';$('bossHealthBar').style.width=bossHP+'%';$('score').textContent=score;$('phase').textContent=bossHP>65?'1':bossHP>30?'2':'3';}
-function placeHero(){fighter.style.left=(heroX*100)+'%';fighter.style.top=(heroY*100)+'%';}
-function startBattle(){stopBattle();clearShots();running=true;score=0;maxHeroHP=settings().hp;heroHP=maxHeroHP;bossHP=100;heroX=.5;heroY=.78;lastTime=0;attackTimer=1;patternTimer=0;pattern=0;invulnerable=0;boss.style.display='grid';fighter.style.display='grid';fighter.setAttribute('aria-label',($('heroName').value||'Your spider hero')); warning.style.display='none';if($('attackTelegraph'))$('attackTelegraph').style.display='none';overlay.style.display='none';fighter.style.setProperty('--hero-suit',$('heroColour')?.value||'#d91f42');fighter.style.setProperty('--hero-accent',$('heroAccent')?.value||'#172d59');placeHero();updateHud();frame=requestAnimationFrame(tick);}
-function tick(ts){if(!running)return;const dt=lastTime?Math.min((ts-lastTime)/1000,.04):0;lastTime=ts;attackTimer+=dt;patternTimer+=dt;const cfg=settings(),phase=bossHP<=30?.72:bossHP<=65?.86:1;boss.style.display='grid';boss.style.left=(50+Math.sin(ts/(650*phase))*22)+'%';boss.style.top=(22+Math.sin(ts/900)*3)+'%';if(patternTimer>cfg.interval*phase){patternTimer=0;launchPattern(cfg);}moveShots(dt);checkHits(ts);fighter.style.opacity=ts<invulnerable&&Math.floor(ts/80)%2===0?'.3':'1';if(bossHP<=0){bossHP=0;updateHud();endBattle(true);return;}if(heroHP<=0){heroHP=0;updateHud();endBattle(false);return;}frame=requestAnimationFrame(tick);}
-function launchPattern(cfg){const r=arena.getBoundingClientRect(),br=boss.getBoundingClientRect(),bx=br.left-r.left+br.width/2,by=br.top-r.top+br.height/2,hx=heroX*arena.clientWidth,hy=heroY*arena.clientHeight,mode=pattern%3;const messages=['â ï¸ THE GLITCH IS LOCKING ON â DODGE NOW!','â ï¸ RED ORB SPREAD INCOMING â MOVE SIDEWAYS!','â ï¸ FLOOR BLAST INCOMING â MOVE UP!'];warning.textContent=messages[mode]+'  Â·  GET READY';warning.style.display='block';const beam=$('attackTelegraph');if(beam){beam.style.display='block';const tx=mode===2?hx:heroX*arena.clientWidth,ty=mode===2?arena.clientHeight:heroY*arena.clientHeight,dx=tx-bx,dy=ty-by;beam.style.left=bx+'px';beam.style.top=by+'px';beam.style.width=Math.hypot(dx,dy)+'px';beam.style.transform='rotate('+Math.atan2(dy,dx)+'rad)';}const delay=cfg.delay||900;window.setTimeout(()=>{if(!running)return;warning.style.display='none';if(beam)beam.style.display='none';const nowX=heroX*arena.clientWidth,nowY=heroY*arena.clientHeight;if(mode===0){const dx=nowX-bx,dy=nowY-by,l=Math.hypot(dx,dy)||1;for(let i=-1;i<=1;i++){const sx=dx/l+i*.22,sy=dy/l;const sl=Math.hypot(sx,sy)||1;addShot('enemy',bx,by,sx/sl*cfg.shot,sy/sl*cfg.shot);}}else if(mode===1){for(let i=-2;i<=2;i++)addShot('enemy',bx,by,i*cfg.shot*.28,cfg.shot*.68);}else{for(let i=0;i<3;i++){const x=(arena.clientWidth/4)*(i+1);addShot('enemy',x,arena.clientHeight-8,(nowX-x)*.22,-cfg.shot*.8);}}},delay);pattern++;}
-function addShot(type,x,y,vx,vy){
- const el=document.createElement('div');
- el.className=type==='enemy'?'projectile':'webshot';
- el.setAttribute('aria-label',type==='enemy'?'Boss attack â dodge':'Your web shot');
- el.style.left=x+'px';el.style.top=y+'px';
- arena.appendChild(el);
- shots.push({type,el,x,y,vx,vy,life:3});
+function toast(message) {
+  const box = $("toast");
+  box.textContent = message;
+  box.style.display = "block";
+  clearTimeout(window.toastTimer);
+  window.toastTimer = setTimeout(() => box.style.display = "none", 2600);
 }
-function attackBoss(){if(!running||attackTimer<.18)return;attackTimer=0;fighter.classList.remove('attacking');void fighter.offsetWidth;fighter.classList.add('attacking');const r=arena.getBoundingClientRect(),br=boss.getBoundingClientRect(),bx=br.left-r.left+br.width/2,by=br.top-r.top+br.height/2,hx=heroX*arena.clientWidth,hy=heroY*arena.clientHeight,dx=bx-hx,dy=by-hy,l=Math.hypot(dx,dy)||1;addShot('hero',hx,hy,dx/l*600,dy/l*600);}
-function moveShots(dt){shots=shots.filter(s=>{s.x+=s.vx*dt;s.y+=s.vy*dt;s.life-=dt;s.el.style.left=s.x+'px';s.el.style.top=s.y+'px';if(s.type==='hero'){const r=arena.getBoundingClientRect(),br=boss.getBoundingClientRect(),bx=br.left-r.left+br.width/2,by=br.top-r.top+br.height/2;if(Math.hypot(s.x-bx,s.y-by)<55){bossHP=Math.max(0,bossHP-5);score+=10;updateHud();s.el.remove();return false;}}const out=s.life<=0||s.x< -30||s.x>arena.clientWidth+30||s.y< -30||s.y>arena.clientHeight+30;if(out)s.el.remove();return !out;});}
-function checkHits(ts){const hx=heroX*arena.clientWidth,hy=heroY*arena.clientHeight;shots=shots.filter(s=>{if(s.type!=='enemy')return true;if(Math.hypot(s.x-hx,s.y-hy)<30){s.el.remove();if(ts>invulnerable)damage();return false;}return true;});}
-function damage(){if(!running||performance.now()<invulnerable)return;heroHP--;invulnerable=performance.now()+1000;updateHud();}
-function dodge(){if(!running)return;heroY=Math.max(.12,heroY-.15);heroX=Math.max(.08,Math.min(.92,heroX+(Math.random()>.5?.12:-.12)));invulnerable=Math.max(invulnerable,performance.now()+650);placeHero();}
-function endBattle(win){stopBattle();warning.style.display='none';if($('attackTelegraph'))$('attackTelegraph').style.display='none';overlay.style.display='grid';$('resultTitle').textContent=win?'CITY SAVED!':'MISSION FAILED';$('resultText').textContent=win?'You defeated The Glitch. Final score: '+score+'.':'The boss overwhelmed you. Try a lower difficulty, move often and dodge the red attacks.';}
-arena.addEventListener('pointerdown',e=>{if(!running)return;swipe={x:e.clientX,y:e.clientY};try{arena.setPointerCapture(e.pointerId);}catch(err){}});arena.addEventListener('pointermove',e=>{if(!running||!swipe)return;const dx=e.clientX-swipe.x,dy=e.clientY-swipe.y,r=arena.getBoundingClientRect();if(Math.abs(dx)+Math.abs(dy)<3)return;heroX=Math.max(.06,Math.min(.94,heroX+dx/r.width));heroY=Math.max(.12,Math.min(.92,heroY+dy/r.height));swipe={x:e.clientX,y:e.clientY};placeHero();});['pointerup','pointercancel','lostpointercapture'].forEach(n=>arena.addEventListener(n,()=>swipe=null));
-try{const theme=localStorage.getItem('sv-theme');if(theme)applyTheme(theme);restoreSavedBackground();const pl=JSON.parse(localStorage.getItem('sv-playlist')||'null');if(pl){songs=pl.songs||[];vibe=pl.vibe||'Happy';vibeQuery=pl.vibeQuery||'happy pop';$('vibeLabel').textContent='Current vibe: '+vibe;renderPlaylist();}missionPoints=Number(localStorage.getItem('sv-mission-points')||0);$('missionPoints').textContent=missionPoints;const hero=JSON.parse(localStorage.getItem('sv-hero')||'null');if(hero){$('heroName').value=hero.name||'';$('characterChoice').value=hero.heroCharacter||'Miles Morales';$('heroColour').value=hero.suitColour||'#e52c55';$('heroAccent').value=hero.accentColour||'#45caff';$('heroSymbol').value=hero.symbol||'ð·ï¸';$('heroPower').value=hero.power||'Web control';$('heroOrigin').value=hero.origin||'';changeSuit();createHero();}}catch(e){}
-stopBattle();
 
-function botReply(message){
- const m=message.toLowerCase();
- // Safety checks come first so a crisis message never receives a generic reply.
- if(/suicid|kill myself|end my life|end it all|want to die|wanna die|don't want to live|do not want to live|better off dead|take my own life|not worth living|hurt myself|self.harm/.test(m)) return 'Iâm really sorry youâre feeling this way. I canât agree with hurting yourself or ending your life, but I do want you to get support and stay safe. Please tell a trusted adult now and ask them to stay with you if you might act on these thoughts. In South Africa, Childline is free on 116 (24/7). You can also call the Suicide Crisis Line on 0800 567 567. If you are in immediate danger, go to a trusted adult nearby or contact emergency services. Are you in immediate danger right now?';
-
- if(/hurt|unsafe|threat|abuse|scared of someone|in danger/.test(m)) return 'Iâm sorry youâre dealing with this. Your safety matters. If someone may hurt you, try to reach a trusted adult or local support service when it is safe. If danger is immediate, contact local emergency services. You do not have to explain everything here.';
- if(/sad|lonely|alone|cry|down|empty/.test(m)) return 'That sounds heavy to carry. You do not have to solve everything at once. Would it help to name one thing that has been hardest today, or think of one safe person you could talk to?';
- if(/love|crush|relationship|girlfriend|boyfriend|breakup/.test(m)) return 'Relationships can bring up a lot of feelings. You deserve respect and room to be honest. What part is confusing you most: what you feel, what they feel, or what to do next?';
- if(/school|exam|marks|teacher|homework/.test(m)) return 'School pressure can feel like a lot. Letâs make it smaller: what is the one task or worry you want to deal with first?';
- if(/fear|afraid|scared|tell someone|ask someone/.test(m)) return 'It can be difficult to say something when you are worried about how people will react. You could practise the words here first, without sharing names or identifying details.';
- return 'Thank you for saying that. I can help you sort through your thoughts, but I may misunderstand and I am not a professional counsellor. What feels like the most important part of this for you?';
+function saveValue(key, value) {
+  try {
+    localStorage.setItem("spiderverse_" + key, value);
+    return true;
+  } catch (error) {
+    toast("Couldn't save. Your browser storage may be full.");
+    return false;
+  }
 }
-function sendBotMessage(){
- const box=$('botMessage'),chat=$('botChat');const msg=(box.value||'').trim();
- if(!msg){toast('Write a message first.');return;}
- function line(who,text,kind){const p=document.createElement('p');p.className=kind||'';const strong=document.createElement('strong');strong.textContent=who+': ';p.append(strong,document.createTextNode(text));chat.appendChild(p);}
- const crisis=/suicid|kill myself|end my life|end it all|want to die|wanna die|don't want to live|do not want to live|better off dead|take my own life|not worth living|hurt myself|self.harm/i.test(msg);
- line('You',msg,'user-message');line('Bot',botReply(msg),crisis?'crisis-message':'bot-message');
- box.value='';chat.scrollTop=chat.scrollHeight;
-}
-function escapeHtml(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function getConfessions(){try{return JSON.parse(localStorage.getItem('sv-confessions')||'[]')}catch(e){return []}}
-function submitConfession(){const text=($('confessionText').value||'').trim();const consent=$('shareWithCreator').checked;const status=$('confessionStatus');if(!text){status.textContent='Write a message first, or just use the bot above.';return;}if(!consent){status.textContent='Please tick the box if you want to save this message in the creator inbox on this device.';return;}const items=getConfessions();items.unshift({text,when:new Date().toLocaleString()});try{localStorage.setItem('sv-confessions',JSON.stringify(items));$('confessionText').value='';$('shareWithCreator').checked=false;status.textContent='Saved in this browser demo. It has not been sent to a server or to another device.';renderConfessionInbox();}catch(e){status.textContent='Could not save in this browser. You can still use the support bot.';}}
-function renderConfessionInbox(){const el=$('creatorInbox');if(!el)return;const items=getConfessions();el.innerHTML=items.length?items.map(x=>'<p><strong>'+escapeHtml(x.when)+'</strong><br>'+escapeHtml(x.text)+'</p>').join(''):'No messages saved on this device.';}
-function clearConfessionInbox(){if(!confirm('Clear the messages saved in this browser demo?'))return;localStorage.removeItem('sv-confessions');renderConfessionInbox();}
-const openPageBeforeConfessions=openPage;openPage=function(id){openPageBeforeConfessions(id);if(id==='settings')renderConfessionInbox();};
 
+function getValue(key) {
+  try { return localStorage.getItem("spiderverse_" + key); }
+  catch (error) { return null; }
+}
+
+/* NAVIGATION: EACH BUTTON OPENS ITS OWN PAGE */
+function openPage(id) {
+  const target = $(id);
+  if (!target || !target.classList.contains("page")) {
+    toast("That page could not be found.");
+    return;
+  }
+
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.remove("active");
+    page.setAttribute("aria-hidden", "true");
+  });
+
+  target.classList.add("active");
+  target.setAttribute("aria-hidden", "false");
+
+  if (id !== "game") stopBattle();
+  window.scrollTo({ top:0, behavior:"smooth" });
+}
+
+document.querySelectorAll(".page").forEach(page => {
+  page.setAttribute("aria-hidden", page.id === "home" ? "false" : "true");
+});
+
+/* STORY CHAPTER NAVIGATION */
+let currentChapter = 0;
+const totalChapters = 6;
+
+function goToChapter(number) {
+  currentChapter = Math.max(0, Math.min(totalChapters - 1, number));
+
+  for (let i = 0; i < totalChapters; i++) {
+    const chapter = $("chapter-" + i);
+    if (chapter) chapter.classList.toggle("chapter-hidden", i !== currentChapter);
+  }
+
+  document.querySelectorAll("#chapterButtons button").forEach((button, i) => {
+    button.classList.toggle("current", i === currentChapter);
+  });
+
+  $("chapterProgress").textContent = "Chapter " + (currentChapter + 1) + " of " + totalChapters;
+  $("previousChapter").disabled = currentChapter === 0;
+  $("nextChapter").textContent = currentChapter === totalChapters - 1 ? "🏁 Story complete" : "Next Chapter ➡️";
+}
+
+function changeChapter(direction) {
+  if (currentChapter + direction >= totalChapters) {
+    toast("🏁 You reached the end. Write your own next chapter!");
+    openPage("storyCreator");
+    return;
+  }
+  goToChapter(currentChapter + direction);
+}
 goToChapter(0);
+
+/* MUSIC */
+function setMusicMood(mood) {
+  const moods = {
+    energy:"⚡ High Energy: choose upbeat pop, energetic electronic music and fast beats for swinging through the city.",
+    chill:"🌆 Chill City: try smooth R&B, laid-back beats and atmospheric music for rooftop moments.",
+    focus:"🎯 Focus Mode: choose instrumentals or steady beats that help you concentrate on one mission.",
+    victory:"🏆 Victory: pick confident, upbeat songs that feel like the final scene of a movie."
+  };
+  $("musicMoodText").textContent = moods[mood] || "Choose a mood.";
+}
+
+function savePlaylist() {
+  const data = { name:$("playlistName").value, songs:$("playlistSongs").value };
+  if (saveValue("playlist", JSON.stringify(data))) {
+    $("playlistStatus").textContent = "Playlist saved in this browser.";
+    toast("🎧 Playlist saved!");
+  }
+}
+function loadPlaylist() {
+  const raw = getValue("playlist");
+  if (!raw) return toast("No saved playlist found yet.");
+  try {
+    const data = JSON.parse(raw);
+    $("playlistName").value = data.name || "";
+    $("playlistSongs").value = data.songs || "";
+    $("playlistStatus").textContent = "Loaded your saved playlist.";
+  } catch (error) { toast("The saved playlist could not be opened."); }
+}
+function clearPlaylist() {
+  $("playlistName").value = "";
+  $("playlistSongs").value = "";
+}
+
+/* BOSS MODE */
+let attackTimer = null;
+let attackTimeout = null;
+let heroHealth = 100;
+let bossHealth = 100;
+let battleRunning = false;
+let dodging = false;
+
+function updateBattleBars() {
+  $("heroHealthBar").style.width = Math.max(0,heroHealth) + "%";
+  $("bossHealthBar").style.width = Math.max(0,bossHealth) + "%";
+  $("heroHealthText").textContent = Math.max(0,heroHealth) + " / 100";
+  $("bossHealthText").textContent = Math.max(0,bossHealth) + " / 100";
+}
+
+function startBattle() {
+  stopBattle();
+  heroHealth = 100;
+  bossHealth = 100;
+  battleRunning = true;
+  dodging = false;
+  $("heroCharacter").style.left = "50%";
+  $("bossCharacter").style.left = "50%";
+  $("battleOverlay").classList.remove("show");
+  $("bossWarning").style.display = "none";
+  $("battleStatus").textContent = "⚔️ The battle has begun! Dodge warnings and shoot webs.";
+  updateBattleBars();
+
+  const difficulty = $("difficulty").value;
+  const interval = difficulty === "easy" ? 2600 : difficulty === "hard" ? 1400 : 2000;
+  attackTimer = setInterval(bossAttack, interval);
+  attackTimeout = setTimeout(bossAttack, 800);
+}
+
+function stopBattle() {
+  battleRunning = false;
+  dodging = false;
+  clearInterval(attackTimer);
+  clearTimeout(attackTimeout);
+  clearTimeout(window.nextAttackTimeout);
+  attackTimer = null;
+  attackTimeout = null;
+  if ($("bossWarning")) $("bossWarning").style.display = "none";
+}
+
+function bossAttack() {
+  if (!battleRunning) return;
+  dodging = false;
+  $("bossWarning").style.display = "block";
+  $("battleStatus").textContent = "⚠️ Incoming attack! Dodge now!";
+
+  clearTimeout(window.nextAttackTimeout);
+  window.nextAttackTimeout = setTimeout(() => {
+    $("bossWarning").style.display = "none";
+    if (!battleRunning) return;
+
+    if (!dodging) {
+      const damage = $("difficulty").value === "hard" ? 25 : $("difficulty").value === "easy" ? 10 : 17;
+      heroHealth = Math.max(0, heroHealth - damage);
+      $("battleStatus").textContent = "💥 You were hit! Keep moving.";
+      updateBattleBars();
+      if (heroHealth <= 0) finishBattle(false);
+    } else {
+      $("battleStatus").textContent = "🕸️ Nice dodge! Now strike back.";
+    }
+  }, 1050);
+}
+
+function dodge(direction) {
+  if (!battleRunning) return toast("Start the battle first.");
+  dodging = true;
+  $("heroCharacter").style.left = direction === "left" ? "24%" : "76%";
+  $("battleStatus").textContent = direction === "left" ? "⬅️ You dodged left!" : "➡️ You dodged right!";
+  setTimeout(() => {
+    if (battleRunning) $("heroCharacter").style.left = "50%";
+  }, 650);
+}
+
+function shootWeb() {
+  if (!battleRunning) return toast("Start the battle first.");
+  const damage = $("difficulty").value === "hard" ? 8 : $("difficulty").value === "easy" ? 18 : 13;
+  bossHealth = Math.max(0, bossHealth - damage);
+  updateBattleBars();
+  $("battleStatus").textContent = "🕸️ Web shot landed! The Glitch took " + damage + " damage.";
+  const boss = $("bossCharacter");
+  boss.style.transform = "translate(-50%,-50%) scale(1.2)";
+  setTimeout(() => boss.style.transform = "translate(-50%,-50%)", 180);
+  if (bossHealth <= 0) finishBattle(true);
+}
+
+function finishBattle(won) {
+  stopBattle();
+  $("battleOverlay").classList.add("show");
+  $("battleResult").textContent = won ? "🏆 VICTORY!" : "💥 MISSION FAILED";
+  $("battleResultText").textContent = won ? "You defeated The Glitch. The city is safe for now!" : "The Glitch won this round. Try again and watch the warnings.";
+  $("battleStatus").textContent = won ? "🏆 You won the battle!" : "Try again when you're ready.";
+}
+
+/* HERO LAB */
+function updateHero() {
+  const name = $("heroName").value.trim() || "Web Hero";
+  const colour = $("suitColor").value;
+  const symbol = $("heroSymbol").value;
+  const power = $("heroPower").value;
+  const bio = $("heroBio").value.trim() || "A new hero with a story still being written.";
+
+  $("heroPreview").style.setProperty("--suit",colour);
+  $("heroPreview").querySelector(".fig-head").style.background = colour;
+  $("heroPreview").querySelector(".fig-body").style.background = colour;
+  $("heroPreview").querySelector(".fig-body").textContent = symbol;
+  $("heroPreview").querySelectorAll(".fig-leg").forEach(leg => leg.style.background = colour);
+  $("heroPreviewName").textContent = name;
+  $("heroPreviewPower").textContent = "Special ability: " + power;
+  $("heroPreviewBio").textContent = bio;
+  $("heroStatus").textContent = "Your hero design has been updated.";
+}
+
+function saveHero() {
+  const hero = {
+    name:$("heroName").value, colour:$("suitColor").value,
+    symbol:$("heroSymbol").value, power:$("heroPower").value, bio:$("heroBio").value
+  };
+  if (saveValue("hero",JSON.stringify(hero))) {
+    toast("🕷️ Hero saved!");
+    $("heroStatus").textContent = "Hero saved in this browser.";
+  }
+}
+
+function loadHero() {
+  const raw = getValue("hero");
+  if (!raw) return toast("No saved hero found yet.");
+  try {
+    const hero = JSON.parse(raw);
+    $("heroName").value = hero.name || "";
+    $("suitColor").value = hero.colour || "#27c9ff";
+    $("heroSymbol").value = hero.symbol || "🕷️";
+    $("heroPower").value = hero.power || "Web Swinging";
+    $("heroBio").value = hero.bio || "";
+    updateHero();
+    toast("Hero loaded!");
+  } catch (error) { toast("The saved hero could not be loaded."); }
+}
+updateHero();
+
+/* MISSIONS */
+function updateMissionProgress() {
+  const checks = [...document.querySelectorAll(".mission-check")];
+  const complete = checks.filter(check => check.checked).length;
+  $("missionProgressBar").style.width = (complete / checks.length * 100) + "%";
+  $("missionProgressText").textContent = complete + " of " + checks.length + " missions complete";
+  saveValue("missions",JSON.stringify(checks.map(check => check.checked)));
+}
+
+function resetMissions() {
+  document.querySelectorAll(".mission-check").forEach(check => check.checked = false);
+  updateMissionProgress();
+  toast("Mission progress reset.");
+}
+document.querySelectorAll(".mission-check").forEach(check => check.addEventListener("change",updateMissionProgress));
+
+(function loadMissions() {
+  const raw = getValue("missions");
+  if (!raw) return;
+  try {
+    const values = JSON.parse(raw);
+    document.querySelectorAll(".mission-check").forEach((check,index) => check.checked = Boolean(values[index]));
+    updateMissionProgress();
+  } catch (error) {}
+})();
+
+function saveMystery() {
+  const data = { title:$("mysteryTitle").value, clue:$("mysteryClue").value };
+  if (saveValue("mystery",JSON.stringify(data))) {
+    $("mysteryStatus").textContent = "Your mystery has been saved.";
+    toast("🔎 Mystery saved!");
+  }
+}
+
+/* STORY CREATOR */
+function saveStory() {
+  const data = {
+    title:$("storyTitle").value, character:$("storyCharacter").value,
+    setting:$("storySetting").value, text:$("storyText").value
+  };
+  if (saveValue("createdStory",JSON.stringify(data))) {
+    $("storyStatus").textContent = "Your story has been saved in this browser.";
+    toast("✍️ Story saved!");
+  }
+}
+
+function loadStory() {
+  const raw = getValue("createdStory");
+  if (!raw) return toast("No saved story found yet.");
+  try {
+    const data = JSON.parse(raw);
+    $("storyTitle").value = data.title || "";
+    $("storyCharacter").value = data.character || "";
+    $("storySetting").value = data.setting || "";
+    $("storyText").value = data.text || "";
+    $("storyStatus").textContent = "Your saved story has been loaded.";
+  } catch (error) { toast("The saved story could not be opened."); }
+}
+
+function clearStory() {
+  $("storyTitle").value = "";
+  $("storyCharacter").value = "";
+  $("storySetting").value = "";
+  $("storyText").value = "";
+}
+
+function usePrompt(prompt) {
+  $("storyText").value = prompt + "\n\n";
+  $("storyText").focus();
+}
+
+function downloadText(filename,content) {
+  const blob = new Blob([content],{type:"text/plain;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url),1000);
+}
+
+function downloadStory() {
+  const content = $("storyTitle").value + "\n\nMain character: " + $("storyCharacter").value +
+    "\nSetting: " + $("storySetting").value + "\n\n" + $("storyText").value;
+  downloadText("my-spider-verse-story.txt",content);
+}
+
+/* DRAWING STUDIO */
+const canvas = $("drawingCanvas");
+const ctx = canvas.getContext("2d");
+let drawing = false;
+let drawTool = "pen";
+let lastPoint = null;
+let undoStack = [];
+
+function paintWhite() {
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+}
+paintWhite();
+undoStack.push(canvas.toDataURL());
+
+function canvasPoint(event) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    x:(event.clientX - rect.left) * canvas.width / rect.width,
+    y:(event.clientY - rect.top) * canvas.height / rect.height
+  };
+}
+
+canvas.addEventListener("pointerdown",event => {
+  event.preventDefault();
+  drawing = true;
+  lastPoint = canvasPoint(event);
+  canvas.setPointerCapture(event.pointerId);
+});
+
+canvas.addEventListener("pointermove",event => {
+  if (!drawing) return;
+  event.preventDefault();
+  const point = canvasPoint(event);
+  ctx.beginPath();
+  ctx.moveTo(lastPoint.x,lastPoint.y);
+  ctx.lineTo(point.x,point.y);
+  ctx.lineWidth = $("brushSize").value;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.strokeStyle = drawTool === "eraser" ? "#ffffff" : $("brushColor").value;
+  ctx.stroke();
+  lastPoint = point;
+});
+
+function endDrawing() {
+  if (!drawing) return;
+  drawing = false;
+  lastPoint = null;
+  try {
+    undoStack.push(canvas.toDataURL());
+    if (undoStack.length > 25) undoStack.shift();
+  } catch (error) {}
+}
+canvas.addEventListener("pointerup",endDrawing);
+canvas.addEventListener("pointercancel",endDrawing);
+
+function setDrawTool(tool) {
+  drawTool = tool;
+  $("drawingStatus").textContent = tool === "eraser" ? "Eraser selected." : "Pen selected.";
+}
+
+function undoDrawing() {
+  if (undoStack.length <= 1) return toast("Nothing to undo yet.");
+  undoStack.pop();
+  const img = new Image();
+  img.onload = () => {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.drawImage(img,0,0);
+  };
+  img.src = undoStack[undoStack.length - 1];
+}
+
+function clearDrawing() {
+  if (!confirm("Clear your whole drawing?")) return;
+  paintWhite();
+  undoStack.push(canvas.toDataURL());
+  $("drawingStatus").textContent = "Canvas cleared.";
+}
+
+function saveDrawing() {
+  try {
+    if (saveValue("drawing",canvas.toDataURL())) {
+      $("drawingStatus").textContent = "Drawing saved in this browser.";
+      toast("🎨 Drawing saved!");
+    }
+  } catch (error) { toast("The drawing could not be saved."); }
+}
+
+function downloadDrawing() {
+  const link = document.createElement("a");
+  link.download = "my-spider-verse-drawing.png";
+  link.href = canvas.toDataURL("image/png");
+  link.click();
+}
+
+(function loadDrawing() {
+  const saved = getValue("drawing");
+  if (!saved) return;
+  const img = new Image();
+  img.onload = () => {
+    ctx.drawImage(img,0,0,canvas.width,canvas.height);
+    undoStack.push(canvas.toDataURL());
+  };
+  img.src = saved;
+})();
+
+/* CONFESSIONS */
+function saveConfession() {
+  const data = { title:$("confessionTitle").value, text:$("confessionText").value };
+  if (saveValue("confession",JSON.stringify(data))) {
+    $("confessionStatus").textContent = "Entry saved in this browser. It is not encrypted or password-protected.";
+    toast("💬 Entry saved.");
+  }
+}
+
+function loadConfession() {
+  const raw = getValue("confession");
+  if (!raw) return toast("No saved entry found yet.");
+  try {
+    const data = JSON.parse(raw);
+    $("confessionTitle").value = data.title || "";
+    $("confessionText").value = data.text || "";
+    $("confessionStatus").textContent = "Saved entry loaded.";
+  } catch (error) { toast("The entry could not be loaded."); }
+}
+
+function clearConfession() {
+  $("confessionTitle").value = "";
+  $("confessionText").value = "";
+}
+
+/* SETTINGS */
+function applyAccent() {
+  const colour = $("accentColor").value;
+  document.documentElement.style.setProperty("--pink",colour);
+  saveValue("accent",colour);
+  toast("🎨 Accent colour updated.");
+}
+
+function resetAccent() {
+  $("accentColor").value = "#ff2c8a";
+  document.documentElement.style.setProperty("--pink","#ff2c8a");
+  saveValue("accent","#ff2c8a");
+  toast("Default accent restored.");
+}
+
+(function loadAccent() {
+  const colour = getValue("accent");
+  if (colour && /^#[0-9a-f]{6}$/i.test(colour)) {
+    $("accentColor").value = colour;
+    document.documentElement.style.setProperty("--pink",colour);
+  }
+})();
+
+function applyBackground() {
+  const file = $("backgroundFile").files[0];
+  if (!file) return toast("Choose an image first.");
+  if (!file.type.startsWith("image/")) return toast("Please choose an image file.");
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    const dataUrl = reader.result;
+    document.body.style.backgroundImage =
+      "linear-gradient(#05071666,#05071699),url('" + dataUrl + "')";
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundPosition = "center";
+    document.body.style.backgroundAttachment = "fixed";
+
+    if (saveValue("background",dataUrl)) {
+      $("backgroundStatus").textContent = "Custom background applied and saved in this browser.";
+    } else {
+      $("backgroundStatus").textContent = "Background applied for this session.";
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function resetBackground() {
+  document.body.style.backgroundImage = "";
+  document.body.style.backgroundSize = "";
+  document.body.style.backgroundPosition = "";
+  document.body.style.backgroundAttachment = "";
+  try { localStorage.removeItem("spiderverse_background"); } catch (error) {}
+  $("backgroundStatus").textContent = "Default background restored.";
+}
+
+(function loadBackground() {
+  const saved = getValue("background");
+  if (saved && saved.startsWith("data:image/")) {
+    document.body.style.backgroundImage =
+      "linear-gradient(#05071666,#05071699),url('" + saved + "')";
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundPosition = "center";
+    document.body.style.backgroundAttachment = "fixed";
+    $("backgroundStatus").textContent = "Your saved background has been restored.";
+  }
+})();
+
+function exportData() {
+  const data = {};
+  try {
+    for (let i=0;i<localStorage.length;i++) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith("spiderverse_")) data[key] = localStorage.getItem(key);
+    }
+  } catch (error) {
+    toast("Could not read saved data.");
+    return;
+  }
+  downloadText("my-spider-verse-data.json",JSON.stringify(data,null,2));
+  $("settingsStatus").textContent = "Export started. Keep the downloaded file somewhere safe.";
+}
+
+function clearAllData() {
+  if (!confirm("This will delete saved Spider-Verse creations, settings and progress from this browser. Continue?")) return;
+  try {
+    const keys = [];
+    for (let i=0;i<localStorage.length;i++) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith("spiderverse_")) keys.push(key);
+    }
+    keys.forEach(key => localStorage.removeItem(key));
+    $("settingsStatus").textContent = "Saved Spider-Verse data has been cleared.";
+    toast("Saved website data cleared.");
+  } catch (error) { toast("Could not clear all saved data."); }
+}
 </script>
 </body>
 </html>
