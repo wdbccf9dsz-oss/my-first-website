@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -6,7 +8,7 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <meta name="theme-color" content="#071426">
 
@@ -16,39 +18,33 @@
 
 :root {
 
-  --bg: #071426;
+  --bg: #050d1d;
 
-  --panel: rgba(11, 30, 53, 0.94);
+  --panel: rgba(10, 25, 48, .92);
 
-  --panel2: #102945;
+  --panel2: #122b49;
 
-  --text: #f2f7ff;
+  --text: #f4f8ff;
 
-  --muted: #afc4dd;
+  --muted: #bbcade;
 
-  --accent: #78c7ff;
+  --accent: #79d5ff;
 
-  --accent2: #e45b91;
+  --pink: #ff5b9f;
 
-  --border: rgba(169, 212, 255, 0.25);
+  --border: rgba(132, 201, 255, .25);
 
 }
 
 * { box-sizing: border-box; }
 
-html {
-
-  scroll-behavior: smooth;
-
-  scroll-padding-top: 75px;
-
-}
+html { scroll-behavior: smooth; }
 
 body {
 
   margin: 0;
 
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
 
   color: var(--text);
 
@@ -56,9 +52,11 @@ body {
 
   background-image:
 
-    radial-gradient(circle at 10% 15%, rgba(48, 111, 183, .18), transparent 30%),
+    radial-gradient(ellipse at 10% 10%, rgba(0, 125, 255, .25), transparent 38%),
 
-    radial-gradient(circle at 90% 70%, rgba(228, 91, 145, .12), transparent 30%);
+    radial-gradient(ellipse at 90% 30%, rgba(255, 40, 126, .17), transparent 35%),
+
+    radial-gradient(ellipse at 50% 100%, rgba(62, 56, 255, .18), transparent 45%);
 
   background-size: cover;
 
@@ -66,109 +64,165 @@ body {
 
   background-attachment: fixed;
 
+  font-family: Arial, Helvetica, sans-serif;
+
   line-height: 1.6;
+
+  overflow-x: hidden;
 
 }
 
-body::before {
+/* Decorative multiverse background */
 
-  content: "";
+.web-decoration {
 
   position: fixed;
 
-  inset: 0;
+  width: 330px;
+
+  height: 330px;
+
+  border-radius: 50%;
 
   pointer-events: none;
 
-  background: rgba(4, 12, 25, .24);
+  z-index: 0;
 
-  z-index: -1;
+  opacity: .65;
 
-}
+  background:
 
-button, input, textarea, select { font: inherit; }
+    repeating-radial-gradient(
 
-button, .button, .menu-link {
+      circle at 50% 50%,
 
-  border: 1px solid var(--border);
+      transparent 0 24px,
 
-  border-radius: 12px;
+      rgba(121, 213, 255, .16) 25px 26px,
 
-  padding: 11px 15px;
+      transparent 27px 46px
 
-  color: var(--text);
+    ),
 
-  background: #173958;
+    repeating-conic-gradient(
 
-  cursor: pointer;
+      from 0deg,
 
-  transition: transform .18s, background .18s, border-color .18s;
+      transparent 0deg 14deg,
 
-  text-decoration: none;
+      rgba(121, 213, 255, .14) 14.5deg 15deg,
 
-}
+      transparent 15.5deg 30deg
 
-button:hover, .button:hover, .menu-link:hover {
+    );
 
-  transform: translateY(-2px);
-
-  background: #21517a;
-
-  border-color: var(--accent);
+  filter: drop-shadow(0 0 12px rgba(66, 166, 255, .15));
 
 }
 
-button:focus-visible, a:focus-visible, input:focus-visible,
+.web-one {
 
-textarea:focus-visible, select:focus-visible {
+  top: -155px;
 
-  outline: 2px solid var(--accent);
-
-  outline-offset: 3px;
+  left: -155px;
 
 }
 
-button.primary {
+.web-two {
 
-  background: linear-gradient(120deg, #1765a0, #63345f);
+  right: -170px;
+
+  bottom: -155px;
+
+  transform: rotate(25deg);
+
+  background:
+
+    repeating-radial-gradient(
+
+      circle at 50% 50%,
+
+      transparent 0 24px,
+
+      rgba(255, 91, 159, .18) 25px 26px,
+
+      transparent 27px 46px
+
+    ),
+
+    repeating-conic-gradient(
+
+      from 0deg,
+
+      transparent 0deg 14deg,
+
+      rgba(255, 91, 159, .16) 14.5deg 15deg,
+
+      transparent 15.5deg 30deg
+
+    );
 
 }
 
-button.danger { background: #57283d; }
+.ambient {
 
-input, textarea, select {
+  position: fixed;
 
-  width: 100%;
+  width: 230px;
 
-  padding: 11px;
+  height: 230px;
 
-  border: 1px solid var(--border);
+  border-radius: 50%;
 
-  border-radius: 10px;
+  filter: blur(80px);
 
-  color: var(--text);
+  opacity: .18;
 
-  background: #07182b;
+  pointer-events: none;
 
-  margin: 5px 0 12px;
+  z-index: 0;
+
+  animation: float 12s ease-in-out infinite alternate;
 
 }
 
-input[type="checkbox"] { width: auto; }
+.ambient-blue {
 
-textarea { min-height: 110px; resize: vertical; }
+  background: #008cff;
 
-label { color: var(--muted); }
+  top: 25%;
 
-h1, h2, h3 { line-height: 1.2; }
+  left: -100px;
 
-h1 { font-size: clamp(2.2rem, 7vw, 4.3rem); }
+}
 
-h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); }
+.ambient-pink {
 
-p { color: var(--muted); }
+  background: #ff167d;
 
-a { color: var(--accent); }
+  right: -100px;
+
+  top: 55%;
+
+  animation-delay: -5s;
+
+}
+
+@keyframes float {
+
+  from { transform: translateY(-20px); }
+
+  to { transform: translateY(40px); }
+
+}
+
+header, main, footer {
+
+  position: relative;
+
+  z-index: 1;
+
+}
 
 header {
 
@@ -176,7 +230,7 @@ header {
 
   top: 0;
 
-  z-index: 20;
+  z-index: 10;
 
   display: flex;
 
@@ -186,57 +240,157 @@ header {
 
   gap: 12px;
 
-  padding: 10px 4%;
+  padding: 12px 5%;
 
-  background: rgba(5, 16, 31, .96);
+  background: rgba(3, 10, 23, .92);
 
   border-bottom: 1px solid var(--border);
 
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
 
 }
 
 .brand {
 
-  font-weight: 800;
-
   color: var(--text);
 
   text-decoration: none;
+
+  font-size: .95rem;
+
+  font-weight: 900;
+
+  letter-spacing: 1px;
 
 }
 
-.top-actions { display: flex; gap: 8px; }
+.top-actions {
 
-.top-actions a {
+  display: flex;
 
-  padding: 7px 11px;
+  gap: 8px;
 
-  border-radius: 9px;
+}
 
-  text-decoration: none;
+.top-actions button {
 
-  border: 1px solid var(--border);
+  padding: 7px 12px;
 
-  color: var(--text);
-
-  background: #102945;
+  font-size: .88rem;
 
 }
 
 main {
 
-  width: min(1000px, 92%);
+  width: min(960px, 92%);
+
+  min-height: 75vh;
 
   margin: auto;
 
+  padding-bottom: 30px;
+
 }
 
-section {
+.page {
+
+  display: none;
+
+  padding: 30px 0 45px;
+
+}
+
+.page.active {
+
+  display: block;
+
+  animation: appear .28s ease-out;
+
+}
+
+@keyframes appear {
+
+  from { opacity: 0; transform: translateY(8px); }
+
+  to { opacity: 1; transform: translateY(0); }
+
+}
+
+.hero {
+
+  min-height: 370px;
 
   padding: 40px 0;
 
-  scroll-margin-top: 75px;
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+}
+
+.eyebrow {
+
+  color: var(--accent);
+
+  letter-spacing: 3px;
+
+  text-transform: uppercase;
+
+  font-weight: bold;
+
+  font-size: .78rem;
+
+}
+
+h1 {
+
+  font-size: clamp(2.5rem, 9vw, 5.3rem);
+
+  line-height: 1.04;
+
+  margin: 16px 0;
+
+  letter-spacing: -2px;
+
+}
+
+h2 {
+
+  font-size: clamp(1.65rem, 5vw, 2.5rem);
+
+  line-height: 1.2;
+
+  margin-top: 5px;
+
+}
+
+h3 { line-height: 1.3; }
+
+p { color: var(--muted); }
+
+.hero p {
+
+  max-width: 650px;
+
+  font-size: 1.05rem;
+
+}
+
+.blue-text {
+
+  color: var(--accent);
+
+  text-shadow: 0 0 22px rgba(121, 213, 255, .3);
+
+}
+
+.pink-text {
+
+  color: var(--pink);
+
+  text-shadow: 0 0 22px rgba(255, 91, 159, .25);
 
 }
 
@@ -246,61 +400,15 @@ section {
 
   border: 1px solid var(--border);
 
-  border-radius: 20px;
+  border-radius: 21px;
 
   padding: clamp(17px, 4vw, 30px);
 
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 
-  box-shadow: 0 12px 35px rgba(0, 0, 0, .17);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, .22);
 
-  backdrop-filter: blur(8px);
-
-}
-
-.hero {
-
-  min-height: 280px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  justify-content: center;
-
-  padding: 36px 0 24px;
-
-}
-
-.eyebrow {
-
-  color: var(--accent);
-
-  text-transform: uppercase;
-
-  letter-spacing: 3px;
-
-  font-size: .8rem;
-
-  font-weight: bold;
-
-}
-
-.hero p { max-width: 650px; }
-
-.section-heading { margin-bottom: 8px; }
-
-.small { font-size: .9rem; }
-
-.muted { color: var(--muted); }
-
-.grid {
-
-  display: grid;
-
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
-
-  gap: 14px;
+  backdrop-filter: blur(12px);
 
 }
 
@@ -312,41 +420,127 @@ section {
 
   gap: 12px;
 
+  margin-top: 24px;
+
 }
 
 .menu-link {
 
-  display: flex;
-
-  align-items: flex-start;
-
-  gap: 13px;
-
   width: 100%;
+
+  display: flex;
 
   text-align: left;
 
+  align-items: flex-start;
+
+  gap: 15px;
+
   padding: 17px;
 
-  background: linear-gradient(120deg, rgba(18, 48, 78, .97), rgba(15, 30, 57, .97));
+  border: 1px solid var(--border);
+
+  border-radius: 15px;
+
+  color: var(--text);
+
+  text-decoration: none;
+
+  background: linear-gradient(115deg, rgba(17, 50, 82, .96), rgba(12, 23, 48, .96));
+
+  transition: transform .2s, border-color .2s, box-shadow .2s;
+
+}
+
+.menu-link:hover {
+
+  transform: translateX(5px);
+
+  border-color: var(--accent);
+
+  box-shadow: 0 0 22px rgba(69, 176, 255, .12);
 
 }
 
 .menu-emoji {
 
-  font-size: 1.65rem;
+  flex-shrink: 0;
 
-  min-width: 38px;
+  font-size: 1.9rem;
+
+  width: 42px;
 
   text-align: center;
 
 }
 
-.menu-copy { display: flex; flex-direction: column; }
+.menu-copy {
 
-.menu-copy strong { font-size: 1.05rem; color: var(--text); }
+  display: flex;
 
-.menu-copy span { font-size: .9rem; color: var(--muted); }
+  flex-direction: column;
+
+  gap: 3px;
+
+}
+
+.menu-copy strong {
+
+  font-size: 1.08rem;
+
+  color: var(--text);
+
+}
+
+.menu-copy span {
+
+  color: var(--muted);
+
+  font-size: .92rem;
+
+}
+
+button, .button {
+
+  border: 1px solid var(--border);
+
+  border-radius: 11px;
+
+  padding: 11px 15px;
+
+  color: var(--text);
+
+  background: var(--panel2);
+
+  cursor: pointer;
+
+  text-decoration: none;
+
+  transition: background .2s, transform .2s;
+
+}
+
+button:hover, .button:hover {
+
+  background: #204a70;
+
+  transform: translateY(-1px);
+
+}
+
+button.primary, .button.primary {
+
+  background: linear-gradient(110deg, #1469a6, #623c83);
+
+  border-color: rgba(150, 205, 255, .4);
+
+}
+
+button.danger {
+
+  background: #57283d;
+
+}
 
 .actions {
 
@@ -356,73 +550,167 @@ section {
 
   gap: 9px;
 
-  margin: 10px 0;
+  margin: 15px 0;
 
 }
 
-.status {
+input, textarea, select {
 
-  min-height: 24px;
+  display: block;
 
-  color: var(--accent);
+  width: 100%;
 
-  font-size: .9rem;
+  padding: 11px;
+
+  margin: 6px 0 14px;
+
+  border-radius: 10px;
+
+  border: 1px solid var(--border);
+
+  color: var(--text);
+
+  background: #08172b;
+
+  font: inherit;
+
+}
+
+input[type="color"] {
+
+  height: 48px;
+
+  padding: 4px;
+
+}
+
+input[type="range"] { padding: 0; }
+
+input[type="checkbox"] {
+
+  display: inline-block;
+
+  width: auto;
+
+  margin-right: 8px;
+
+}
+
+textarea {
+
+  min-height: 130px;
+
+  resize: vertical;
+
+}
+
+label { color: var(--muted); }
+
+.grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+
+  gap: 13px;
 
 }
 
 .stat {
 
-  padding: 12px;
+  padding: 15px;
 
-  background: rgba(5, 18, 34, .65);
+  margin: 10px 0;
 
   border: 1px solid var(--border);
 
-  border-radius: 12px;
+  border-radius: 13px;
+
+  background: rgba(5, 16, 32, .75);
 
 }
 
-.stat strong { display: block; font-size: 1.3rem; }
-
-.quiz-option {
+.stat strong {
 
   display: block;
 
-  padding: 12px;
+  font-size: 1.5rem;
 
-  margin: 8px 0;
+  color: var(--accent);
+
+}
+
+.small { font-size: .87rem; }
+
+.status {
+
+  color: var(--accent);
+
+  min-height: 24px;
+
+  font-size: .92rem;
+
+}
+
+.back-menu {
+
+  display: inline-block;
+
+  margin-top: 15px;
+
+  padding: 9px 13px;
 
   border: 1px solid var(--border);
 
   border-radius: 10px;
 
-  cursor: pointer;
-
   color: var(--text);
+
+  background: rgba(9, 24, 45, .8);
+
+  text-decoration: none;
 
 }
 
-.quiz-option:has(input:checked) { border-color: var(--accent); }
-
 .story-card, .mission-card, .confession-card {
 
-  background: rgba(5, 18, 34, .62);
+  padding: 16px;
+
+  margin: 12px 0;
 
   border: 1px solid var(--border);
 
-  padding: 15px;
+  border-radius: 14px;
 
-  border-radius: 13px;
+  background: rgba(5, 16, 32, .65);
 
-  margin: 10px 0;
+}
+
+.hero-preview {
+
+  padding: 20px;
+
+  text-align: center;
+
+  border: 1px solid var(--border);
+
+  border-radius: 16px;
+
+  background: radial-gradient(circle, #174268, #071426 75%);
+
+}
+
+.hero-preview svg {
+
+  max-width: 220px;
+
+  width: 100%;
 
 }
 
 canvas {
 
   width: 100%;
-
-  max-width: 100%;
 
   display: block;
 
@@ -432,99 +720,101 @@ canvas {
 
   border-radius: 13px;
 
-  touch-action: manipulation;
-
 }
 
-#artCanvas { touch-action: none; cursor: crosshair; }
+#artCanvas { touch-action: none; }
 
 .gallery-grid {
 
   display: grid;
 
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
 
   gap: 12px;
 
 }
 
+.gallery-item {
+
+  min-width: 0;
+
+  border: 1px solid var(--border);
+
+  border-radius: 12px;
+
+  padding: 8px;
+
+  background: rgba(5, 16, 32, .7);
+
+}
+
 .gallery-item img {
+
+  display: block;
 
   width: 100%;
 
-  height: 150px;
+  height: 130px;
 
   object-fit: cover;
 
-  border-radius: 10px;
-
-  border: 1px solid var(--border);
+  border-radius: 8px;
 
 }
 
-.gallery-item button { margin-top: 5px; width: 100%; }
+.gallery-item button {
 
-.hero-preview {
+  width: 100%;
 
-  border: 1px solid var(--border);
+  margin-top: 7px;
 
-  border-radius: 15px;
-
-  background: radial-gradient(circle, #173d60, #061323);
-
-  padding: 15px;
-
-  text-align: center;
+  font-size: .82rem;
 
 }
-
-.hero-preview svg { max-width: 220px; width: 100%; }
 
 footer {
 
   text-align: center;
 
-  padding: 25px 10px 45px;
+  padding: 25px 12px 40px;
 
-  color: var(--muted);
+  border-top: 1px solid var(--border);
 
-}
-
-.back-menu {
-
-  display: inline-block;
-
-  margin-top: 12px;
-
-  font-size: .9rem;
+  background: rgba(4, 12, 25, .72);
 
 }
+
+footer p { font-size: .85rem; }
 
 #toast {
 
+  display: none;
+
   position: fixed;
 
-  bottom: 15px;
+  z-index: 100;
+
+  bottom: 18px;
 
   left: 50%;
 
   transform: translateX(-50%);
 
-  z-index: 100;
+  width: max-content;
 
   max-width: 90%;
 
-  background: #173958;
+  padding: 12px 16px;
+
+  background: #143c61;
+
+  border: 1px solid var(--accent);
 
   color: white;
 
-  padding: 10px 16px;
+  border-radius: 12px;
 
-  border-radius: 10px;
-
-  border: 1px solid var(--border);
-
-  display: none;
+  box-shadow: 0 0 25px rgba(0, 0, 0, .4);
 
 }
 
@@ -532,29 +822,33 @@ body.high-contrast {
 
   --bg: #000;
 
-  --panel: rgba(0, 0, 0, .96);
-
-  --panel2: #111;
+  --panel: rgba(0, 0, 0, .97);
 
   --text: #fff;
 
-  --muted: #e1e1e1;
+  --muted: #efefef;
 
-  --accent: #7de8ff;
+  --accent: #8ceaff;
 
-  --border: rgba(255,255,255,.5);
+  --border: rgba(255, 255, 255, .55);
 
 }
 
 @media (max-width: 520px) {
 
-  header { padding: 9px 4%; }
+  header { padding: 10px 4%; }
 
-  .brand { font-size: .9rem; }
+  .brand { font-size: .76rem; letter-spacing: .4px; }
 
-  .top-actions a { font-size: .82rem; padding: 7px 9px; }
+  .top-actions { gap: 5px; }
 
-  section { padding: 28px 0; }
+  .top-actions button { padding: 7px 8px; font-size: .8rem; }
+
+  .hero { min-height: 300px; }
+
+  .menu-link { padding: 14px 11px; gap: 9px; }
+
+  .menu-emoji { width: 34px; font-size: 1.55rem; }
 
 }
 
@@ -564,15 +858,23 @@ body.high-contrast {
 
 <body>
 
+<div class="web-decoration web-one"></div>
+
+<div class="web-decoration web-two"></div>
+
+<div class="ambient ambient-blue"></div>
+
+<div class="ambient ambient-pink"></div>
+
 <header>
 
-  <a class="brand" href="#home">🕷️ MY SPIDER-VERSE</a>
+  <a href="#home" class="brand" data-page="home">🕷️ MY SPIDER-VERSE</a>
 
   <div class="top-actions">
 
-    <a href="#home">🏠 Home</a>
+    <button data-page="home">🏠 Home</button>
 
-    <a href="#settings">⚙️ Settings</a>
+    <button data-page="settings">⚙️ Settings</button>
 
   </div>
 
@@ -580,659 +882,657 @@ body.high-contrast {
 
 <main>
 
-  <!-- HOME AND VERTICAL MENU -->
+<!-- HOME -->
 
-  <section id="home">
+<section class="page active" id="home">
 
-    <div class="hero">
+  <div class="hero">
 
-      <div class="eyebrow">Your universe. Your rules.</div>
+    <div class="eyebrow">🌌 Enter the multiverse</div>
 
-      <h1>Welcome to Your <span style="color:var(--accent)">Spider-Verse</span> 🕸️</h1>
+    <h1>Welcome to Your <span class="blue-text">Spider-Verse</span> 🕸️</h1>
 
-      <p>
+    <p>
 
-        Enter your own multiverse. Test your knowledge, build a hero,
+      Every universe has a story. Every hero has a beginning.
 
-        explore stories, create art, complete missions and discover what
+      This is your space to explore, create, play and build
 
-        your universe has waiting for you.
+      a universe of your own.
 
-      </p>
+    </p>
 
-      <div class="actions">
+    <div class="actions">
 
-        <a class="button primary" href="#menu">🕷️ Explore the Website</a>
-
-      </div>
+      <button class="primary" id="exploreButton">🕷️ Enter My Universe</button>
 
     </div>
 
-    <div class="panel" id="menu">
+  </div>
 
-      <h2 class="section-heading">🌌 Choose Your Destination</h2>
+  <div class="panel" id="menuPanel">
 
-      <p>Choose a section below. Each one takes you directly to its own part of the website.</p>
+    <div class="eyebrow">Choose your destination</div>
 
-      <nav class="menu-list" aria-label="Main menu">
+    <h2>🌠 Your Multiverse Menu</h2>
 
-        <a class="menu-link" href="#quiz">
+    <p>Select an option to open its own page. Only the page you choose will be displayed.</p>
 
-          <span class="menu-emoji">🧠</span>
+    <nav class="menu-list" aria-label="Main menu">
 
-          <span class="menu-copy"><strong>Quiz</strong><span>Answer questions, test your knowledge and earn points for correct answers.</span></span>
+      <a class="menu-link" href="#quiz" data-page="quiz">
 
-        </a>
+        <span class="menu-emoji">🧠</span>
 
-        <a class="menu-link" href="#boss">
+        <span class="menu-copy"><strong>Quiz</strong><span>Test your knowledge with fun questions and earn points for correct answers.</span></span>
 
-          <span class="menu-emoji">⚔️</span>
+      </a>
 
-          <span class="menu-copy"><strong>Boss Mode</strong><span>Fight a multiverse enemy using your on-screen controls. Try to defeat the boss before your health runs out.</span></span>
+      <a class="menu-link" href="#boss" data-page="boss">
 
-        </a>
+        <span class="menu-emoji">⚔️</span>
 
-        <a class="menu-link" href="#hero-lab">
+        <span class="menu-copy"><strong>Boss Mode</strong><span>Enter the arena, attack your enemy and try to win the multiverse battle.</span></span>
 
-          <span class="menu-emoji">🦸</span>
+      </a>
 
-          <span class="menu-copy"><strong>Hero Lab</strong><span>Create your own hero name and preview a custom Spider-Verse-inspired character.</span></span>
+      <a class="menu-link" href="#hero-lab" data-page="hero-lab">
 
-        </a>
+        <span class="menu-emoji">🦸</span>
 
-        <a class="menu-link" href="#stories">
+        <span class="menu-copy"><strong>Hero Lab</strong><span>Create a hero name and customise the colours of your superhero mask.</span></span>
 
-          <span class="menu-emoji">📖</span>
+      </a>
 
-          <span class="menu-copy"><strong>Stories</strong><span>Read the chapters of The Midnight Signal and follow its multiverse adventure.</span></span>
+      <a class="menu-link" href="#stories" data-page="stories">
 
-        </a>
+        <span class="menu-emoji">📖</span>
 
-        <a class="menu-link" href="#story-creator">
+        <span class="menu-copy"><strong>Stories</strong><span>Read The Midnight Signal, a six-chapter adventure across different universes.</span></span>
 
-          <span class="menu-emoji">✍️</span>
+      </a>
 
-          <span class="menu-copy"><strong>Story Creator</strong><span>Write your own stories, save drafts and publish them to your local story list.</span></span>
+      <a class="menu-link" href="#story-creator" data-page="story-creator">
 
-        </a>
+        <span class="menu-emoji">✍️</span>
 
-        <a class="menu-link" href="#music">
+        <span class="menu-copy"><strong>Story Creator</strong><span>Write your own stories, save drafts and publish them to your personal story list.</span></span>
 
-          <span class="menu-emoji">🎵</span>
+      </a>
 
-          <span class="menu-copy"><strong>Music</strong><span>Play music from a link or choose an audio file saved on your device.</span></span>
+      <a class="menu-link" href="#music" data-page="music">
 
-        </a>
+        <span class="menu-emoji">🎵</span>
 
-        <a class="menu-link" href="#missions">
+        <span class="menu-copy"><strong>Music</strong><span>Open music links, use supported embedded players or play an audio file from your iPad.</span></span>
 
-          <span class="menu-emoji">🎯</span>
+      </a>
 
-          <span class="menu-copy"><strong>Missions</strong><span>Keep track of your objectives, mark them complete and follow your progress.</span></span>
+      <a class="menu-link" href="#missions" data-page="missions">
 
-        </a>
+        <span class="menu-emoji">🎯</span>
 
-        <a class="menu-link" href="#art-studio">
+        <span class="menu-copy"><strong>Missions</strong><span>Create goals, track your progress and mark objectives as complete.</span></span>
 
-          <span class="menu-emoji">🎨</span>
+      </a>
 
-          <span class="menu-copy"><strong>Art Studio</strong><span>Draw, choose colours, use stickers and save your artwork as an image.</span></span>
+      <a class="menu-link" href="#art-studio" data-page="art-studio">
 
-        </a>
+        <span class="menu-emoji">🎨</span>
 
-        <a class="menu-link" href="#gallery">
+        <span class="menu-copy"><strong>Art Studio</strong><span>Draw with your finger or Apple Pencil, add stickers and save your artwork.</span></span>
 
-          <span class="menu-emoji">🖼️</span>
+      </a>
 
-          <span class="menu-copy"><strong>Gallery</strong><span>Import pictures from your gallery and keep a collection of images in this browser.</span></span>
+      <a class="menu-link" href="#gallery" data-page="gallery">
 
-        </a>
+        <span class="menu-emoji">🖼️</span>
 
-        <a class="menu-link" href="#confessions">
+        <span class="menu-copy"><strong>Gallery</strong><span>Import pictures from your iPad gallery and use a picture as your website background.</span></span>
 
-          <span class="menu-emoji">💭</span>
+      </a>
 
-          <span class="menu-copy"><strong>Confessions</strong><span>Write private notes for yourself that stay in this browser on this device.</span></span>
+      <a class="menu-link" href="#confessions" data-page="confessions">
 
-        </a>
+        <span class="menu-emoji">💭</span>
 
-      </nav>
+        <span class="menu-copy"><strong>Confessions</strong><span>Keep personal notes in this browser so you can revisit or delete them later.</span></span>
+
+      </a>
+
+    </nav>
+
+  </div>
+
+  <div class="grid">
+
+    <div class="stat"><strong id="statPoints">0</strong>Quiz points</div>
+
+    <div class="stat"><strong id="statMissions">0</strong>Missions completed</div>
+
+    <div class="stat"><strong id="statStories">0</strong>Stories published</div>
+
+  </div>
+
+</section>
+
+<!-- QUIZ -->
+
+<section class="page" id="quiz">
+
+  <div class="panel">
+
+    <div class="eyebrow">🧠 Test yourself</div>
+
+    <h2>Multiverse Quiz</h2>
+
+    <p>Answer ten questions. Every correct answer earns 10 points.</p>
+
+    <div class="stat">⏱️ Time remaining: <strong id="quizTimer">60</strong> seconds</div>
+
+    <div id="quizQuestions"></div>
+
+    <div class="actions">
+
+      <button class="primary" id="startQuiz">▶️ Start / Restart</button>
+
+      <button id="submitQuiz">✅ Submit Answers</button>
 
     </div>
+
+    <p class="status" id="quizResult"></p>
+
+  </div>
+
+  <button class="back-menu" data-page="home">⬅️ Back to Home</button>
+
+</section>
+
+<!-- BOSS MODE -->
+
+<section class="page" id="boss">
+
+  <div class="panel">
+
+    <div class="eyebrow">⚔️ Enter the arena</div>
+
+    <h2>Boss Mode</h2>
+
+    <p>Move your hero, get close to the enemy and attack before your health runs out.</p>
 
     <div class="grid">
 
-      <div class="stat"><strong id="statPoints">0</strong><span class="muted">Quiz points</span></div>
+      <div class="stat">🦸 Hero health<strong id="playerHealth">100</strong></div>
 
-      <div class="stat"><strong id="statMissions">0</strong><span class="muted">Missions completed</span></div>
-
-      <div class="stat"><strong id="statStories">0</strong><span class="muted">Your published stories</span></div>
+      <div class="stat">👾 Boss health<strong id="bossHealth">100</strong></div>
 
     </div>
 
-  </section>
+    <canvas id="bossCanvas" width="700" height="300"></canvas>
 
-  <!-- QUIZ -->
+    <div class="actions">
 
-  <section id="quiz">
+      <button id="moveLeft">⬅️ Move Left</button>
 
-    <div class="panel">
+      <button id="moveRight">➡️ Move Right</button>
 
-      <div class="eyebrow">Challenge yourself</div>
+      <button class="primary" id="attackBoss">🕸️ Attack</button>
 
-      <h2>🧠 Multiverse Quiz</h2>
-
-      <p>Answer all ten questions. Each correct answer earns 10 points.</p>
-
-      <div class="stat">⏱️ Time left: <strong id="quizTimer">60</strong> seconds</div>
-
-      <div id="quizQuestions"></div>
-
-      <div class="actions">
-
-        <button class="primary" id="startQuiz">▶️ Start / Restart Quiz</button>
-
-        <button id="submitQuiz">✅ Submit Answers</button>
-
-      </div>
-
-      <p class="status" id="quizResult" aria-live="polite"></p>
+      <button id="restartBoss">🔄 Restart Battle</button>
 
     </div>
 
-    <a class="back-menu" href="#menu">⬆️ Back to the menu</a>
+    <p class="status" id="bossMessage">Your battle begins when you are ready.</p>
 
-  </section>
+  </div>
 
-  <!-- BOSS MODE -->
+  <button class="back-menu" data-page="home">⬅️ Back to Home</button>
 
-  <section id="boss">
+</section>
 
-    <div class="panel">
+<!-- HERO LAB -->
 
-      <div class="eyebrow">Combat simulator</div>
+<section class="page" id="hero-lab">
 
-      <h2>⚔️ Boss Mode</h2>
+  <div class="panel">
 
-      <p>Move your hero and attack the boss. This is a simple arcade-style mini-game.</p>
+    <div class="eyebrow">🦸 Create your identity</div>
 
-      <div class="grid">
+    <h2>Hero Lab</h2>
 
-        <div class="stat">🦸 Your health <strong id="playerHealth">100</strong></div>
+    <p>Design a character that belongs to your universe.</p>
 
-        <div class="stat">👾 Boss health <strong id="bossHealth">100</strong></div>
+    <label for="heroName">Hero name</label>
 
-      </div>
+    <input id="heroName" maxlength="35" placeholder="e.g. Shadow Web">
 
-      <canvas id="bossCanvas" width="700" height="300" aria-label="Boss battle game"></canvas>
+    <div class="grid">
 
-      <div class="actions">
+      <div><label for="heroPrimary">Main colour</label><input type="color" id="heroPrimary" value="#e63958"></div>
 
-        <button id="moveLeft">⬅️ Move left</button>
-
-        <button id="moveRight">➡️ Move right</button>
-
-        <button class="primary" id="attackBoss">🕸️ Attack</button>
-
-        <button id="restartBoss">🔄 Restart battle</button>
-
-      </div>
-
-      <p class="status" id="bossMessage" aria-live="polite">Ready when you are, hero.</p>
+      <div><label for="heroSecondary">Eye colour</label><input type="color" id="heroSecondary" value="#78c7ff"></div>
 
     </div>
 
-    <a class="back-menu" href="#menu">⬆️ Back to the menu</a>
+    <div class="hero-preview">
 
-  </section>
+      <svg viewBox="0 0 220 230" aria-label="Hero mask preview">
 
-  <!-- HERO LAB -->
+        <path id="maskShape" d="M110 15 L178 48 L169 132 Q153 184 110 211 Q67 184 51 132 L42 48 Z" fill="#e63958" stroke="#f2f7ff" stroke-width="3"/>
 
-  <section id="hero-lab">
+        <path id="eyeLeft" d="M60 85 L98 95 L91 119 L62 111 Z" fill="#78c7ff" stroke="#071426" stroke-width="4"/>
 
-    <div class="panel">
+        <path id="eyeRight" d="M160 85 L122 95 L129 119 L158 111 Z" fill="#78c7ff" stroke="#071426" stroke-width="4"/>
 
-      <div class="eyebrow">Create your identity</div>
+        <path d="M110 42 L110 182 M70 54 L150 165 M150 54 L70 165 M48 104 L172 104" fill="none" stroke="#071426" stroke-width="2"/>
 
-      <h2>🦸 Hero Lab</h2>
+      </svg>
 
-      <p>Give your hero a name and choose the colours for your character preview.</p>
-
-      <label for="heroName">Hero name</label>
-
-      <input id="heroName" maxlength="35" placeholder="e.g. Shadow Web">
-
-      <div class="grid">
-
-        <div><label for="heroPrimary">Main colour</label><input id="heroPrimary" type="color" value="#e63958"></div>
-
-        <div><label for="heroSecondary">Second colour</label><input id="heroSecondary" type="color" value="#78c7ff"></div>
-
-      </div>
-
-      <div class="hero-preview">
-
-        <svg viewBox="0 0 220 230" role="img" aria-label="Custom superhero mask preview">
-
-          <path d="M110 15 L178 48 L169 132 Q153 184 110 211 Q67 184 51 132 L42 48 Z" id="maskShape" fill="#e63958" stroke="#f2f7ff" stroke-width="3"/>
-
-          <path d="M60 85 L98 95 L91 119 L62 111 Z" id="eyeLeft" fill="#78c7ff" stroke="#071426" stroke-width="4"/>
-
-          <path d="M160 85 L122 95 L129 119 L158 111 Z" id="eyeRight" fill="#78c7ff" stroke="#071426" stroke-width="4"/>
-
-          <path d="M110 42 L110 182 M70 54 L150 165 M150 54 L70 165 M48 104 L172 104" fill="none" stroke="#071426" stroke-width="2" opacity=".7"/>
-
-        </svg>
-
-        <h3 id="heroPreviewName">Your Hero</h3>
-
-      </div>
-
-      <div class="actions"><button class="primary" id="saveHero">💾 Save hero name</button></div>
-
-      <p class="status" id="heroStatus"></p>
+      <h3 id="heroPreviewName">Your Hero</h3>
 
     </div>
 
-    <a class="back-menu" href="#menu">⬆️ Back to the menu</a>
+    <div class="actions"><button class="primary" id="saveHero">💾 Save Hero</button></div>
 
-  </section>
+    <p class="status" id="heroStatus"></p>
 
-  <!-- STORIES -->
+  </div>
 
-  <section id="stories">
+  <button class="back-menu" data-page="home">⬅️ Back to Home</button>
 
-    <div class="panel">
+</section>
 
-      <div class="eyebrow">Original multiverse adventure</div>
+<!-- STORIES -->
 
-      <h2>📖 The Midnight Signal</h2>
+<section class="page" id="stories">
 
-      <p>Read the six rebuilt chapters of this original Spider-Verse-inspired story.</p>
+  <div class="panel">
 
-      <div class="story-card">
+    <div class="eyebrow">📖 An original multiverse adventure</div>
 
-        <h3>CHAPTER ONE: THE SIGNAL</h3>
+    <h2>The Midnight Signal</h2>
 
-        <p>At 11:59 p.m., every screen in the city went black. Every screen except the one in Kai's bedroom.</p>
+    <div class="story-card">
 
-        <p>A blue symbol appeared on the glass: a spider surrounded by a circle of stars. Then came a message.</p>
+      <h3>CHAPTER ONE: THE SIGNAL</h3>
 
-        <p><em>IF YOU CAN READ THIS, YOUR UNIVERSE HAS BEEN FOUND.</em></p>
+      <p>At 11:59 p.m., every screen in the city went black. Every screen except the one in Kai's bedroom.</p>
 
-      </div>
+      <p>A blue symbol appeared on the glass: a spider surrounded by stars. Then came a message.</p>
 
-      <div class="story-card">
-
-        <h3>CHAPTER TWO: THE OTHER SIDE</h3>
-
-        <p>The symbol led Kai to an abandoned station beneath the city. Behind a locked door, the air shimmered like sunlight on water.</p>
-
-        <p>Someone stepped through. They wore a familiar mask, but the colours were different.</p>
-
-        <p>“You have to listen,” the stranger said. “Your world isn't the only one in danger.”</p>
-
-      </div>
-
-      <div class="story-card">
-
-        <h3>CHAPTER THREE: THE MISSING PIECE</h3>
-
-        <p>The stranger called herself Nova. She came from a universe where the midnight signal had already swallowed the stars.</p>
-
-        <p>Kai wanted proof. Nova showed a photograph of the city, its skyline broken by a glowing crack in the sky.</p>
-
-        <p>In the corner of the photograph stood Kai, wearing a suit they had never seen before.</p>
-
-      </div>
-
-      <div class="story-card">
-
-        <h3>CHAPTER FOUR: TRUST FALL</h3>
-
-        <p>They followed the signal across rooftops, through quiet streets and into a tower that did not appear on any map.</p>
-
-        <p>Nova admitted she had hidden something: the signal was responding to Kai, not the city.</p>
-
-        <p>“I was afraid you'd leave,” she said. For the first time that night, Kai believed her.</p>
-
-      </div>
-
-      <div class="story-card">
-
-        <h3>CHAPTER FIVE: THE CHOICE</h3>
-
-        <p>The tower began to split between two realities. Nova reached for the control panel while Kai held the unstable portal open.</p>
-
-        <p>“If we do this, there is no guarantee we'll land in the same place,” Nova warned.</p>
-
-        <p>Kai looked at her. “Then we'll find each other again.”</p>
-
-        <p>Together, they pressed the glowing symbol. The whole city turned blue.</p>
-
-      </div>
-
-      <div class="story-card">
-
-        <h3>CHAPTER SIX: BEFORE TWELVE</h3>
-
-        <p>Morning arrived without a sunrise. The portal was closed, the city was safe, and Nova was still beside Kai.</p>
-
-        <p>For one quiet moment, neither of them spoke. They had crossed universes, faced the impossible and chosen to trust each other.</p>
-
-        <p>Nova smiled. “So, what happens now?”</p>
-
-        <p>Kai was about to answer when a new message appeared across the sky.</p>
-
-        <p><strong>UNIVERSE 02 DETECTED.</strong></p>
-
-        <p>Then someone knocked on the other side of the portal.</p>
-
-        <p><em>To be continued…</em></p>
-
-      </div>
+      <p><em>IF YOU CAN READ THIS, YOUR UNIVERSE HAS BEEN FOUND.</em></p>
 
     </div>
 
-    <a class="back-menu" href="#menu">⬆️ Back to the menu</a>
+    <div class="story-card">
 
-  </section>
+      <h3>CHAPTER TWO: THE OTHER SIDE</h3>
 
-  <!-- STORY CREATOR -->
+      <p>The symbol led Kai to an abandoned station beneath the city. Behind a locked door, the air shimmered like sunlight on water.</p>
 
-  <section id="story-creator">
+      <p>Someone stepped through. They wore a familiar mask, but the colours were different.</p>
 
-    <div class="panel">
-
-      <div class="eyebrow">Your imagination</div>
-
-      <h2>✍️ Story Creator</h2>
-
-      <p>Write a story, save it as a draft or publish it to your list on this device.</p>
-
-      <label for="storyTitle">Story title</label>
-
-      <input id="storyTitle" maxlength="100" placeholder="Give your story a title">
-
-      <label for="storyBody">Your story</label>
-
-      <textarea id="storyBody" placeholder="Once upon a time in another universe..."></textarea>
-
-      <div class="actions">
-
-        <button class="primary" id="publishStory">📚 Publish story</button>
-
-        <button id="saveDraft">💾 Save draft</button>
-
-        <button id="loadDraft">📂 Load draft</button>
-
-        <button id="clearStory">🧹 Clear editor</button>
-
-      </div>
-
-      <p class="status" id="storyStatus" aria-live="polite"></p>
-
-      <h3>📚 Your stories</h3>
-
-      <div id="publishedStories"></div>
+      <p>“You have to listen,” the stranger said. “Your world isn't the only one in danger.”</p>
 
     </div>
 
-    <a class="back-menu" href="#menu">⬆️ Back to the menu</a>
+    <div class="story-card">
 
-  </section>
+      <h3>CHAPTER THREE: THE MISSING PIECE</h3>
 
-  <!-- MUSIC -->
+      <p>The stranger called herself Nova. She came from a universe where the midnight signal had already swallowed the stars.</p>
 
-  <section id="music">
+      <p>Kai wanted proof. Nova showed a photograph of the city, its skyline broken by a glowing crack in the sky.</p>
 
-    <div class="panel">
-
-      <div class="eyebrow">Your soundtrack</div>
-
-      <h2>🎵 Music Zone</h2>
-
-      <p>Listen to music using a supported link, or choose an audio file from your iPad.</p>
-
-      <label for="musicUrl">Music or video link</label>
-
-      <input id="musicUrl" type="url" placeholder="Paste a YouTube or Spotify link">
-
-      <div class="actions">
-
-        <button class="primary" id="openMusic">🔗 Open music link</button>
-
-        <button id="embedMusic">▶️ Try embedded player</button>
-
-      </div>
-
-      <div id="musicEmbed"></div>
-
-      <label for="audioFile">Or choose an audio file from your device</label>
-
-      <input id="audioFile" type="file" accept="audio/*">
-
-      <audio id="localAudio" controls style="width:100%;display:none"></audio>
-
-      <p class="small">Some services restrict embedded playback. If a player does not load, open the link directly.</p>
-
-      <p class="status" id="musicStatus"></p>
+      <p>In the corner of the photograph stood Kai, wearing a suit they had never seen before.</p>
 
     </div>
 
-    <a class="back-menu" href="#menu">⬆️ Back to the menu</a>
+    <div class="story-card">
 
-  </section>
+      <h3>CHAPTER FOUR: TRUST FALL</h3>
 
-  <!-- MISSIONS -->
+      <p>They followed the signal across rooftops, through quiet streets and into a tower that did not appear on any map.</p>
 
-  <section id="missions">
+      <p>Nova admitted she had hidden something: the signal was responding to Kai, not the city.</p>
 
-    <div class="panel">
-
-      <div class="eyebrow">Daily objectives</div>
-
-      <h2>🎯 Missions</h2>
-
-      <p>Add your own objectives and tick them off as you complete them.</p>
-
-      <label for="missionInput">New mission</label>
-
-      <input id="missionInput" maxlength="140" placeholder="e.g. Complete a quiz">
-
-      <div class="actions"><button class="primary" id="addMission">➕ Add mission</button></div>
-
-      <div id="missionList"></div>
-
-      <p class="status" id="missionStatus"></p>
+      <p>“I was afraid you'd leave,” she said. For the first time that night, Kai believed her.</p>
 
     </div>
 
-    <a class="back-menu" href="#menu">⬆️ Back to the menu</a>
+    <div class="story-card">
 
-  </section>
+      <h3>CHAPTER FIVE: THE CHOICE</h3>
 
-  <!-- ART STUDIO -->
+      <p>The tower began to split between two realities. Nova reached for the control panel while Kai held the unstable portal open.</p>
 
-  <section id="art-studio">
+      <p>“If we do this, there is no guarantee we'll land in the same place,” Nova warned.</p>
 
-    <div class="panel">
+      <p>Kai looked at her. “Then we'll find each other again.”</p>
 
-      <div class="eyebrow">Make something original</div>
-
-      <h2>🎨 Art Studio</h2>
-
-      <p>Draw with your finger or Apple Pencil. Pick a colour, adjust the brush and save your creation.</p>
-
-      <div class="grid">
-
-        <div><label for="brushColour">Brush colour</label><input id="brushColour" type="color" value="#78c7ff"></div>
-
-        <div><label for="brushSize">Brush size</label><input id="brushSize" type="range" min="1" max="30" value="5"></div>
-
-      </div>
-
-      <div class="actions">
-
-        <button id="addHeart">💙 Add heart</button>
-
-        <button id="addSpider">🕷️ Add spider</button>
-
-        <button id="addStar">⭐ Add star</button>
-
-        <button id="clearArt">🧽 Clear canvas</button>
-
-        <button class="primary" id="downloadArt">💾 Save artwork</button>
-
-      </div>
-
-      <canvas id="artCanvas" width="900" height="500" aria-label="Drawing canvas"></canvas>
-
-      <p class="status" id="artStatus"></p>
+      <p>Together, they pressed the glowing symbol. The whole city turned blue.</p>
 
     </div>
 
-    <a class="back-menu" href="#menu">⬆️ Back to the menu</a>
+    <div class="story-card">
 
-  </section>
+      <h3>CHAPTER SIX: BEFORE TWELVE</h3>
 
-  <!-- GALLERY -->
+      <p>Morning arrived without a sunrise. The portal was closed, the city was safe, and Nova was still beside Kai.</p>
 
-  <section id="gallery">
+      <p>For one quiet moment, neither of them spoke. They had crossed universes, faced the impossible and chosen to trust each other.</p>
 
-    <div class="panel">
+      <p>Nova smiled. “So, what happens now?”</p>
 
-      <div class="eyebrow">Your image collection</div>
+      <p>Kai was about to answer when a new message appeared across the sky.</p>
 
-      <h2>🖼️ Gallery</h2>
+      <p><strong>UNIVERSE 02 DETECTED.</strong></p>
 
-      <p>Import images from your iPad gallery. You can also use a picture as your website background.</p>
+      <p>Then someone knocked on the other side of the portal.</p>
 
-      <label for="galleryFiles">Choose images</label>
-
-      <input id="galleryFiles" type="file" accept="image/*" multiple>
-
-      <div class="actions">
-
-        <button class="primary" id="useBackground">🌌 Use selected picture as background</button>
-
-        <button id="removeBackground">🧹 Remove custom background</button>
-
-      </div>
-
-      <p class="small">To use an image as your background, import it first and then tap the background button under that picture.</p>
-
-      <p class="status" id="galleryStatus" aria-live="polite"></p>
-
-      <div class="gallery-grid" id="galleryGrid"></div>
+      <p><em>To be continued…</em></p>
 
     </div>
 
-    <a class="back-menu" href="#menu">⬆️ Back to the menu</a>
+  </div>
 
-  </section>
+  <button class="back-menu" data-page="home">⬅️ Back to Home</button>
 
-  <!-- CONFESSIONS -->
+</section>
 
-  <section id="confessions">
+<!-- STORY CREATOR -->
 
-    <div class="panel">
+<section class="page" id="story-creator">
 
-      <div class="eyebrow">A space for your thoughts</div>
+  <div class="panel">
 
-      <h2>💭 Confessions</h2>
+    <div class="eyebrow">✍️ Your imagination</div>
 
-      <p>Write a note for yourself. Your notes are stored locally in this browser, not sent to a public feed.</p>
+    <h2>Story Creator</h2>
 
-      <label for="confessionInput">Your note</label>
+    <p>Write a story, save it as a draft or publish it to your story list in this browser.</p>
 
-      <textarea id="confessionInput" maxlength="3000" placeholder="Something I want to get off my mind..."></textarea>
+    <label for="storyTitle">Story title</label>
 
-      <div class="actions">
+    <input id="storyTitle" maxlength="100" placeholder="Give your story a name">
 
-        <button class="primary" id="saveConfession">💌 Save note</button>
+    <label for="storyBody">Your story</label>
 
-        <button id="clearConfession">🧹 Clear box</button>
+    <textarea id="storyBody" placeholder="Begin your next adventure..."></textarea>
 
-      </div>
+    <div class="actions">
 
-      <div id="confessionList"></div>
+      <button class="primary" id="publishStory">📚 Publish Story</button>
 
-      <p class="small">These notes are not encrypted or password-protected. Avoid writing passwords or highly sensitive information here.</p>
+      <button id="saveDraft">💾 Save Draft</button>
 
-    </div>
+      <button id="loadDraft">📂 Load Draft</button>
 
-    <a class="back-menu" href="#menu">⬆️ Back to the menu</a>
-
-  </section>
-
-  <!-- SETTINGS -->
-
-  <section id="settings">
-
-    <div class="panel">
-
-      <div class="eyebrow">Make it yours</div>
-
-      <h2>⚙️ Settings</h2>
-
-      <p>Change how your website looks and manage your saved data.</p>
-
-      <h3>🌌 Website background</h3>
-
-      <p>Import a picture from Gallery and choose it as your background. You can also remove it here.</p>
-
-      <label for="backgroundFile">Import background picture</label>
-
-      <input id="backgroundFile" type="file" accept="image/*">
-
-      <div class="actions">
-
-        <button class="primary" id="applyBackground">🖼️ Apply picture</button>
-
-        <button id="clearBackground">Reset background</button>
-
-      </div>
-
-      <p class="status" id="backgroundStatus"></p>
-
-      <h3>🎨 Theme</h3>
-
-      <label for="themeSelect">Choose a theme</label>
-
-      <select id="themeSelect">
-
-        <option value="blue">🌌 Midnight Blue</option>
-
-        <option value="pink">💗 Spider Pink</option>
-
-        <option value="purple">💜 Multiverse Purple</option>
-
-        <option value="contrast">⚪ High Contrast</option>
-
-      </select>
-
-      <h3>🧹 Manage saved data</h3>
-
-      <p>This removes local site data in this browser, including saved missions, drafts, stories and notes.</p>
-
-      <button class="danger" id="clearAllData">Delete all saved website data</button>
-
-      <p class="status" id="settingsStatus"></p>
+      <button id="clearStory">🧹 Clear Editor</button>
 
     </div>
 
-    <a class="back-menu" href="#menu">⬆️ Back to the menu</a>
+    <p class="status" id="storyStatus"></p>
 
-  </section>
+    <h3>📚 Your Stories</h3>
+
+    <div id="publishedStories"></div>
+
+  </div>
+
+  <button class="back-menu" data-page="home">⬅️ Back to Home</button>
+
+</section>
+
+<!-- MUSIC -->
+
+<section class="page" id="music">
+
+  <div class="panel">
+
+    <div class="eyebrow">🎵 Your soundtrack</div>
+
+    <h2>Music Zone</h2>
+
+    <p>Open a music link, try an embedded player or select audio stored on your device.</p>
+
+    <label for="musicUrl">YouTube or Spotify link</label>
+
+    <input id="musicUrl" type="url" placeholder="Paste your music link">
+
+    <div class="actions">
+
+      <button class="primary" id="openMusic">🔗 Open Music Link</button>
+
+      <button id="embedMusic">▶️ Try Embedded Player</button>
+
+    </div>
+
+    <div id="musicEmbed"></div>
+
+    <label for="audioFile">Or import an audio file</label>
+
+    <input id="audioFile" type="file" accept="audio/*">
+
+    <audio id="localAudio" controls style="width:100%;display:none"></audio>
+
+    <p class="small">Some services restrict embedded playback. Open the link directly if the player does not load.</p>
+
+    <p class="status" id="musicStatus"></p>
+
+  </div>
+
+  <button class="back-menu" data-page="home">⬅️ Back to Home</button>
+
+</section>
+
+<!-- MISSIONS -->
+
+<section class="page" id="missions">
+
+  <div class="panel">
+
+    <div class="eyebrow">🎯 Objectives</div>
+
+    <h2>Your Missions</h2>
+
+    <p>Create your own missions and keep track of the ones you complete.</p>
+
+    <label for="missionInput">New mission</label>
+
+    <input id="missionInput" maxlength="140" placeholder="What do you want to accomplish?">
+
+    <div class="actions"><button class="primary" id="addMission">➕ Add Mission</button></div>
+
+    <div id="missionList"></div>
+
+    <p class="status" id="missionStatus"></p>
+
+  </div>
+
+  <button class="back-menu" data-page="home">⬅️ Back to Home</button>
+
+</section>
+
+<!-- ART STUDIO -->
+
+<section class="page" id="art-studio">
+
+  <div class="panel">
+
+    <div class="eyebrow">🎨 Create something original</div>
+
+    <h2>Art Studio</h2>
+
+    <p>Draw with your finger or Apple Pencil. Add stickers and save your artwork.</p>
+
+    <div class="grid">
+
+      <div><label for="brushColour">Brush colour</label><input id="brushColour" type="color" value="#79d5ff"></div>
+
+      <div><label for="brushSize">Brush size</label><input id="brushSize" type="range" min="1" max="30" value="5"></div>
+
+    </div>
+
+    <div class="actions">
+
+      <button id="addHeart">💙 Heart</button>
+
+      <button id="addSpider">🕷️ Spider</button>
+
+      <button id="addStar">⭐ Star</button>
+
+      <button id="clearArt">🧽 Clear</button>
+
+      <button class="primary" id="downloadArt">💾 Save Artwork</button>
+
+    </div>
+
+    <canvas id="artCanvas" width="900" height="500"></canvas>
+
+    <p class="status" id="artStatus"></p>
+
+  </div>
+
+  <button class="back-menu" data-page="home">⬅️ Back to Home</button>
+
+</section>
+
+<!-- GALLERY -->
+
+<section class="page" id="gallery">
+
+  <div class="panel">
+
+    <div class="eyebrow">🖼️ Your collection</div>
+
+    <h2>Gallery</h2>
+
+    <p>Import pictures from your iPad. Use any imported picture as your website background.</p>
+
+    <label for="galleryFiles">Choose images from your gallery</label>
+
+    <input id="galleryFiles" type="file" accept="image/*" multiple>
+
+    <p class="small">After importing, use the button beneath a picture to set it as the background.</p>
+
+    <p class="status" id="galleryStatus"></p>
+
+    <div class="gallery-grid" id="galleryGrid"></div>
+
+    <div class="actions">
+
+      <button id="removeBackground">🌌 Remove Custom Background</button>
+
+    </div>
+
+  </div>
+
+  <button class="back-menu" data-page="home">⬅️ Back to Home</button>
+
+</section>
+
+<!-- CONFESSIONS -->
+
+<section class="page" id="confessions">
+
+  <div class="panel">
+
+    <div class="eyebrow">💭 A space for your thoughts</div>
+
+    <h2>Confessions</h2>
+
+    <p>Write notes for yourself. They stay in this browser on this device rather than appearing on a public feed.</p>
+
+    <label for="confessionInput">Your note</label>
+
+    <textarea id="confessionInput" maxlength="3000" placeholder="Something I want to write down..."></textarea>
+
+    <div class="actions">
+
+      <button class="primary" id="saveConfession">💌 Save Note</button>
+
+      <button id="clearConfession">🧹 Clear Box</button>
+
+    </div>
+
+    <div id="confessionList"></div>
+
+    <p class="small">These notes are not encrypted or password-protected. Avoid entering passwords or highly sensitive information.</p>
+
+  </div>
+
+  <button class="back-menu" data-page="home">⬅️ Back to Home</button>
+
+</section>
+
+<!-- SETTINGS -->
+
+<section class="page" id="settings">
+
+  <div class="panel">
+
+    <div class="eyebrow">⚙️ Customise your universe</div>
+
+    <h2>Settings</h2>
+
+    <p>Change the site's appearance, upload your own background and manage your saved information.</p>
+
+    <h3>🌌 Custom Background</h3>
+
+    <p>Choose a picture from your iPad. You can use this image as the background across your site's pages.</p>
+
+    <label for="backgroundFile">Choose background image</label>
+
+    <input id="backgroundFile" type="file" accept="image/*">
+
+    <div class="actions">
+
+      <button class="primary" id="applyBackground">🖼️ Apply Background</button>
+
+      <button id="clearBackground">Reset Original Design</button>
+
+    </div>
+
+    <p class="status" id="backgroundStatus"></p>
+
+    <h3>🎨 Theme</h3>
+
+    <label for="themeSelect">Choose a colour theme</label>
+
+    <select id="themeSelect">
+
+      <option value="blue">🌌 Midnight Blue</option>
+
+      <option value="pink">💗 Spider Pink</option>
+
+      <option value="purple">💜 Multiverse Purple</option>
+
+      <option value="contrast">⚪ High Contrast</option>
+
+    </select>
+
+    <h3>🧹 Saved Website Data</h3>
+
+    <p>Delete locally saved stories, drafts, missions, notes, hero information and imported gallery images.</p>
+
+    <button class="danger" id="clearAllData">Delete All Saved Data</button>
+
+    <p class="status" id="settingsStatus"></p>
+
+  </div>
+
+  <button class="back-menu" data-page="home">⬅️ Back to Home</button>
+
+</section>
 
 </main>
 
 <footer>
 
-  <p>🕷️ My Spider-Verse · Made for your own corner of the multiverse.</p>
+  <p>🕷️ MY SPIDER-VERSE · Every universe begins somewhere.</p>
 
-  <a href="#home">🏠 Back to the beginning</a>
+  <a href="#home" data-page="home">🏠 Return Home</a>
 
 </footer>
 
@@ -1242,17 +1542,87 @@ body.high-contrast {
 
 const $ = id => document.getElementById(id);
 
+/* PAGE NAVIGATION: show only the selected page */
+
+const pages = Array.from(document.querySelectorAll(".page"));
+
+function showPage(id, addHistory = true) {
+
+  const target = document.getElementById(id);
+
+  if (!target || !target.classList.contains("page")) id = "home";
+
+  pages.forEach(page => {
+
+    page.classList.toggle("active", page.id === id);
+
+  });
+
+  if (addHistory) {
+
+    history.pushState({page:id}, "", "#" + id);
+
+  }
+
+  window.scrollTo({top:0, behavior:"instant"});
+
+}
+
+document.querySelectorAll("[data-page]").forEach(link => {
+
+  link.addEventListener("click", event => {
+
+    event.preventDefault();
+
+    showPage(link.dataset.page);
+
+  });
+
+});
+
+$("exploreButton").addEventListener("click", () => {
+
+  $("menuPanel").scrollIntoView({behavior:"smooth", block:"start"});
+
+});
+
+window.addEventListener("popstate", () => {
+
+  const id = location.hash.slice(1) || "home";
+
+  showPage(id, false);
+
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+
+  const initialPage = location.hash.slice(1);
+
+  if (initialPage && document.getElementById(initialPage)?.classList.contains("page")) {
+
+    showPage(initialPage, false);
+
+  } else {
+
+    showPage("home", false);
+
+  }
+
+});
+
+/* GENERAL HELPERS */
+
 function toast(message) {
 
-  const box = $("toast");
+  const el = $("toast");
 
-  box.textContent = message;
+  el.textContent = message;
 
-  box.style.display = "block";
+  el.style.display = "block";
 
   clearTimeout(toast.timer);
 
-  toast.timer = setTimeout(() => box.style.display = "none", 2600);
+  toast.timer = setTimeout(() => el.style.display = "none", 2800);
 
 }
 
@@ -1282,7 +1652,7 @@ function setData(key, value) {
 
   } catch {
 
-    toast("Storage is full. Try removing some images or saved items.");
+    toast("Your browser storage may be full. Try removing saved images.");
 
     return false;
 
@@ -1290,15 +1660,21 @@ function setData(key, value) {
 
 }
 
-/* HOME COUNTERS */
+function escapeHTML(value) {
+
+  return String(value).replace(/[&<>"']/g, char => ({
+
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+
+  })[char]);
+
+}
 
 function updateStats() {
 
   $("statPoints").textContent = getData("spiderPoints", 0);
 
-  $("statMissions").textContent =
-
-    getData("spiderMissions", []).filter(m => m.done).length;
+  $("statMissions").textContent = getData("spiderMissions", []).filter(m => m.done).length;
 
   $("statStories").textContent = getData("spiderStories", []).length;
 
@@ -1308,25 +1684,25 @@ function updateStats() {
 
 const questions = [
 
-  {q:"What does a spider use to make its web?",a:["Sand","Silk","Leaves","Metal"],correct:1},
+  {q:"What do spiders use to make their webs?",a:["Sand","Silk","Leaves","Metal"],c:1},
 
-  {q:"Which planet is known as the Red Planet?",a:["Mars","Venus","Jupiter","Neptune"],correct:0},
+  {q:"Which planet is known as the Red Planet?",a:["Mars","Venus","Jupiter","Neptune"],c:0},
 
-  {q:"What is the closest star to Earth?",a:["Sirius","The Sun","Polaris","Vega"],correct:1},
+  {q:"What is the closest star to Earth?",a:["Sirius","The Sun","Polaris","Vega"],c:1},
 
-  {q:"How many sides does a hexagon have?",a:["Five","Six","Seven","Eight"],correct:1},
+  {q:"How many sides does a hexagon have?",a:["Five","Six","Seven","Eight"],c:1},
 
-  {q:"Which organ pumps blood around the body?",a:["Lungs","Brain","Heart","Kidneys"],correct:2},
+  {q:"Which organ pumps blood around the body?",a:["Lungs","Brain","Heart","Kidneys"],c:2},
 
-  {q:"What is the largest ocean on Earth?",a:["Atlantic","Indian","Arctic","Pacific"],correct:3},
+  {q:"What is the largest ocean on Earth?",a:["Atlantic","Indian","Arctic","Pacific"],c:3},
 
-  {q:"Which gas do plants take in during photosynthesis?",a:["Oxygen","Carbon dioxide","Helium","Hydrogen"],correct:1},
+  {q:"Which gas do plants take in during photosynthesis?",a:["Oxygen","Carbon dioxide","Helium","Hydrogen"],c:1},
 
-  {q:"How many minutes are in one hour?",a:["30","45","60","100"],correct:2},
+  {q:"How many minutes are in an hour?",a:["30","45","60","100"],c:2},
 
-  {q:"Which shape has three sides?",a:["Triangle","Square","Circle","Pentagon"],correct:0},
+  {q:"Which shape has three sides?",a:["Triangle","Square","Circle","Pentagon"],c:0},
 
-  {q:"What is frozen water called?",a:["Steam","Ice","Mist","Salt"],correct:1}
+  {q:"What is frozen water called?",a:["Steam","Ice","Mist","Salt"],c:1}
 
 ];
 
@@ -1344,13 +1720,13 @@ function renderQuiz() {
 
       <strong>${i+1}. ${q.q}</strong>
 
-      ${q.a.map((option,j) => `
+      ${q.a.map((answer,j) => `
 
-        <label class="quiz-option">
+        <label class="menu-link" style="margin-top:8px;padding:10px">
 
-          <input type="radio" name="quiz${i}" value="${j}" ${!quizActive ? "disabled" : ""}>
+          <input type="radio" name="quiz${i}" value="${j}" ${quizActive ? "" : "disabled"}>
 
-          ${option}
+          ${answer}
 
         </label>
 
@@ -1362,13 +1738,13 @@ function renderQuiz() {
 
 }
 
-function endQuiz() {
+function finishQuiz() {
+
+  if (!quizActive) return;
 
   quizActive = false;
 
   clearInterval(quizInterval);
-
-  document.querySelectorAll('#quizQuestions input').forEach(input => input.disabled = true);
 
   let correct = 0;
 
@@ -1376,21 +1752,17 @@ function endQuiz() {
 
     const selected = document.querySelector(`input[name="quiz${i}"]:checked`);
 
-    if (selected && Number(selected.value) === q.correct) correct++;
+    if (selected && Number(selected.value) === q.c) correct++;
 
   });
 
   const points = correct * 10;
 
-  const oldPoints = getData("spiderPoints", 0);
+  setData("spiderPoints", getData("spiderPoints",0) + points);
 
-  setData("spiderPoints", oldPoints + points);
+  renderQuiz();
 
-  $("quizResult").textContent =
-
-    `You scored ${correct}/${questions.length} and earned ${points} points!`;
-
-  $("quizTimer").textContent = quizTime;
+  $("quizResult").textContent = `You scored ${correct}/10 and earned ${points} points.`;
 
   updateStats();
 
@@ -1406,7 +1778,7 @@ $("startQuiz").addEventListener("click", () => {
 
   $("quizTimer").textContent = quizTime;
 
-  $("quizResult").textContent = "Quiz started. Good luck! 🕸️";
+  $("quizResult").textContent = "The quiz has started. Good luck! 🕸️";
 
   renderQuiz();
 
@@ -1418,7 +1790,7 @@ $("startQuiz").addEventListener("click", () => {
 
     if (quizTime <= 0) {
 
-      endQuiz();
+      finishQuiz();
 
       $("quizResult").textContent += " Time is up!";
 
@@ -1430,15 +1802,9 @@ $("startQuiz").addEventListener("click", () => {
 
 $("submitQuiz").addEventListener("click", () => {
 
-  if (!quizActive) {
+  if (!quizActive) return toast("Start the quiz first.");
 
-    toast("Start the quiz first.");
-
-    return;
-
-  }
-
-  endQuiz();
+  finishQuiz();
 
 });
 
@@ -1450,33 +1816,25 @@ const bossCanvas = $("bossCanvas");
 
 const bctx = bossCanvas.getContext("2d");
 
-let playerX = 105;
+let playerX = 105, playerHP = 100, bossHP = 100, bossX = 510;
 
-let playerHP = 100;
-
-let bossHP = 100;
-
-let bossX = 510;
-
-let battleOver = false;
-
-let bossFrame = 0;
+let battleOver = false, bossFrame = 0;
 
 function drawBoss() {
 
-  bctx.clearRect(0,0,bossCanvas.width,bossCanvas.height);
+  bctx.clearRect(0,0,700,300);
 
   const gradient = bctx.createLinearGradient(0,0,0,300);
 
-  gradient.addColorStop(0,"#102c4a");
+  gradient.addColorStop(0,"#17395c");
 
-  gradient.addColorStop(1,"#06101f");
+  gradient.addColorStop(1,"#050c1a");
 
   bctx.fillStyle = gradient;
 
   bctx.fillRect(0,0,700,300);
 
-  bctx.strokeStyle = "rgba(120,199,255,.15)";
+  bctx.strokeStyle="rgba(121,213,255,.13)";
 
   for(let x=0;x<700;x+=35){
 
@@ -1484,67 +1842,55 @@ function drawBoss() {
 
   }
 
-  bctx.fillStyle = "#78c7ff";
+  bctx.fillStyle="#79d5ff";
 
-  bctx.beginPath();
+  bctx.beginPath(); bctx.arc(playerX,205,22,0,Math.PI*2); bctx.fill();
 
-  bctx.arc(playerX,205,22,0,Math.PI*2);
-
-  bctx.fill();
-
-  bctx.fillStyle = "#071426";
+  bctx.fillStyle="#071426";
 
   bctx.fillRect(playerX-13,199,9,5);
 
   bctx.fillRect(playerX+4,199,9,5);
 
-  bctx.fillStyle = "#eaf6ff";
-
-  bctx.font = "14px Arial";
-
-  bctx.textAlign = "center";
-
-  bctx.fillText("HERO",playerX,245);
-
-  bctx.fillStyle = "#e45b91";
+  bctx.fillStyle="#ff5b9f";
 
   bctx.beginPath();
 
-  bctx.arc(bossX,195,35 + Math.sin(bossFrame/10)*3,0,Math.PI*2);
+  bctx.arc(bossX,195,35+Math.sin(bossFrame/10)*3,0,Math.PI*2);
 
   bctx.fill();
 
-  bctx.fillStyle = "#fff";
+  bctx.fillStyle="#fff";
 
   bctx.fillRect(bossX-20,185,12,7);
 
   bctx.fillRect(bossX+8,185,12,7);
 
-  bctx.fillStyle = "#071426";
+  bctx.fillStyle="#071426";
 
   bctx.fillRect(bossX-12,207,24,4);
 
-  bctx.fillStyle = "#f2f7ff";
+  bctx.fillStyle="#f2f7ff";
+
+  bctx.textAlign="center";
+
+  bctx.font="14px Arial";
+
+  bctx.fillText("HERO",playerX,245);
 
   bctx.fillText("BOSS",bossX,245);
 
-  bctx.textAlign = "left";
+  bctx.textAlign="left";
 
-  bctx.fillStyle = "#fff";
+  bctx.fillText("MULTIVERSE ARENA",15,24);
 
-  bctx.font = "15px Arial";
+  if(battleOver){
 
-  bctx.fillText("MULTIVERSE ARENA",15,25);
+    bctx.font="bold 28px Arial";
 
-  if(battleOver) {
+    bctx.textAlign="center";
 
-    bctx.font = "bold 28px Arial";
-
-    bctx.textAlign = "center";
-
-    bctx.fillStyle = "#fff";
-
-    bctx.fillText(bossHP<=0 ? "YOU WIN! 🕸️" : "BATTLE OVER",350,75);
+    bctx.fillText(bossHP<=0?"YOU WIN! 🕸️":"BATTLE OVER",350,75);
 
   }
 
@@ -1578,37 +1924,37 @@ $("attackBoss").addEventListener("click",()=>{
 
   if(battleOver) return;
 
-  if(Math.abs(playerX-bossX)<210) {
+  if(Math.abs(playerX-bossX)<210){
 
-    bossHP = Math.max(0,bossHP-20);
+    bossHP=Math.max(0,bossHP-20);
 
-    $("bossMessage").textContent = "🕸️ Direct hit! The boss lost 20 health.";
+    $("bossMessage").textContent="🕸️ Hit! The boss lost 20 health.";
 
   } else {
 
-    $("bossMessage").textContent = "Your attack missed. Move closer to the boss!";
+    $("bossMessage").textContent="Your attack missed. Move closer!";
 
   }
 
-  if(bossHP>0 && Math.random()<0.45) {
+  if(bossHP>0 && Math.random()<.45){
 
-    playerHP = Math.max(0,playerHP-10);
+    playerHP=Math.max(0,playerHP-10);
 
-    $("bossMessage").textContent += " The boss counterattacked!";
+    $("bossMessage").textContent+=" The boss counterattacked!";
 
   }
 
-  if(bossHP<=0) {
+  if(bossHP<=0){
 
-    battleOver = true;
+    battleOver=true;
 
-    $("bossMessage").textContent = "🏆 You defeated the boss!";
+    $("bossMessage").textContent="🏆 You defeated the boss!";
 
   } else if(playerHP<=0) {
 
-    battleOver = true;
+    battleOver=true;
 
-    $("bossMessage").textContent = "Your health ran out. Try again!";
+    $("bossMessage").textContent="Your health ran out. Try again!";
 
   }
 
@@ -1620,17 +1966,17 @@ $("restartBoss").addEventListener("click",()=>{
 
   playerX=105; playerHP=100; bossHP=100; bossX=510; battleOver=false;
 
-  $("bossMessage").textContent="New battle started. Good luck, hero!";
+  $("bossMessage").textContent="A new battle has started!";
 
   updateBossDisplay();
 
 });
 
-function bossAnimation() {
+function bossAnimation(){
 
   bossFrame++;
 
-  if(!battleOver) drawBoss();
+  if($("bossCanvas")) drawBoss();
 
   requestAnimationFrame(bossAnimation);
 
@@ -1642,47 +1988,47 @@ bossAnimation();
 
 /* HERO LAB */
 
-function updateHeroPreview() {
+function updateHeroPreview(){
 
-  const primary = $("heroPrimary").value;
+  $("maskShape").setAttribute("fill",$("heroPrimary").value);
 
-  const secondary = $("heroSecondary").value;
+  $("eyeLeft").setAttribute("fill",$("heroSecondary").value);
 
-  $("maskShape").setAttribute("fill",primary);
+  $("eyeRight").setAttribute("fill",$("heroSecondary").value);
 
-  $("eyeLeft").setAttribute("fill",secondary);
-
-  $("eyeRight").setAttribute("fill",secondary);
-
-  const name = $("heroName").value.trim() || "Your Hero";
-
-  $("heroPreviewName").textContent = name;
+  $("heroPreviewName").textContent=$("heroName").value.trim()||"Your Hero";
 
 }
 
-$("heroName").addEventListener("input",updateHeroPreview);
+["heroName","heroPrimary","heroSecondary"].forEach(id=>{
 
-$("heroPrimary").addEventListener("input",updateHeroPreview);
+  $(id).addEventListener("input",updateHeroPreview);
 
-$("heroSecondary").addEventListener("input",updateHeroPreview);
+});
 
 $("saveHero").addEventListener("click",()=>{
 
   const name=$("heroName").value.trim();
 
-  if(!name) { toast("Give your hero a name first."); return; }
+  if(!name) return toast("Give your hero a name first.");
 
-  setData("spiderHero",{name,primary:$("heroPrimary").value,secondary:$("heroSecondary").value});
+  setData("spiderHero",{
 
-  $("heroStatus").textContent="Your hero details have been saved on this device.";
+    name,
 
-  toast("Hero saved! 🦸");
+    primary:$("heroPrimary").value,
+
+    secondary:$("heroSecondary").value
+
+  });
+
+  $("heroStatus").textContent="Hero saved in this browser.";
 
 });
 
 const savedHero=getData("spiderHero",null);
 
-if(savedHero) {
+if(savedHero){
 
   $("heroName").value=savedHero.name||"";
 
@@ -1696,11 +2042,11 @@ updateHeroPreview();
 
 /* STORY CREATOR */
 
-function renderStories() {
+function renderStories(){
 
   const stories=getData("spiderStories",[]);
 
-  $("publishedStories").innerHTML = stories.length ? stories.map((story,index)=>`
+  $("publishedStories").innerHTML=stories.length ? stories.map((story,index)=>`
 
     <div class="story-card">
 
@@ -1718,31 +2064,31 @@ function renderStories() {
 
     </div>
 
-  `).join("") : "<p>No stories published yet. Your first story can start here.</p>";
+  `).join("") : "<p>No stories published yet.</p>";
 
-  $("publishedStories").querySelectorAll("[data-edit-story]").forEach(btn=>{
+  $("publishedStories").querySelectorAll("[data-edit-story]").forEach(button=>{
 
-    btn.addEventListener("click",()=>{
+    button.addEventListener("click",()=>{
 
-      const story=stories[Number(btn.dataset.editStory)];
+      const story=stories[Number(button.dataset.editStory)];
 
       $("storyTitle").value=story.title;
 
       $("storyBody").value=story.body;
 
-      $("storyStatus").textContent="Story loaded into the editor. Publish to save your changes as a new entry.";
+      $("storyStatus").textContent="Story loaded. Publish to add your edited version.";
 
-      $("storyTitle").focus();
+      window.scrollTo({top:0,behavior:"smooth"});
 
     });
 
   });
 
-  $("publishedStories").querySelectorAll("[data-delete-story]").forEach(btn=>{
+  $("publishedStories").querySelectorAll("[data-delete-story]").forEach(button=>{
 
-    btn.addEventListener("click",()=>{
+    button.addEventListener("click",()=>{
 
-      stories.splice(Number(btn.dataset.deleteStory),1);
+      stories.splice(Number(button.dataset.deleteStory),1);
 
       setData("spiderStories",stories);
 
@@ -1756,33 +2102,25 @@ function renderStories() {
 
 }
 
-function escapeHTML(value) {
-
-  return String(value).replace(/[&<>"']/g, char => ({
-
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-
-  })[char]);
-
-}
-
 $("publishStory").addEventListener("click",()=>{
 
   const title=$("storyTitle").value.trim();
 
   const body=$("storyBody").value.trim();
 
-  if(!title||!body) { toast("Add a title and some story text first."); return; }
+  if(!title||!body) return toast("Add a title and story text first.");
 
   const stories=getData("spiderStories",[]);
 
   stories.unshift({title,body,date:new Date().toLocaleDateString()});
 
-  if(setData("spiderStories",stories)) {
+  if(setData("spiderStories",stories)){
 
-    $("storyStatus").textContent="Published to your local story list!";
+    $("storyStatus").textContent="Story published to your local list!";
 
-    renderStories(); updateStats();
+    renderStories();
+
+    updateStats();
 
   }
 
@@ -1792,7 +2130,7 @@ $("saveDraft").addEventListener("click",()=>{
 
   const draft={title:$("storyTitle").value,body:$("storyBody").value};
 
-  if(setData("spiderDraft",draft)) $("storyStatus").textContent="Draft saved on this device.";
+  if(setData("spiderDraft",draft)) $("storyStatus").textContent="Draft saved.";
 
 });
 
@@ -1800,7 +2138,7 @@ $("loadDraft").addEventListener("click",()=>{
 
   const draft=getData("spiderDraft",null);
 
-  if(!draft) { toast("No saved draft found."); return; }
+  if(!draft) return toast("No saved draft found.");
 
   $("storyTitle").value=draft.title||"";
 
@@ -1824,25 +2162,23 @@ renderStories();
 
 /* MUSIC */
 
-let audioURL=null;
-
 $("openMusic").addEventListener("click",()=>{
 
-  const url=$("musicUrl").value.trim();
+  const value=$("musicUrl").value.trim();
 
   try {
 
-    const parsed=new URL(url);
+    const url=new URL(value);
 
-    if(!["http:","https:"].includes(parsed.protocol)) throw new Error();
+    if(!["http:","https:"].includes(url.protocol)) throw new Error();
 
-    window.open(parsed.href,"_blank","noopener,noreferrer");
+    window.open(url.href,"_blank","noopener,noreferrer");
 
     $("musicStatus").textContent="Music link opened in a new tab.";
 
   } catch {
 
-    $("musicStatus").textContent="Please enter a valid http or https link.";
+    $("musicStatus").textContent="Enter a valid music link first.";
 
   }
 
@@ -1850,43 +2186,37 @@ $("openMusic").addEventListener("click",()=>{
 
 $("embedMusic").addEventListener("click",()=>{
 
-  const url=$("musicUrl").value.trim();
+  const value=$("musicUrl").value.trim();
 
   let embedURL="";
 
-  try {
+  try{
 
-    const parsed=new URL(url);
+    const url=new URL(value);
 
-    if(parsed.hostname.includes("youtube.com")) {
+    if(url.hostname.includes("youtube.com")){
 
-      const video=parsed.searchParams.get("v");
+      const video=url.searchParams.get("v");
 
       if(video) embedURL="https://www.youtube-nocookie.com/embed/"+encodeURIComponent(video);
 
-      else if(parsed.pathname.startsWith("/embed/")) embedURL=parsed.href;
+      else if(url.pathname.startsWith("/embed/")) embedURL=url.href;
 
-    } else if(parsed.hostname==="youtu.be") {
+    } else if(url.hostname==="youtu.be"){
 
-      embedURL="https://www.youtube-nocookie.com/embed/"+parsed.pathname.slice(1);
+      embedURL="https://www.youtube-nocookie.com/embed/"+url.pathname.slice(1);
 
-    } else if(parsed.hostname.includes("spotify.com")) {
+    } else if(url.hostname.includes("spotify.com")){
 
-      embedURL=parsed.origin+"/embed"+parsed.pathname;
+      embedURL=url.origin+"/embed"+url.pathname;
 
     }
 
-  } catch {}
+  }catch{}
 
-  if(!embedURL) {
+  if(!embedURL) return $("musicStatus").textContent="This link cannot be embedded. Try opening it directly.";
 
-    $("musicStatus").textContent="That link cannot be embedded here. Try opening it directly.";
-
-    return;
-
-  }
-
-  $("musicEmbed").innerHTML="";
+  $("musicEmbed").replaceChildren();
 
   const frame=document.createElement("iframe");
 
@@ -1908,9 +2238,11 @@ $("embedMusic").addEventListener("click",()=>{
 
   $("musicEmbed").appendChild(frame);
 
-  $("musicStatus").textContent="Player added. Some services may require you to sign in.";
+  $("musicStatus").textContent="Player loaded where supported by the service.";
 
 });
+
+let audioURL=null;
 
 $("audioFile").addEventListener("change",event=>{
 
@@ -1926,17 +2258,17 @@ $("audioFile").addEventListener("change",event=>{
 
   $("localAudio").style.display="block";
 
-  $("musicStatus").textContent="Audio file ready to play.";
+  $("musicStatus").textContent="Your audio file is ready to play.";
 
 });
 
 /* MISSIONS */
 
-function renderMissions() {
+function renderMissions(){
 
-  const missions=getData("spiderMissions",[]);
+  const list=getData("spiderMissions",[]);
 
-  $("missionList").innerHTML=missions.length ? missions.map((mission,index)=>`
+  $("missionList").innerHTML=list.length ? list.map((mission,index)=>`
 
     <div class="mission-card">
 
@@ -1944,7 +2276,7 @@ function renderMissions() {
 
         <input type="checkbox" data-mission-check="${index}" ${mission.done?"checked":""}>
 
-        <span style="${mission.done?"text-decoration:line-through;opacity:.7":""}">${escapeHTML(mission.text)}</span>
+        <span style="${mission.done?"text-decoration:line-through;opacity:.65":""}">${escapeHTML(mission.text)}</span>
 
       </label>
 
@@ -1952,19 +2284,21 @@ function renderMissions() {
 
     </div>
 
-  `).join("") : "<p>No missions yet. Add your first objective above.</p>";
+  `).join("") : "<p>No missions yet. Add one above.</p>";
 
-  $("missionList").querySelectorAll("[data-mission-check]").forEach(input=>{
+  $("missionList").querySelectorAll("[data-mission-check]").forEach(box=>{
 
-    input.addEventListener("change",()=>{
+    box.addEventListener("change",()=>{
 
-      const list=getData("spiderMissions",[]);
+      const missions=getData("spiderMissions",[]);
 
-      list[Number(input.dataset.missionCheck)].done=input.checked;
+      missions[Number(box.dataset.missionCheck)].done=box.checked;
 
-      setData("spiderMissions",list);
+      setData("spiderMissions",missions);
 
-      renderMissions(); updateStats();
+      renderMissions();
+
+      updateStats();
 
     });
 
@@ -1974,13 +2308,15 @@ function renderMissions() {
 
     button.addEventListener("click",()=>{
 
-      const list=getData("spiderMissions",[]);
+      const missions=getData("spiderMissions",[]);
 
-      list.splice(Number(button.dataset.missionDelete),1);
+      missions.splice(Number(button.dataset.missionDelete),1);
 
-      setData("spiderMissions",list);
+      setData("spiderMissions",missions);
 
-      renderMissions(); updateStats();
+      renderMissions();
+
+      updateStats();
 
     });
 
@@ -1992,17 +2328,19 @@ $("addMission").addEventListener("click",()=>{
 
   const text=$("missionInput").value.trim();
 
-  if(!text) { toast("Write a mission first."); return; }
+  if(!text) return toast("Write a mission first.");
 
-  const list=getData("spiderMissions",[]);
+  const missions=getData("spiderMissions",[]);
 
-  list.push({text,done:false});
+  missions.push({text,done:false});
 
-  if(setData("spiderMissions",list)) {
+  if(setData("spiderMissions",missions)){
 
     $("missionInput").value="";
 
-    renderMissions(); updateStats();
+    renderMissions();
+
+    updateStats();
 
     $("missionStatus").textContent="Mission added.";
 
@@ -2022,11 +2360,9 @@ actx.fillStyle="#07182b";
 
 actx.fillRect(0,0,artCanvas.width,artCanvas.height);
 
-let drawing=false;
+let drawing=false,lastPoint=null;
 
-let lastPoint=null;
-
-function canvasPoint(event) {
+function canvasPoint(event){
 
   const rect=artCanvas.getBoundingClientRect();
 
@@ -2076,19 +2412,13 @@ artCanvas.addEventListener("pointermove",event=>{
 
 });
 
-function stopDrawing() { drawing=false; lastPoint=null; }
+function stopDrawing(){drawing=false;lastPoint=null;}
 
 artCanvas.addEventListener("pointerup",stopDrawing);
 
 artCanvas.addEventListener("pointercancel",stopDrawing);
 
-artCanvas.addEventListener("pointerleave",event=>{
-
-  if(event.buttons===0) stopDrawing();
-
-});
-
-function addSticker(emoji) {
+function addSticker(emoji){
 
   actx.font="48px Arial";
 
@@ -2122,19 +2452,43 @@ $("downloadArt").addEventListener("click",()=>{
 
   link.click();
 
-  $("artStatus").textContent="Your artwork has been saved as a PNG image.";
+  $("artStatus").textContent="Artwork saved as a PNG.";
 
 });
 
-/* GALLERY AND BACKGROUND */
+/* GALLERY AND BACKGROUND IMAGE */
 
-let galleryImages=[];
+let galleryImages=getData("spiderGallery",[]);
 
-let selectedGalleryImage=null;
+let selectedBackground=null;
 
-const galleryKey="spiderGallery";
+function applyBackground(data){
 
-function readImageAsDataURL(file) {
+  document.body.style.backgroundImage=
+
+    `linear-gradient(rgba(4,10,25,.65),rgba(4,10,25,.65)),url("${data}")`;
+
+  document.body.style.backgroundSize="cover";
+
+  document.body.style.backgroundPosition="center";
+
+  document.body.style.backgroundAttachment="fixed";
+
+}
+
+function resetBackground(){
+
+  document.body.style.backgroundImage="";
+
+  localStorage.removeItem("spiderBackground");
+
+}
+
+const savedBackground=getData("spiderBackground",null);
+
+if(savedBackground) applyBackground(savedBackground);
+
+function readImage(file){
 
   return new Promise((resolve,reject)=>{
 
@@ -2150,71 +2504,37 @@ function readImageAsDataURL(file) {
 
 }
 
-function applyBackground(dataURL) {
+function renderGallery(){
 
-  document.body.style.backgroundImage=
-
-    `linear-gradient(rgba(4,12,25,.65),rgba(4,12,25,.65)), url("${dataURL}")`;
-
-  document.body.style.backgroundSize="cover";
-
-  document.body.style.backgroundPosition="center";
-
-  document.body.style.backgroundAttachment="fixed";
-
-}
-
-function resetBackground() {
-
-  document.body.style.backgroundImage=
-
-    "radial-gradient(circle at 10% 15%, rgba(48,111,183,.18), transparent 30%), radial-gradient(circle at 90% 70%, rgba(228,91,145,.12), transparent 30%)";
-
-  document.body.style.backgroundSize="cover";
-
-  document.body.style.backgroundPosition="center";
-
-  document.body.style.backgroundAttachment="fixed";
-
-  localStorage.removeItem("spiderBackground");
-
-}
-
-const savedBackground=getData("spiderBackground",null);
-
-if(savedBackground) applyBackground(savedBackground);
-
-function renderGallery() {
-
-  $("galleryGrid").innerHTML=galleryImages.length ? galleryImages.map((image,index)=>`
+  $("galleryGrid").innerHTML=galleryImages.length ? galleryImages.map((img,index)=>`
 
     <div class="gallery-item">
 
-      <img src="${image.data}" alt="${escapeHTML(image.name)}">
+      <img src="${img.data}" alt="${escapeHTML(img.name)}">
 
-      <p class="small">${escapeHTML(image.name)}</p>
+      <p class="small">${escapeHTML(img.name)}</p>
 
-      <button data-select-image="${index}">🌌 Set as background</button>
+      <button data-use-image="${index}">🌌 Set as Background</button>
 
-      <button class="danger" data-remove-image="${index}">🗑️ Remove</button>
+      <button class="danger" data-delete-image="${index}">🗑️ Remove</button>
 
     </div>
 
-  `).join("") : "<p>Your gallery is empty. Import an image to begin.</p>";
+  `).join("") : "<p>No images in your gallery yet.</p>";
 
-  $("galleryGrid").querySelectorAll("[data-select-image]").forEach(button=>{
+  $("galleryGrid").querySelectorAll("[data-use-image]").forEach(button=>{
 
     button.addEventListener("click",()=>{
 
-      selectedGalleryImage=galleryImages[Number(button.dataset.selectImage)].data;
+      const image=galleryImages[Number(button.dataset.useImage)];
 
-      if(setData("spiderBackground",selectedGalleryImage)) {
+      if(setData("spiderBackground",image.data)){
 
-        applyBackground(selectedGalleryImage);
+        applyBackground(image.data);
 
-        $("galleryStatus").textContent="Background changed!";
+        $("galleryStatus").textContent="Background updated!";
 
-        toast("Your background has been updated. 🌌");
+        toast("Your background has changed. 🌌");
 
       }
 
@@ -2222,17 +2542,19 @@ function renderGallery() {
 
   });
 
-  $("galleryGrid").querySelectorAll("[data-remove-image]").forEach(button=>{
+  $("galleryGrid").querySelectorAll("[data-delete-image]").forEach(button=>{
 
     button.addEventListener("click",()=>{
 
-      galleryImages.splice(Number(button.dataset.removeImage),1);
+      galleryImages.splice(Number(button.dataset.deleteImage),1);
 
-      setData(galleryKey,galleryImages);
+      if(setData("spiderGallery",galleryImages)){
 
-      renderGallery();
+        renderGallery();
 
-      $("galleryStatus").textContent="Image removed from your local gallery.";
+        $("galleryStatus").textContent="Image removed.";
+
+      }
 
     });
 
@@ -2240,81 +2562,53 @@ function renderGallery() {
 
 }
 
-galleryImages=getData(galleryKey,[]);
-
-renderGallery();
-
 $("galleryFiles").addEventListener("change",async event=>{
 
   const files=Array.from(event.target.files||[]);
 
   if(!files.length) return;
 
-  $("galleryStatus").textContent="Importing images…";
+  $("galleryStatus").textContent="Importing images...";
 
-  for(const file of files) {
+  for(const file of files){
 
     if(!file.type.startsWith("image/")) continue;
 
-    if(file.size>2*1024*1024) {
+    if(file.size>1.5*1024*1024){
 
-      $("galleryStatus").textContent="One or more images were over 2 MB and were skipped. Smaller images work best.";
+      $("galleryStatus").textContent="A picture was too large. Try an image smaller than 1.5 MB.";
 
       continue;
 
     }
 
-    try {
+    try{
 
-      const data=await readImageAsDataURL(file);
+      const data=await readImage(file);
 
       galleryImages.push({name:file.name,data});
 
-      selectedGalleryImage=data;
+      selectedBackground=data;
 
-    } catch {
+    }catch{
 
-      $("galleryStatus").textContent="An image could not be imported.";
+      $("galleryStatus").textContent="Could not import one of your images.";
 
     }
 
   }
 
-  if(galleryImages.length>20) {
+  galleryImages=galleryImages.slice(-12);
 
-    galleryImages=galleryImages.slice(-20);
+  if(setData("spiderGallery",galleryImages)){
 
-    $("galleryStatus").textContent="Gallery limited to the latest 20 images.";
+    renderGallery();
+
+    $("galleryStatus").textContent="Images imported. Tap Set as Background under a picture.";
 
   }
-
-  const saved=setData(galleryKey,galleryImages);
-
-  renderGallery();
-
-  if(saved) $("galleryStatus").textContent="Images imported. Tap 'Set as background' under an image to use it.";
 
   event.target.value="";
-
-});
-
-$("useBackground").addEventListener("click",()=>{
-
-  if(!selectedGalleryImage) {
-
-    toast("Import an image and choose Set as background first.");
-
-    return;
-
-  }
-
-  if(setData("spiderBackground",selectedGalleryImage)) {
-
-    applyBackground(selectedGalleryImage);
-
-    $("galleryStatus").textContent="Background changed.";
-
-  }
 
 });
 
@@ -2332,31 +2626,19 @@ $("backgroundFile").addEventListener("change",async event=>{
 
   if(!file) return;
 
-  if(!file.type.startsWith("image/")) {
+  if(!file.type.startsWith("image/")) return $("backgroundStatus").textContent="Choose an image file.";
 
-    $("backgroundStatus").textContent="Please choose an image file.";
+  if(file.size>1.5*1024*1024) return $("backgroundStatus").textContent="Choose an image smaller than 1.5 MB.";
 
-    return;
+  try{
 
-  }
+    selectedBackground=await readImage(file);
 
-  if(file.size>2*1024*1024) {
+    $("backgroundStatus").textContent="Picture ready. Tap Apply Background.";
 
-    $("backgroundStatus").textContent="Please choose an image smaller than 2 MB.";
+  }catch{
 
-    return;
-
-  }
-
-  try {
-
-    selectedGalleryImage=await readImageAsDataURL(file);
-
-    $("backgroundStatus").textContent="Picture ready. Tap Apply picture.";
-
-  } catch {
-
-    $("backgroundStatus").textContent="Could not read this image.";
+    $("backgroundStatus").textContent="Could not read the selected picture.";
 
   }
 
@@ -2364,19 +2646,13 @@ $("backgroundFile").addEventListener("change",async event=>{
 
 $("applyBackground").addEventListener("click",()=>{
 
-  if(!selectedGalleryImage) {
+  if(!selectedBackground) return toast("Choose an image first.");
 
-    toast("Choose an image first.");
+  if(setData("spiderBackground",selectedBackground)){
 
-    return;
+    applyBackground(selectedBackground);
 
-  }
-
-  if(setData("spiderBackground",selectedGalleryImage)) {
-
-    applyBackground(selectedGalleryImage);
-
-    $("backgroundStatus").textContent="Background applied and saved in this browser.";
+    $("backgroundStatus").textContent="Your background is now applied.";
 
   }
 
@@ -2386,57 +2662,59 @@ $("clearBackground").addEventListener("click",()=>{
 
   resetBackground();
 
-  $("backgroundStatus").textContent="Background reset to the original design.";
+  $("backgroundStatus").textContent="Original Spider-Verse background restored.";
 
 });
 
-const savedTheme=getData("spiderTheme","blue");
+renderGallery();
 
-$("themeSelect").value=savedTheme;
+/* SETTINGS: THEMES */
 
-function applyTheme(theme) {
+function applyTheme(theme){
 
   document.body.classList.toggle("high-contrast",theme==="contrast");
 
   const root=document.documentElement;
 
-  if(theme==="pink") {
+  if(theme==="pink"){
 
     root.style.setProperty("--accent","#ff91c5");
 
-    root.style.setProperty("--accent2","#78c7ff");
+    root.style.setProperty("--pink","#79d5ff");
 
-    root.style.setProperty("--panel2","#381d39");
+    root.style.setProperty("--panel2","#402044");
 
-  } else if(theme==="purple") {
+  }else if(theme==="purple"){
 
     root.style.setProperty("--accent","#c5a4ff");
 
-    root.style.setProperty("--accent2","#78c7ff");
+    root.style.setProperty("--pink","#ff83c7");
 
-    root.style.setProperty("--panel2","#261c49");
+    root.style.setProperty("--panel2","#29204c");
 
-  } else {
+  }else{
 
-    root.style.setProperty("--accent","#78c7ff");
+    root.style.setProperty("--accent","#79d5ff");
 
-    root.style.setProperty("--accent2","#e45b91");
+    root.style.setProperty("--pink","#ff5b9f");
 
-    root.style.setProperty("--panel2","#102945");
+    root.style.setProperty("--panel2","#122b49");
 
   }
 
 }
 
-applyTheme(savedTheme);
+const initialTheme=getData("spiderTheme","blue");
+
+$("themeSelect").value=initialTheme;
+
+applyTheme(initialTheme);
 
 $("themeSelect").addEventListener("change",()=>{
 
-  const theme=$("themeSelect").value;
+  applyTheme($("themeSelect").value);
 
-  applyTheme(theme);
-
-  setData("spiderTheme",theme);
+  setData("spiderTheme",$("themeSelect").value);
 
   $("settingsStatus").textContent="Theme updated.";
 
@@ -2444,7 +2722,7 @@ $("themeSelect").addEventListener("change",()=>{
 
 /* CONFESSIONS */
 
-function renderConfessions() {
+function renderConfessions(){
 
   const notes=getData("spiderConfessions",[]);
 
@@ -2456,7 +2734,7 @@ function renderConfessions() {
 
       <p class="small">${escapeHTML(note.date)}</p>
 
-      <button class="danger" data-delete-note="${index}">🗑️ Delete note</button>
+      <button class="danger" data-delete-note="${index}">🗑️ Delete Note</button>
 
     </div>
 
@@ -2484,19 +2762,19 @@ $("saveConfession").addEventListener("click",()=>{
 
   const text=$("confessionInput").value.trim();
 
-  if(!text) { toast("Write something first."); return; }
+  if(!text) return toast("Write a note first.");
 
   const notes=getData("spiderConfessions",[]);
 
   notes.unshift({text,date:new Date().toLocaleString()});
 
-  if(setData("spiderConfessions",notes)) {
+  if(setData("spiderConfessions",notes)){
 
     $("confessionInput").value="";
 
     renderConfessions();
 
-    toast("Note saved on this device.");
+    toast("Your note has been saved on this device.");
 
   }
 
@@ -2510,13 +2788,11 @@ $("clearConfession").addEventListener("click",()=>{
 
 renderConfessions();
 
-/* DELETE LOCAL WEBSITE DATA */
+/* CLEAR SAVED SITE DATA */
 
 $("clearAllData").addEventListener("click",()=>{
 
-  const confirmed=confirm("Delete your saved missions, stories, drafts, notes, hero and gallery images from this browser?");
-
-  if(!confirmed) return;
+  if(!confirm("Delete your saved missions, drafts, stories, notes, hero and gallery data from this browser?")) return;
 
   [
 
@@ -2528,7 +2804,7 @@ $("clearAllData").addEventListener("click",()=>{
 
   galleryImages=[];
 
-  selectedGalleryImage=null;
+  selectedBackground=null;
 
   resetBackground();
 
@@ -2550,9 +2826,7 @@ $("clearAllData").addEventListener("click",()=>{
 
   updateHeroPreview();
 
-  $("settingsStatus").textContent="Saved website data deleted.";
-
-  toast("Local website data cleared.");
+  $("settingsStatus").textContent="Your saved website data has been deleted.";
 
 });
 
