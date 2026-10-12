@@ -1,229 +1,607 @@
+
+
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My World</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="theme-color" content="#080D18">
+
+  <title>My Spider-Verse</title>
 
   <style>
+
+    :root {
+
+      --bg: #080D18;
+
+      --panel: #111D30;
+
+      --red: #EF3340;
+
+      --blue: #4DA3FF;
+
+      --white: #F5F7FB;
+
+      --muted: #B8C8DC;
+
+      --border: #263750;
+
+    }
+
     * {
+
       box-sizing: border-box;
+
     }
 
     html {
+
       scroll-behavior: smooth;
+
     }
 
     body {
+
       margin: 0;
+
+      background: var(--bg);
+
+      color: var(--white);
+
       font-family: Arial, sans-serif;
-      background: #071426;
-      color: white;
-      text-align: center;
+
+      line-height: 1.6;
+
     }
 
     nav {
-      padding: 22px;
-      background: #0b1e35;
+
       position: sticky;
+
       top: 0;
+
       z-index: 10;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      gap: 12px;
+
+      padding: 16px 6%;
+
+      background: rgba(8, 13, 24, 0.94);
+
+      border-bottom: 1px solid var(--border);
+
+      backdrop-filter: blur(12px);
+
     }
 
-    nav a {
-      color: #a9d4ff;
+    .logo {
+
+      color: var(--red);
+
+      font-weight: 900;
+
+      letter-spacing: 2px;
+
       text-decoration: none;
-      margin: 0 10px;
-      font-size: 14px;
+
+    }
+
+    nav div {
+
+      display: flex;
+
+      gap: 14px;
+
+      flex-wrap: wrap;
+
+    }
+
+    nav div a {
+
+      color: var(--muted);
+
+      text-decoration: none;
+
+      font-size: 12px;
+
+      transition: color 0.25s;
+
+    }
+
+    nav div a:hover {
+
+      color: var(--blue);
+
     }
 
     .hero {
-      min-height: 82vh;
+
+      position: relative;
+
+      min-height: 85vh;
+
+      overflow: hidden;
+
       display: flex;
+
       flex-direction: column;
+
       align-items: center;
+
       justify-content: center;
-      padding: 30px 20px;
+
+      text-align: center;
+
+      padding: 70px 22px;
+
       background:
-        radial-gradient(ellipse at top, #163d70, #071426 70%);
+
+        radial-gradient(ellipse at 20% 20%,
+
+          #173D68 0%, transparent 45%),
+
+        radial-gradient(ellipse at 85% 75%,
+
+          #5D1729 0%, transparent 40%),
+
+        var(--bg);
+
     }
 
-    .tag {
-      color: #86c5ff;
-      letter-spacing: 4px;
+    /* Decorative comic-book web pattern */
+
+    .hero::before {
+
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      opacity: 0.13;
+
+      background-image:
+
+        repeating-radial-gradient(
+
+          circle at 50% 0%,
+
+          transparent 0 35px,
+
+          var(--blue) 36px 37px,
+
+          transparent 38px 65px
+
+        );
+
+      mask-image: linear-gradient(
+
+        to bottom, black, transparent 90%
+
+      );
+
+    }
+
+    .hero > * {
+
+      position: relative;
+
+    }
+
+    .eyebrow {
+
+      color: var(--red);
+
       font-size: 12px;
-      animation: fadeIn 1s ease both;
+
+      font-weight: bold;
+
+      letter-spacing: 5px;
+
+      animation: fadeUp 0.8s ease both;
+
     }
 
     h1 {
-      font-size: clamp(42px, 10vw, 76px);
-      margin: 20px 0;
-      animation: floatIn 1s ease both;
+
+      margin: 18px 0;
+
+      max-width: 900px;
+
+      font-size: clamp(42px, 10vw, 82px);
+
+      line-height: 1.08;
+
+      text-transform: uppercase;
+
+      animation: fadeUp 1s ease both;
+
     }
 
     h1 span {
-      color: #76baff;
-      text-shadow: 0 0 25px #2878cc;
+
+      color: var(--blue);
+
+      text-shadow: 0 0 25px #4DA3FF55;
+
     }
 
     .intro {
-      max-width: 450px;
-      color: #c3d0df;
-      line-height: 1.8;
-      animation: fadeIn 1.5s ease both;
+
+      max-width: 500px;
+
+      color: var(--muted);
+
+      animation: fadeUp 1.2s ease both;
+
     }
 
-    button {
-      margin-top: 25px;
-      padding: 15px 25px;
-      border: 1px solid #91caff;
-      border-radius: 30px;
-      background: #2878cc;
+    .button {
+
+      display: inline-block;
+
+      margin-top: 22px;
+
+      padding: 13px 24px;
+
+      background: var(--red);
+
       color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: transform 0.25s, box-shadow 0.25s;
+
+      border: 1px solid #FF6670;
+
+      border-radius: 5px;
+
+      text-decoration: none;
+
+      font-weight: bold;
+
+      transition: transform 0.25s,
+
+                  box-shadow 0.25s;
+
     }
 
-    button:hover {
-      transform: translateY(-4px) scale(1.04);
-      box-shadow: 0 0 25px #2878cc;
+    .button:hover {
+
+      transform: translateY(-4px);
+
+      box-shadow: 0 0 24px #EF334066;
+
     }
 
-    section {
-      padding: 70px 22px;
-      max-width: 850px;
+    section.content {
+
+      max-width: 900px;
+
       margin: auto;
+
+      padding: 65px 22px;
+
+      scroll-margin-top: 70px;
+
     }
 
     h2 {
-      color: #91caff;
+
       font-size: 30px;
+
+      text-transform: uppercase;
+
+    }
+
+    h2 span {
+
+      color: var(--red);
+
     }
 
     .card {
-      background: #10243b;
-      border: 1px solid #244365;
-      border-radius: 18px;
-      padding: 25px;
+
+      padding: 24px;
+
       margin: 18px 0;
-      transition: transform 0.3s, border-color 0.3s;
+
+      background: var(--panel);
+
+      border: 1px solid var(--border);
+
+      border-left: 3px solid var(--red);
+
+      border-radius: 8px;
+
+      transition: transform 0.3s,
+
+                  border-color 0.3s,
+
+                  box-shadow 0.3s;
+
     }
 
     .card:hover {
-      transform: translateY(-6px);
-      border-color: #76baff;
+
+      transform: translateY(-5px);
+
+      border-color: var(--blue);
+
+      box-shadow: 0 10px 30px #00000030;
+
+    }
+
+    .card h3 {
+
+      color: var(--blue);
+
+      margin-top: 0;
+
     }
 
     .card p {
-      color: #c3d0df;
-      line-height: 1.7;
+
+      color: var(--muted);
+
+    }
+
+    #message {
+
+      color: var(--blue);
+
+      min-height: 28px;
+
     }
 
     footer {
-      padding: 30px;
-      color: #94a9bf;
-      background: #0b1e35;
+
+      padding: 28px 18px;
+
+      text-align: center;
+
+      color: var(--muted);
+
+      background: #0B1423;
+
+      border-top: 1px solid var(--border);
+
       font-size: 13px;
+
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
+    @keyframes fadeUp {
 
-    @keyframes floatIn {
       from {
+
         opacity: 0;
-        transform: translateY(25px);
+
+        transform: translateY(22px);
+
       }
+
       to {
+
         opacity: 1;
+
         transform: translateY(0);
+
       }
+
+    }
+
+    @media (max-width: 480px) {
+
+      nav {
+
+        padding: 14px 12px;
+
+      }
+
+      nav div {
+
+        gap: 9px;
+
+      }
+
+      nav div a {
+
+        font-size: 10px;
+
+      }
+
     }
 
     @media (prefers-reduced-motion: reduce) {
+
       *, *::before, *::after {
+
         animation: none !important;
-        scroll-behavior: auto !important;
+
         transition: none !important;
+
+        scroll-behavior: auto !important;
+
       }
+
     }
+
   </style>
+
 </head>
 
 <body>
+
   <nav>
-    <a href="#home">HOME</a>
-    <a href="#about">ABOUT</a>
-    <a href="#interests">INTERESTS</a>
+
+    <a class="logo" href="#home">MY SPIDER-VERSE</a>
+
+    <div>
+
+      <a href="#home">HOME</a>
+
+      <a href="#story">MY STORY</a>
+
+      <a href="#interests">INTERESTS</a>
+
+      <a href="#goals">GOALS</a>
+
+    </div>
+
   </nav>
 
   <header class="hero" id="home">
-    <p class="tag">WELCOME TO MY WORLD</p>
 
-    <h1>Hey, I'm <span>You.</span></h1>
+    <p class="eyebrow">YOUR FRIENDLY NEIGHBOURHOOD...</p>
+
+    <h1>This is <span>my world.</span></h1>
 
     <p class="intro">
-      This is my own little corner of the internet.
-      A place for my interests, ideas, goals and everything
-      that makes me who I am.
+
+      Welcome to my corner of the Spider-Verse.
+
+      A place for my interests, my ideas, my favourite
+
+      things and the person I'm becoming.
+
     </p>
 
-    <button onclick="showMessage()">
-      Discover my world ✦
-    </button>
+    <a class="button" href="#story">ENTER MY WORLD ↗</a>
 
-    <p id="message" aria-live="polite"></p>
   </header>
 
-  <section id="about">
-    <h2>About Me</h2>
+  <section class="content" id="story">
+
+    <h2>My <span>Story</span></h2>
+
     <div class="card">
+
+      <h3>Behind the Mask</h3>
+
       <p>
-        I'm creating my own space on the internet.
-        I'm learning new things, exploring my interests
-        and building something that belongs to me.
+
+        Every hero has a story. This is mine.
+
+        I'm building my own path, learning new things
+
+        and creating a space that represents me.
+
       </p>
+
     </div>
+
   </section>
 
-  <section id="interests">
-    <h2>My Interests</h2>
+  <section class="content" id="interests">
+
+    <h2>My <span>Universe</span></h2>
 
     <div class="card">
+
       <h3>🎮 Gaming</h3>
-      <p>Games, adventures and new worlds to explore.</p>
+
+      <p>
+
+        The games I play, the worlds I explore
+
+        and the adventures I enjoy.
+
+      </p>
+
     </div>
 
     <div class="card">
+
       <h3>🎧 Music</h3>
-      <p>My favourite sounds, artists and moods.</p>
+
+      <p>
+
+        My favourite artists, songs and soundtracks.
+
+      </p>
+
     </div>
 
     <div class="card">
-      <h3>🚀 My Goals</h3>
-      <p>Learning, growing and turning ideas into reality.</p>
+
+      <h3>🕸️ The Spider-Verse</h3>
+
+      <p>
+
+        Spider-Man, different universes,
+
+        legendary moments and superhero stories.
+
+      </p>
+
     </div>
+
+  </section>
+
+  <section class="content" id="goals">
+
+    <h2>My <span>Mission</span></h2>
+
+    <div class="card">
+
+      <h3>Greatness takes time.</h3>
+
+      <p>
+
+        My goals, my plans and everything I want
+
+        to learn. This is where my next chapter begins.
+
+      </p>
+
+      <button class="button" id="missionButton" type="button">
+
+        ACTIVATE SPIDER-SENSE
+
+      </button>
+
+      <p id="message" aria-live="polite"></p>
+
+    </div>
+
   </section>
 
   <footer>
-    Made by me, with code and a little imagination.
+
+    MY SPIDER-VERSE · A PERSONAL FAN-MADE WEBSITE
+
   </footer>
 
   <script>
-    function showMessage() {
-      document.getElementById("message").textContent =
-        "You made it! Welcome to my world. ✨";
 
-      document.getElementById("message").style.color =
-        "#91caff";
-    }
+    const missionButton =
+
+      document.getElementById("missionButton");
+
+    const message = document.getElementById("message");
+
+    missionButton.addEventListener("click", () => {
+
+      message.textContent =
+
+        "Spider-Sense activated. Your story is yours to write. 🕸️";
+
+      missionButton.textContent = "MISSION ACTIVATED ✓";
+
+    });
+
   </script>
+
 </body>
+
 </html>
