@@ -1,607 +1,358 @@
-
-
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <meta name="theme-color" content="#080D18">
-
   <title>My Spider-Verse</title>
 
   <style>
-
     :root {
-
       --bg: #080D18;
-
       --panel: #111D30;
-
       --red: #EF3340;
-
       --blue: #4DA3FF;
-
       --white: #F5F7FB;
-
       --muted: #B8C8DC;
-
       --border: #263750;
-
     }
 
     * {
-
       box-sizing: border-box;
-
     }
 
     html {
-
       scroll-behavior: smooth;
-
     }
 
     body {
-
       margin: 0;
-
       background: var(--bg);
-
       color: var(--white);
-
       font-family: Arial, sans-serif;
-
       line-height: 1.6;
-
     }
 
-    nav {
-
-      position: sticky;
-
-      top: 0;
-
-      z-index: 10;
-
-      display: flex;
-
-      justify-content: space-between;
-
-      align-items: center;
-
-      gap: 12px;
-
-      padding: 16px 6%;
-
-      background: rgba(8, 13, 24, 0.94);
-
-      border-bottom: 1px solid var(--border);
-
-      backdrop-filter: blur(12px);
-
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 18px 5%;
+  background: rgba(8, 13, 24, 0.96);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(14px);
+  
     }
 
     .logo {
-
       color: var(--red);
-
       font-weight: 900;
-
       letter-spacing: 2px;
-
       text-decoration: none;
-
     }
 
     nav div {
-
       display: flex;
-
       gap: 14px;
-
       flex-wrap: wrap;
-
     }
 
     nav div a {
-
       color: var(--muted);
-
       text-decoration: none;
-
       font-size: 12px;
-
       transition: color 0.25s;
-
     }
 
     nav div a:hover {
-
       color: var(--blue);
-
     }
 
     .hero {
-
       position: relative;
-
       min-height: 85vh;
-
       overflow: hidden;
-
       display: flex;
-
       flex-direction: column;
-
       align-items: center;
-
       justify-content: center;
-
       text-align: center;
-
       padding: 70px 22px;
-
       background:
-
         radial-gradient(ellipse at 20% 20%,
-
           #173D68 0%, transparent 45%),
-
         radial-gradient(ellipse at 85% 75%,
-
           #5D1729 0%, transparent 40%),
-
         var(--bg);
-
     }
 
     /* Decorative comic-book web pattern */
-
     .hero::before {
-
       content: "";
-
       position: absolute;
-
       inset: 0;
-
       pointer-events: none;
-
       opacity: 0.13;
-
       background-image:
-
         repeating-radial-gradient(
-
           circle at 50% 0%,
-
           transparent 0 35px,
-
           var(--blue) 36px 37px,
-
           transparent 38px 65px
-
         );
-
       mask-image: linear-gradient(
-
         to bottom, black, transparent 90%
-
       );
-
     }
 
     .hero > * {
-
       position: relative;
-
     }
 
     .eyebrow {
-
       color: var(--red);
-
       font-size: 12px;
-
       font-weight: bold;
-
       letter-spacing: 5px;
-
       animation: fadeUp 0.8s ease both;
-
     }
 
     h1 {
-
       margin: 18px 0;
-
       max-width: 900px;
-
       font-size: clamp(42px, 10vw, 82px);
-
       line-height: 1.08;
-
       text-transform: uppercase;
-
       animation: fadeUp 1s ease both;
-
     }
 
     h1 span {
-
       color: var(--blue);
-
       text-shadow: 0 0 25px #4DA3FF55;
-
     }
 
     .intro {
-
       max-width: 500px;
-
       color: var(--muted);
-
       animation: fadeUp 1.2s ease both;
-
     }
 
     .button {
-
       display: inline-block;
-
       margin-top: 22px;
-
       padding: 13px 24px;
-
       background: var(--red);
-
       color: white;
-
       border: 1px solid #FF6670;
-
       border-radius: 5px;
-
       text-decoration: none;
-
       font-weight: bold;
-
       transition: transform 0.25s,
-
                   box-shadow 0.25s;
-
     }
 
     .button:hover {
-
       transform: translateY(-4px);
-
       box-shadow: 0 0 24px #EF334066;
-
     }
 
     section.content {
-
       max-width: 900px;
-
       margin: auto;
-
       padding: 65px 22px;
-
       scroll-margin-top: 70px;
-
     }
 
     h2 {
-
       font-size: 30px;
-
       text-transform: uppercase;
-
     }
 
     h2 span {
-
       color: var(--red);
-
     }
 
     .card {
-
       padding: 24px;
-
       margin: 18px 0;
-
       background: var(--panel);
-
       border: 1px solid var(--border);
-
       border-left: 3px solid var(--red);
-
       border-radius: 8px;
-
       transition: transform 0.3s,
-
                   border-color 0.3s,
-
                   box-shadow 0.3s;
-
     }
 
     .card:hover {
-
       transform: translateY(-5px);
-
       border-color: var(--blue);
-
       box-shadow: 0 10px 30px #00000030;
-
     }
 
     .card h3 {
-
       color: var(--blue);
-
       margin-top: 0;
-
     }
 
     .card p {
-
       color: var(--muted);
-
     }
 
     #message {
-
       color: var(--blue);
-
       min-height: 28px;
-
     }
 
     footer {
-
       padding: 28px 18px;
-
       text-align: center;
-
       color: var(--muted);
-
       background: #0B1423;
-
       border-top: 1px solid var(--border);
-
       font-size: 13px;
-
     }
 
     @keyframes fadeUp {
-
       from {
-
         opacity: 0;
-
         transform: translateY(22px);
-
       }
-
       to {
-
         opacity: 1;
-
         transform: translateY(0);
-
       }
-
     }
 
     @media (max-width: 480px) {
-
       nav {
-
         padding: 14px 12px;
-
       }
 
       nav div {
-
         gap: 9px;
-
       }
 
       nav div a {
-
         font-size: 10px;
-
       }
-
     }
 
     @media (prefers-reduced-motion: reduce) {
-
       *, *::before, *::after {
-
         animation: none !important;
-
         transition: none !important;
-
         scroll-behavior: auto !important;
-
       }
-
     }
-
   </style>
-
 </head>
 
 <body>
-
   <nav>
-
     <a class="logo" href="#home">MY SPIDER-VERSE</a>
-
     <div>
-
       <a href="#home">HOME</a>
-
       <a href="#story">MY STORY</a>
-
       <a href="#interests">INTERESTS</a>
-
       <a href="#goals">GOALS</a>
-
     </div>
-
   </nav>
 
   <header class="hero" id="home">
-
     <p class="eyebrow">YOUR FRIENDLY NEIGHBOURHOOD...</p>
 
     <h1>This is <span>my world.</span></h1>
 
     <p class="intro">
-
       Welcome to my corner of the Spider-Verse.
-
       A place for my interests, my ideas, my favourite
-
       things and the person I'm becoming.
-
     </p>
 
     <a class="button" href="#story">ENTER MY WORLD ↗</a>
-
   </header>
 
   <section class="content" id="story">
-
     <h2>My <span>Story</span></h2>
 
     <div class="card">
-
       <h3>Behind the Mask</h3>
-
       <p>
-
         Every hero has a story. This is mine.
-
         I'm building my own path, learning new things
-
         and creating a space that represents me.
-
       </p>
-
     </div>
-
   </section>
 
   <section class="content" id="interests">
-
     <h2>My <span>Universe</span></h2>
 
     <div class="card">
-
       <h3>🎮 Gaming</h3>
-
       <p>
-
         The games I play, the worlds I explore
-
         and the adventures I enjoy.
-
       </p>
-
     </div>
 
     <div class="card">
-
       <h3>🎧 Music</h3>
-
       <p>
-
         My favourite artists, songs and soundtracks.
-
       </p>
-
     </div>
 
     <div class="card">
-
       <h3>🕸️ The Spider-Verse</h3>
-
       <p>
-
         Spider-Man, different universes,
-
         legendary moments and superhero stories.
-
       </p>
-
     </div>
-
   </section>
 
   <section class="content" id="goals">
-
     <h2>My <span>Mission</span></h2>
 
     <div class="card">
-
       <h3>Greatness takes time.</h3>
-
       <p>
-
         My goals, my plans and everything I want
-
         to learn. This is where my next chapter begins.
-
       </p>
 
       <button class="button" id="missionButton" type="button">
-
         ACTIVATE SPIDER-SENSE
-
       </button>
 
       <p id="message" aria-live="polite"></p>
-
     </div>
-
   </section>
 
   <footer>
-
     MY SPIDER-VERSE · A PERSONAL FAN-MADE WEBSITE
-
   </footer>
 
   <script>
-
     const missionButton =
-
       document.getElementById("missionButton");
 
     const message = document.getElementById("message");
 
     missionButton.addEventListener("click", () => {
-
       message.textContent =
-
         "Spider-Sense activated. Your story is yours to write. 🕸️";
 
       missionButton.textContent = "MISSION ACTIVATED ✓";
-
     });
-
   </script>
-
 </body>
-
 </html>
