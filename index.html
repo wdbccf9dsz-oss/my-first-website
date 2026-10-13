@@ -21,6 +21,8 @@
 html { scroll-behavior:smooth; }
 body {
   margin:0;
+  position:relative;
+  isolation:isolate;
   color:var(--white);
   font-family:"Trebuchet MS",system-ui,sans-serif;
   background:
@@ -28,7 +30,46 @@ body {
     radial-gradient(ellipse at 80% 70%,#50133e,transparent 40%),
     linear-gradient(180deg,#030512,#090c24 55%,#03040c);
   background-attachment:fixed;
+  min-height:100vh;
 }
+
+/* ANIMATED SPIRALLING SPIDER-WEB BACKGROUND */
+body::before {
+  content:"";
+  position:fixed;
+  inset:-50%;
+  z-index:0;
+  pointer-events:none;
+  opacity:.27;
+  background:
+    repeating-conic-gradient(
+      from 0deg at 50% 50%,
+      transparent 0deg 14deg,
+      #27c9ff 14.2deg 14.45deg,
+      transparent 14.8deg 30deg
+    ),
+    repeating-radial-gradient(
+      circle at 50% 50%,
+      transparent 0 38px,
+      #c52cff 39px 40px,
+      transparent 41px 76px,
+      #ff2c8a 77px 78px,
+      transparent 79px 114px
+    );
+  mask-image:radial-gradient(ellipse at center,#000 0%,#000 32%,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse at center,#000 0%,#000 32%,transparent 75%);
+  animation:spiralWeb 48s linear infinite;
+}
+body > * { position:relative; z-index:1; }
+@keyframes spiralWeb {
+  from { transform:rotate(0deg) scale(1); }
+  to { transform:rotate(360deg) scale(1); }
+}
+@media(prefers-reduced-motion:reduce) {
+  body::before { animation:none; }
+  * { scroll-behavior:auto !important; }
+}
+
 button,input,textarea,select { font:inherit; }
 button {
   color:white;
@@ -101,6 +142,8 @@ nav button {
 }
 .page {
   display:none;
+  position:relative;
+  z-index:1;
   min-height:80vh;
   padding:28px 5% 65px;
   animation:fade .3s ease;
@@ -144,10 +187,7 @@ nav button {
   box-shadow:0 8px 25px #0003;
 }
 .panel { margin:15px 0; }
-.portals,.grid2,.grid3 {
-  display:grid;
-  gap:14px;
-}
+.portals,.grid2,.grid3 { display:grid; gap:14px; }
 .portals { grid-template-columns:repeat(3,minmax(0,1fr)); margin:25px 0; }
 .grid2 { grid-template-columns:repeat(2,minmax(0,1fr)); }
 .grid3 { grid-template-columns:repeat(3,minmax(0,1fr)); }
@@ -162,12 +202,7 @@ nav button {
 .portal:nth-child(3n+1) { border-color:var(--pink); }
 .portal:nth-child(3n+2) { border-color:var(--blue); }
 .portal:nth-child(3n) { border-color:var(--purple); }
-.row,.controls {
-  display:flex;
-  flex-wrap:wrap;
-  gap:9px;
-  align-items:center;
-}
+.row,.controls { display:flex; flex-wrap:wrap; gap:9px; align-items:center; }
 .row > * { flex:1; min-width:0; }
 .divider { border:0; border-top:1px solid #354879; margin:22px 0; }
 .tag {
@@ -182,7 +217,10 @@ nav button {
 .chapter h3 { color:var(--blue); }
 .chapter-nav { display:flex; flex-wrap:wrap; gap:8px; margin:18px 0; }
 .chapter-nav button { flex:1 1 90px; }
-.chapter-nav button.current { border-color:var(--pink); background:linear-gradient(120deg,#15345b,#38194d); }
+.chapter-nav button.current {
+  border-color:var(--pink);
+  background:linear-gradient(120deg,#15345b,#38194d);
+}
 .chapter-hidden { display:none !important; }
 .chapter-progress { width:100%; padding:8px; color:var(--muted); text-align:center; }
 .music-card { display:block; color:white; text-decoration:none; margin:10px 0; }
@@ -195,7 +233,12 @@ nav button {
   overflow:hidden;
   background:#24152d;
 }
-.meter div { height:100%; width:100%; background:linear-gradient(90deg,#ff315a,#ff9860); transition:width .2s; }
+.meter div {
+  height:100%;
+  width:100%;
+  background:linear-gradient(90deg,#ff315a,#ff9860);
+  transition:width .2s;
+}
 .meter.blue div { background:linear-gradient(90deg,#25bfff,#8cecff); }
 .arena {
   height:360px;
@@ -238,27 +281,121 @@ nav button {
   border:1px dashed #6174a9; border-radius:15px;
   background:radial-gradient(circle,#302054,#080e22);
 }
-.minifig { display:flex; flex-direction:column; align-items:center; filter:drop-shadow(0 0 14px var(--suit,#27c9ff)); }
+.minifig {
+  display:flex; flex-direction:column; align-items:center;
+  filter:drop-shadow(0 0 14px var(--suit,#27c9ff));
+}
 .fig-head,.fig-body,.fig-leg { background:var(--suit,#27c9ff); border:4px solid #10172d; }
-.fig-head { width:68px; height:62px; border-radius:17px 17px 12px 12px; display:grid; place-items:center; font-size:28px; }
-.fig-body { width:82px; height:66px; border-radius:12px; display:grid; place-items:center; font-size:26px; }
+.fig-head {
+  width:68px; height:62px; border-radius:17px 17px 12px 12px;
+  display:grid; place-items:center; font-size:28px;
+}
+.fig-body {
+  width:82px; height:66px; border-radius:12px;
+  display:grid; place-items:center; font-size:26px;
+}
 .fig-legs { display:flex; gap:5px; }
 .fig-leg { width:35px; height:43px; border-radius:5px; }
-canvas { display:block; width:100%; height:300px; background:white; border-radius:10px; touch-action:none; }
+canvas {
+  display:block; width:100%; height:300px;
+  background:white; border-radius:10px; touch-action:none;
+}
 .toast {
   display:none; position:fixed; bottom:18px; left:50%; transform:translateX(-50%);
   z-index:2000; padding:12px 17px; background:#18274a;
   border:1px solid var(--blue); border-radius:12px; max-width:90%;
 }
-footer { text-align:center; color:var(--muted); padding:30px 15px; border-top:1px solid #26385f; }
+footer {
+  text-align:center; color:var(--muted); padding:30px 15px;
+  border-top:1px solid #26385f;
+}
 @keyframes fade { from {opacity:0} to {opacity:1} }
 @keyframes float { 50% {transform:translateY(-8px)} }
+
+/* MULTIVERSE QUIZ */
+.quiz-container {
+  max-width:760px;
+  margin:28px auto;
+  padding:25px;
+  color:#fff;
+  background:rgba(7,20,38,.96);
+  border:2px solid #5c8dff;
+  border-radius:20px;
+  box-shadow:0 0 25px rgba(92,141,255,.2);
+}
+.quiz-container h1 {
+  color:#a9d4ff;
+  text-align:center;
+  font-size:clamp(23px,5vw,36px);
+}
+.quiz-subtitle {
+  text-align:center;
+  color:#bdcce2;
+  line-height:1.6;
+  margin-bottom:25px;
+}
+#quiz-setup { display:grid; gap:10px; }
+#quiz-setup label { margin-top:10px; font-weight:bold; color:#a9d4ff; }
+#quiz-setup select {
+  width:100%; padding:13px; border:1px solid #42699c;
+  border-radius:10px; color:white; background:#102746; font-size:15px;
+}
+.quiz-topbar {
+  display:flex; align-items:center; justify-content:space-between;
+  gap:14px; margin:24px 0; padding:14px;
+  border:1px solid #29476e; border-radius:14px; background:#091a30;
+}
+.quiz-timer-box {
+  display:flex; flex-direction:column; gap:4px; min-width:75px; color:#a9d4ff;
+}
+.quiz-timer-box strong { font-size:27px; color:white; }
+#quiz-start,#quiz-results button {
+  padding:13px 19px; border:0; border-radius:10px;
+  color:#071426; background:#a9d4ff; font-weight:bold; cursor:pointer;
+}
+#quiz-start { flex:1; }
+#quiz-start:hover,#quiz-results button:hover { background:#d5eaff; }
+.quiz-stats {
+  display:flex; justify-content:space-between; gap:12px;
+  color:#a9d4ff; margin-bottom:12px;
+}
+.quiz-progress-track {
+  height:8px; overflow:hidden; background:#182d4c;
+  border-radius:10px; margin-bottom:24px;
+}
+#quiz-progress-fill {
+  width:0%; height:100%;
+  background:linear-gradient(90deg,#5c8dff,#d16bff);
+  transition:width .25s;
+}
+#quiz-question { line-height:1.5; margin-bottom:20px; }
+#quiz-options { display:grid; gap:11px; }
+.quiz-option {
+  width:100%; padding:14px; text-align:left; color:white;
+  background:#102746; border:1px solid #42699c;
+  border-radius:11px; font-size:15px; cursor:pointer;
+}
+.quiz-option:hover:not(:disabled) { background:#1d3d66; border-color:#a9d4ff; }
+.quiz-option:disabled { cursor:default; opacity:1; }
+.quiz-option.correct { background:#164c3b; border-color:#55e6a5; }
+.quiz-option.wrong { background:#602b3a; border-color:#ff8298; }
+#quiz-feedback { min-height:24px; line-height:1.5; margin-top:18px; }
+#quiz-auto-note { color:#9eb5d4; font-size:13px; }
+#quiz-results { text-align:center; padding:15px 0; }
+#quiz-results h2 { color:#a9d4ff; }
+#quiz-results button { margin-top:15px; }
+
 @media(max-width:750px) {
   nav { grid-template-columns:repeat(2,minmax(0,1fr)); }
   .portals,.grid3,.grid2 { grid-template-columns:1fr; }
   .page { padding:20px 4% 50px; }
   .hero { min-height:50vh; }
   .arena { height:330px; }
+}
+@media(max-width:480px) {
+  .quiz-container { padding:17px; }
+  .quiz-topbar { padding:10px; gap:10px; }
+  #quiz-start { padding:12px 8px; font-size:13px; }
 }
 </style>
 </head>
@@ -276,6 +413,7 @@ footer { text-align:center; color:var(--muted); padding:30px 15px; border-top:1p
     <button onclick="openPage('storyCreator')">✍️ Story Creator</button>
     <button onclick="openPage('drawingStudio')">🎨 Drawing Studio</button>
     <button onclick="openPage('confessions')">💬 Confessions</button>
+    <button onclick="openPage('quiz')">🧠 Multiverse Quiz</button>
     <button onclick="openPage('settings')">⚙️ Settings</button>
   </nav>
 </header>
@@ -308,6 +446,7 @@ footer { text-align:center; color:var(--muted); padding:30px 15px; border-top:1p
     <button class="portal" onclick="openPage('storyCreator')"><strong>✍️ Story Creator</strong><small>Write your own Spider-Verse scene and save it in this browser.</small></button>
     <button class="portal" onclick="openPage('drawingStudio')"><strong>🎨 Drawing Studio</strong><small>Draw a mask, suit design, logo or anything else you imagine.</small></button>
     <button class="portal" onclick="openPage('confessions')"><strong>💬 Confessions</strong><small>Write thoughts for yourself. Entries are stored in this browser.</small></button>
+    <button class="portal" onclick="openPage('quiz')"><strong>🧠 Multiverse Quiz</strong><small>Test yourself on Spider-Verse, science, history, maths and more.</small></button>
     <button class="portal" onclick="openPage('settings')"><strong>⚙️ Settings</strong><small>Change the colours or choose your own background.</small></button>
   </div>
   <div class="panel">
@@ -331,7 +470,6 @@ footer { text-align:center; color:var(--muted); padding:30px 15px; border-top:1p
     <p>New York had always been loud. Sirens, trains, people arguing on street corners, music coming from open windows. But lately, there had been another sound beneath it all: a strange electronic pulse that only a few people seemed able to hear.</p>
     <p>You were not looking to become a hero. You were trying to understand why the city felt different, why the lights flickered whenever you walked past, and why a mysterious symbol kept appearing in places where nobody remembered painting it.</p>
   </div>
-
   <div class="chapter-nav" id="chapterButtons">
     <button onclick="goToChapter(0)">Chapter 1</button>
     <button onclick="goToChapter(1)">Chapter 2</button>
@@ -568,6 +706,68 @@ footer { text-align:center; color:var(--muted); padding:30px 15px; border-top:1p
 </div>
 </section>
 
+<!-- MULTIVERSE QUIZ -->
+<section id="quiz" class="page">
+<div class="page-inner">
+  <div class="page-head">
+    <span class="tag">TEST YOUR KNOWLEDGE</span>
+    <h2>🧠 The Multiverse Quiz</h2>
+    <p class="muted">Choose your topic. Set your challenge. Test your knowledge.</p>
+  </div>
+  <div class="quiz-container">
+    <div id="quiz-setup">
+      <label for="quiz-topic">Choose your quiz topic</label>
+      <select id="quiz-topic">
+        <option value="spider">🕷️ Spider-Verse</option>
+        <option value="world">🌍 Things Around Us</option>
+        <option value="science">🔬 Science</option>
+        <option value="history">📜 History</option>
+        <option value="geography">🗺️ Geography</option>
+        <option value="maths">➗ Mathematics</option>
+        <option value="general">🧠 General Knowledge</option>
+        <option value="mixed">🎲 Mixed Quiz</option>
+      </select>
+      <label for="quiz-length">How many questions?</label>
+      <select id="quiz-length">
+        <option value="5">5 questions · Quick</option>
+        <option value="10" selected>10 questions · Standard</option>
+        <option value="15">15 questions · Challenge</option>
+        <option value="20">20 questions · Expert</option>
+      </select>
+      <label for="quiz-seconds">Time allowed per question</label>
+      <select id="quiz-seconds">
+        <option value="10">10 seconds · Fast</option>
+        <option value="20" selected>20 seconds · Normal</option>
+        <option value="30">30 seconds · Relaxed</option>
+        <option value="0">No time limit</option>
+      </select>
+    </div>
+
+    <div class="quiz-topbar">
+      <div class="quiz-timer-box"><span>⏱️ TIME</span><strong id="quiz-timer">20</strong></div>
+      <button id="quiz-start" type="button" onclick="startMultiverseQuiz()">▶ START QUIZ</button>
+    </div>
+
+    <div id="quiz-game" hidden>
+      <div class="quiz-stats"><span id="quiz-progress">Question 1</span><span id="quiz-score">Score: 0</span></div>
+      <div class="quiz-progress-track"><div id="quiz-progress-fill"></div></div>
+      <h2 id="quiz-question"></h2>
+      <div id="quiz-options"></div>
+      <p id="quiz-feedback" aria-live="polite"></p>
+      <p id="quiz-auto-note">Choose an answer to continue automatically.</p>
+    </div>
+
+    <div id="quiz-results" hidden>
+      <h2>🏆 QUIZ COMPLETE!</h2>
+      <p id="quiz-final-score"></p>
+      <p id="quiz-percentage"></p>
+      <h3 id="quiz-rank"></h3>
+      <button type="button" onclick="resetMultiverseQuiz()">🔄 PLAY AGAIN</button>
+    </div>
+  </div>
+</div>
+</section>
+
 <!-- SETTINGS -->
 <section id="settings" class="page">
 <div class="page-inner">
@@ -583,7 +783,7 @@ footer { text-align:center; color:var(--muted); padding:30px 15px; border-top:1p
   <p class="muted">Your universe. Your story. Your next adventure.</p>
   <button onclick="openPage('home')">🏠 Back to Home</button>
 </footer>
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 /* GENERAL HELPERS */
@@ -594,46 +794,41 @@ function toast(message) {
   box.textContent = message;
   box.style.display = "block";
   clearTimeout(window.toastTimer);
-  window.toastTimer = setTimeout(() => box.style.display = "none", 2600);
+  window.toastTimer = setTimeout(() => box.style.display = "none",2600);
 }
 
-function saveValue(key, value) {
+function saveValue(key,value) {
   try {
-    localStorage.setItem("spiderverse_" + key, value);
+    localStorage.setItem("spiderverse_" + key,value);
     return true;
-  } catch (error) {
+  } catch(error) {
     toast("Couldn't save. Your browser storage may be full.");
     return false;
   }
 }
-
 function getValue(key) {
   try { return localStorage.getItem("spiderverse_" + key); }
-  catch (error) { return null; }
+  catch(error) { return null; }
 }
 
-/* NAVIGATION: EACH BUTTON OPENS ITS OWN PAGE */
+/* NAVIGATION */
 function openPage(id) {
   const target = $(id);
   if (!target || !target.classList.contains("page")) {
     toast("That page could not be found.");
     return;
   }
-
   document.querySelectorAll(".page").forEach(page => {
     page.classList.remove("active");
-    page.setAttribute("aria-hidden", "true");
+    page.setAttribute("aria-hidden","true");
   });
-
   target.classList.add("active");
-  target.setAttribute("aria-hidden", "false");
-
+  target.setAttribute("aria-hidden","false");
   if (id !== "game") stopBattle();
-  window.scrollTo({ top:0, behavior:"smooth" });
+  window.scrollTo({top:0,behavior:"smooth"});
 }
-
 document.querySelectorAll(".page").forEach(page => {
-  page.setAttribute("aria-hidden", page.id === "home" ? "false" : "true");
+  page.setAttribute("aria-hidden",page.id === "home" ? "false" : "true");
 });
 
 /* STORY CHAPTER NAVIGATION */
@@ -641,22 +836,18 @@ let currentChapter = 0;
 const totalChapters = 6;
 
 function goToChapter(number) {
-  currentChapter = Math.max(0, Math.min(totalChapters - 1, number));
-
-  for (let i = 0; i < totalChapters; i++) {
+  currentChapter = Math.max(0,Math.min(totalChapters - 1,number));
+  for (let i=0;i<totalChapters;i++) {
     const chapter = $("chapter-" + i);
-    if (chapter) chapter.classList.toggle("chapter-hidden", i !== currentChapter);
+    if (chapter) chapter.classList.toggle("chapter-hidden",i !== currentChapter);
   }
-
-  document.querySelectorAll("#chapterButtons button").forEach((button, i) => {
-    button.classList.toggle("current", i === currentChapter);
+  document.querySelectorAll("#chapterButtons button").forEach((button,i) => {
+    button.classList.toggle("current",i === currentChapter);
   });
-
   $("chapterProgress").textContent = "Chapter " + (currentChapter + 1) + " of " + totalChapters;
   $("previousChapter").disabled = currentChapter === 0;
   $("nextChapter").textContent = currentChapter === totalChapters - 1 ? "🏁 Story complete" : "Next Chapter ➡️";
 }
-
 function changeChapter(direction) {
   if (currentChapter + direction >= totalChapters) {
     toast("🏁 You reached the end. Write your own next chapter!");
@@ -677,10 +868,9 @@ function setMusicMood(mood) {
   };
   $("musicMoodText").textContent = moods[mood] || "Choose a mood.";
 }
-
 function savePlaylist() {
-  const data = { name:$("playlistName").value, songs:$("playlistSongs").value };
-  if (saveValue("playlist", JSON.stringify(data))) {
+  const data = {name:$("playlistName").value,songs:$("playlistSongs").value};
+  if (saveValue("playlist",JSON.stringify(data))) {
     $("playlistStatus").textContent = "Playlist saved in this browser.";
     toast("🎧 Playlist saved!");
   }
@@ -693,7 +883,7 @@ function loadPlaylist() {
     $("playlistName").value = data.name || "";
     $("playlistSongs").value = data.songs || "";
     $("playlistStatus").textContent = "Loaded your saved playlist.";
-  } catch (error) { toast("The saved playlist could not be opened."); }
+  } catch(error) { toast("The saved playlist could not be opened."); }
 }
 function clearPlaylist() {
   $("playlistName").value = "";
@@ -714,7 +904,6 @@ function updateBattleBars() {
   $("heroHealthText").textContent = Math.max(0,heroHealth) + " / 100";
   $("bossHealthText").textContent = Math.max(0,bossHealth) + " / 100";
 }
-
 function startBattle() {
   stopBattle();
   heroHealth = 100;
@@ -727,13 +916,11 @@ function startBattle() {
   $("bossWarning").style.display = "none";
   $("battleStatus").textContent = "⚔️ The battle has begun! Dodge warnings and shoot webs.";
   updateBattleBars();
-
   const difficulty = $("difficulty").value;
   const interval = difficulty === "easy" ? 2600 : difficulty === "hard" ? 1400 : 2000;
-  attackTimer = setInterval(bossAttack, interval);
-  attackTimeout = setTimeout(bossAttack, 800);
+  attackTimer = setInterval(bossAttack,interval);
+  attackTimeout = setTimeout(bossAttack,800);
 }
-
 function stopBattle() {
   battleRunning = false;
   dodging = false;
@@ -744,30 +931,27 @@ function stopBattle() {
   attackTimeout = null;
   if ($("bossWarning")) $("bossWarning").style.display = "none";
 }
-
 function bossAttack() {
   if (!battleRunning) return;
   dodging = false;
   $("bossWarning").style.display = "block";
   $("battleStatus").textContent = "⚠️ Incoming attack! Dodge now!";
-
   clearTimeout(window.nextAttackTimeout);
   window.nextAttackTimeout = setTimeout(() => {
     $("bossWarning").style.display = "none";
     if (!battleRunning) return;
-
     if (!dodging) {
-      const damage = $("difficulty").value === "hard" ? 25 : $("difficulty").value === "easy" ? 10 : 17;
-      heroHealth = Math.max(0, heroHealth - damage);
+      const difficulty = $("difficulty").value;
+      const damage = difficulty === "hard" ? 25 : difficulty === "easy" ? 10 : 17;
+      heroHealth = Math.max(0,heroHealth - damage);
       $("battleStatus").textContent = "💥 You were hit! Keep moving.";
       updateBattleBars();
       if (heroHealth <= 0) finishBattle(false);
     } else {
       $("battleStatus").textContent = "🕸️ Nice dodge! Now strike back.";
     }
-  }, 1050);
+  },1050);
 }
-
 function dodge(direction) {
   if (!battleRunning) return toast("Start the battle first.");
   dodging = true;
@@ -775,21 +959,20 @@ function dodge(direction) {
   $("battleStatus").textContent = direction === "left" ? "⬅️ You dodged left!" : "➡️ You dodged right!";
   setTimeout(() => {
     if (battleRunning) $("heroCharacter").style.left = "50%";
-  }, 650);
+  },650);
 }
-
 function shootWeb() {
   if (!battleRunning) return toast("Start the battle first.");
-  const damage = $("difficulty").value === "hard" ? 8 : $("difficulty").value === "easy" ? 18 : 13;
-  bossHealth = Math.max(0, bossHealth - damage);
+  const difficulty = $("difficulty").value;
+  const damage = difficulty === "hard" ? 8 : difficulty === "easy" ? 18 : 13;
+  bossHealth = Math.max(0,bossHealth - damage);
   updateBattleBars();
   $("battleStatus").textContent = "🕸️ Web shot landed! The Glitch took " + damage + " damage.";
   const boss = $("bossCharacter");
   boss.style.transform = "translate(-50%,-50%) scale(1.2)";
-  setTimeout(() => boss.style.transform = "translate(-50%,-50%)", 180);
+  setTimeout(() => boss.style.transform = "translate(-50%,-50%)",180);
   if (bossHealth <= 0) finishBattle(true);
 }
-
 function finishBattle(won) {
   stopBattle();
   $("battleOverlay").classList.add("show");
@@ -797,6 +980,7 @@ function finishBattle(won) {
   $("battleResultText").textContent = won ? "You defeated The Glitch. The city is safe for now!" : "The Glitch won this round. Try again and watch the warnings.";
   $("battleStatus").textContent = won ? "🏆 You won the battle!" : "Try again when you're ready.";
 }
+updateBattleBars();
 
 /* HERO LAB */
 function updateHero() {
@@ -805,7 +989,6 @@ function updateHero() {
   const symbol = $("heroSymbol").value;
   const power = $("heroPower").value;
   const bio = $("heroBio").value.trim() || "A new hero with a story still being written.";
-
   $("heroPreview").style.setProperty("--suit",colour);
   $("heroPreview").querySelector(".fig-head").style.background = colour;
   $("heroPreview").querySelector(".fig-body").style.background = colour;
@@ -816,18 +999,16 @@ function updateHero() {
   $("heroPreviewBio").textContent = bio;
   $("heroStatus").textContent = "Your hero design has been updated.";
 }
-
 function saveHero() {
   const hero = {
-    name:$("heroName").value, colour:$("suitColor").value,
-    symbol:$("heroSymbol").value, power:$("heroPower").value, bio:$("heroBio").value
+    name:$("heroName").value,colour:$("suitColor").value,
+    symbol:$("heroSymbol").value,power:$("heroPower").value,bio:$("heroBio").value
   };
   if (saveValue("hero",JSON.stringify(hero))) {
     toast("🕷️ Hero saved!");
     $("heroStatus").textContent = "Hero saved in this browser.";
   }
 }
-
 function loadHero() {
   const raw = getValue("hero");
   if (!raw) return toast("No saved hero found yet.");
@@ -840,7 +1021,7 @@ function loadHero() {
     $("heroBio").value = hero.bio || "";
     updateHero();
     toast("Hero loaded!");
-  } catch (error) { toast("The saved hero could not be loaded."); }
+  } catch(error) { toast("The saved hero could not be loaded."); }
 }
 updateHero();
 
@@ -852,14 +1033,12 @@ function updateMissionProgress() {
   $("missionProgressText").textContent = complete + " of " + checks.length + " missions complete";
   saveValue("missions",JSON.stringify(checks.map(check => check.checked)));
 }
-
 function resetMissions() {
   document.querySelectorAll(".mission-check").forEach(check => check.checked = false);
   updateMissionProgress();
   toast("Mission progress reset.");
 }
 document.querySelectorAll(".mission-check").forEach(check => check.addEventListener("change",updateMissionProgress));
-
 (function loadMissions() {
   const raw = getValue("missions");
   if (!raw) return;
@@ -867,11 +1046,10 @@ document.querySelectorAll(".mission-check").forEach(check => check.addEventListe
     const values = JSON.parse(raw);
     document.querySelectorAll(".mission-check").forEach((check,index) => check.checked = Boolean(values[index]));
     updateMissionProgress();
-  } catch (error) {}
+  } catch(error) {}
 })();
-
 function saveMystery() {
-  const data = { title:$("mysteryTitle").value, clue:$("mysteryClue").value };
+  const data = {title:$("mysteryTitle").value,clue:$("mysteryClue").value};
   if (saveValue("mystery",JSON.stringify(data))) {
     $("mysteryStatus").textContent = "Your mystery has been saved.";
     toast("🔎 Mystery saved!");
@@ -881,15 +1059,14 @@ function saveMystery() {
 /* STORY CREATOR */
 function saveStory() {
   const data = {
-    title:$("storyTitle").value, character:$("storyCharacter").value,
-    setting:$("storySetting").value, text:$("storyText").value
+    title:$("storyTitle").value,character:$("storyCharacter").value,
+    setting:$("storySetting").value,text:$("storyText").value
   };
   if (saveValue("createdStory",JSON.stringify(data))) {
     $("storyStatus").textContent = "Your story has been saved in this browser.";
     toast("✍️ Story saved!");
   }
 }
-
 function loadStory() {
   const raw = getValue("createdStory");
   if (!raw) return toast("No saved story found yet.");
@@ -900,21 +1077,18 @@ function loadStory() {
     $("storySetting").value = data.setting || "";
     $("storyText").value = data.text || "";
     $("storyStatus").textContent = "Your saved story has been loaded.";
-  } catch (error) { toast("The saved story could not be opened."); }
+  } catch(error) { toast("The saved story could not be opened."); }
 }
-
 function clearStory() {
   $("storyTitle").value = "";
   $("storyCharacter").value = "";
   $("storySetting").value = "";
   $("storyText").value = "";
 }
-
 function usePrompt(prompt) {
   $("storyText").value = prompt + "\n\n";
   $("storyText").focus();
 }
-
 function downloadText(filename,content) {
   const blob = new Blob([content],{type:"text/plain;charset=utf-8"});
   const url = URL.createObjectURL(blob);
@@ -926,7 +1100,6 @@ function downloadText(filename,content) {
   link.remove();
   setTimeout(() => URL.revokeObjectURL(url),1000);
 }
-
 function downloadStory() {
   const content = $("storyTitle").value + "\n\nMain character: " + $("storyCharacter").value +
     "\nSetting: " + $("storySetting").value + "\n\n" + $("storyText").value;
@@ -955,14 +1128,12 @@ function canvasPoint(event) {
     y:(event.clientY - rect.top) * canvas.height / rect.height
   };
 }
-
 canvas.addEventListener("pointerdown",event => {
   event.preventDefault();
   drawing = true;
   lastPoint = canvasPoint(event);
   canvas.setPointerCapture(event.pointerId);
 });
-
 canvas.addEventListener("pointermove",event => {
   if (!drawing) return;
   event.preventDefault();
@@ -977,7 +1148,6 @@ canvas.addEventListener("pointermove",event => {
   ctx.stroke();
   lastPoint = point;
 });
-
 function endDrawing() {
   if (!drawing) return;
   drawing = false;
@@ -985,16 +1155,14 @@ function endDrawing() {
   try {
     undoStack.push(canvas.toDataURL());
     if (undoStack.length > 25) undoStack.shift();
-  } catch (error) {}
+  } catch(error) {}
 }
 canvas.addEventListener("pointerup",endDrawing);
 canvas.addEventListener("pointercancel",endDrawing);
-
 function setDrawTool(tool) {
   drawTool = tool;
   $("drawingStatus").textContent = tool === "eraser" ? "Eraser selected." : "Pen selected.";
 }
-
 function undoDrawing() {
   if (undoStack.length <= 1) return toast("Nothing to undo yet.");
   undoStack.pop();
@@ -1005,30 +1173,26 @@ function undoDrawing() {
   };
   img.src = undoStack[undoStack.length - 1];
 }
-
 function clearDrawing() {
   if (!confirm("Clear your whole drawing?")) return;
   paintWhite();
   undoStack.push(canvas.toDataURL());
   $("drawingStatus").textContent = "Canvas cleared.";
 }
-
 function saveDrawing() {
   try {
     if (saveValue("drawing",canvas.toDataURL())) {
       $("drawingStatus").textContent = "Drawing saved in this browser.";
       toast("🎨 Drawing saved!");
     }
-  } catch (error) { toast("The drawing could not be saved."); }
+  } catch(error) { toast("The drawing could not be saved."); }
 }
-
 function downloadDrawing() {
   const link = document.createElement("a");
   link.download = "my-spider-verse-drawing.png";
   link.href = canvas.toDataURL("image/png");
   link.click();
 }
-
 (function loadDrawing() {
   const saved = getValue("drawing");
   if (!saved) return;
@@ -1042,13 +1206,12 @@ function downloadDrawing() {
 
 /* CONFESSIONS */
 function saveConfession() {
-  const data = { title:$("confessionTitle").value, text:$("confessionText").value };
+  const data = {title:$("confessionTitle").value,text:$("confessionText").value};
   if (saveValue("confession",JSON.stringify(data))) {
     $("confessionStatus").textContent = "Entry saved in this browser. It is not encrypted or password-protected.";
     toast("💬 Entry saved.");
   }
 }
-
 function loadConfession() {
   const raw = getValue("confession");
   if (!raw) return toast("No saved entry found yet.");
@@ -1057,9 +1220,8 @@ function loadConfession() {
     $("confessionTitle").value = data.title || "";
     $("confessionText").value = data.text || "";
     $("confessionStatus").textContent = "Saved entry loaded.";
-  } catch (error) { toast("The entry could not be loaded."); }
+  } catch(error) { toast("The entry could not be loaded."); }
 }
-
 function clearConfession() {
   $("confessionTitle").value = "";
   $("confessionText").value = "";
@@ -1072,14 +1234,12 @@ function applyAccent() {
   saveValue("accent",colour);
   toast("🎨 Accent colour updated.");
 }
-
 function resetAccent() {
   $("accentColor").value = "#ff2c8a";
   document.documentElement.style.setProperty("--pink","#ff2c8a");
   saveValue("accent","#ff2c8a");
   toast("Default accent restored.");
 }
-
 (function loadAccent() {
   const colour = getValue("accent");
   if (colour && /^#[0-9a-f]{6}$/i.test(colour)) {
@@ -1092,7 +1252,6 @@ function applyBackground() {
   const file = $("backgroundFile").files[0];
   if (!file) return toast("Choose an image first.");
   if (!file.type.startsWith("image/")) return toast("Please choose an image file.");
-
   const reader = new FileReader();
   reader.onload = () => {
     const dataUrl = reader.result;
@@ -1101,7 +1260,6 @@ function applyBackground() {
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundPosition = "center";
     document.body.style.backgroundAttachment = "fixed";
-
     if (saveValue("background",dataUrl)) {
       $("backgroundStatus").textContent = "Custom background applied and saved in this browser.";
     } else {
@@ -1110,16 +1268,14 @@ function applyBackground() {
   };
   reader.readAsDataURL(file);
 }
-
 function resetBackground() {
   document.body.style.backgroundImage = "";
   document.body.style.backgroundSize = "";
   document.body.style.backgroundPosition = "";
   document.body.style.backgroundAttachment = "";
-  try { localStorage.removeItem("spiderverse_background"); } catch (error) {}
+  try { localStorage.removeItem("spiderverse_background"); } catch(error) {}
   $("backgroundStatus").textContent = "Default background restored.";
 }
-
 (function loadBackground() {
   const saved = getValue("background");
   if (saved && saved.startsWith("data:image/")) {
@@ -1139,14 +1295,13 @@ function exportData() {
       const key = localStorage.key(i);
       if (key && key.startsWith("spiderverse_")) data[key] = localStorage.getItem(key);
     }
-  } catch (error) {
+  } catch(error) {
     toast("Could not read saved data.");
     return;
   }
   downloadText("my-spider-verse-data.json",JSON.stringify(data,null,2));
   $("settingsStatus").textContent = "Export started. Keep the downloaded file somewhere safe.";
 }
-
 function clearAllData() {
   if (!confirm("This will delete saved Spider-Verse creations, settings and progress from this browser. Continue?")) return;
   try {
@@ -1158,1401 +1313,254 @@ function clearAllData() {
     keys.forEach(key => localStorage.removeItem(key));
     $("settingsStatus").textContent = "Saved Spider-Verse data has been cleared.";
     toast("Saved website data cleared.");
-  } catch (error) { toast("Could not clear all saved data."); }
-}
-</script>
-</body>
-</html>
-
-
-<!-- ================= SPIDER-VERSE QUIZ ================= -->
-
-<section id="quiz" class="page">
-
-  <div class="quiz-container">
-
-    <h1>🕷️ THE MULTIVERSE QUIZ</h1>
-
-    <p class="quiz-subtitle">
-
-      Choose your topic. Set your challenge. Test your knowledge.
-
-    </p>
-
-    <!-- QUIZ SETUP -->
-
-    <div id="quiz-setup">
-
-      <label for="quiz-topic">Choose your quiz topic</label>
-
-      <select id="quiz-topic">
-
-        <option value="spider">🕷️ Spider-Verse</option>
-
-        <option value="world">🌍 Things Around Us</option>
-
-        <option value="science">🔬 Science</option>
-
-        <option value="history">📜 History</option>
-
-        <option value="geography">🗺️ Geography</option>
-
-        <option value="maths">➗ Mathematics</option>
-
-        <option value="general">🧠 General Knowledge</option>
-
-        <option value="mixed">🎲 Mixed Quiz</option>
-
-      </select>
-
-      <label for="quiz-length">How many questions?</label>
-
-      <select id="quiz-length">
-
-        <option value="5">5 questions · Quick</option>
-
-        <option value="10" selected>10 questions · Standard</option>
-
-        <option value="15">15 questions · Challenge</option>
-
-        <option value="20">20 questions · Expert</option>
-
-      </select>
-
-      <label for="quiz-seconds">Time allowed per question</label>
-
-      <select id="quiz-seconds">
-
-        <option value="10">10 seconds · Fast</option>
-
-        <option value="20" selected>20 seconds · Normal</option>
-
-        <option value="30">30 seconds · Relaxed</option>
-
-        <option value="0">No time limit</option>
-
-      </select>
-
-    </div>
-
-    <!-- TIMER AND START BUTTON AT THE TOP -->
-
-    <div class="quiz-topbar">
-
-      <div class="quiz-timer-box">
-
-        <span>⏱️ TIME</span>
-
-        <strong id="quiz-timer">20</strong>
-
-      </div>
-
-      <button id="quiz-start" type="button" onclick="startMultiverseQuiz()">
-
-        ▶ START QUIZ
-
-      </button>
-
-    </div>
-
-    <div id="quiz-game" hidden>
-
-      <div class="quiz-stats">
-
-        <span id="quiz-progress">Question 1</span>
-
-        <span id="quiz-score">Score: 0</span>
-
-      </div>
-
-      <div class="quiz-progress-track">
-
-        <div id="quiz-progress-fill"></div>
-
-      </div>
-
-      <h2 id="quiz-question"></h2>
-
-      <div id="quiz-options"></div>
-
-      <p id="quiz-feedback" aria-live="polite"></p>
-
-      <p id="quiz-auto-note">Choose an answer to continue automatically.</p>
-
-    </div>
-
-    <!-- FINAL RESULTS -->
-
-    <div id="quiz-results" hidden>
-
-      <h2>🏆 QUIZ COMPLETE!</h2>
-
-      <p id="quiz-final-score"></p>
-
-      <p id="quiz-percentage"></p>
-
-      <h3 id="quiz-rank"></h3>
-
-      <button type="button" onclick="resetMultiverseQuiz()">
-
-        🔄 PLAY AGAIN
-
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-<style>
-
-.quiz-container {
-
-  max-width: 760px;
-
-  margin: 28px auto;
-
-  padding: 25px;
-
-  color: #fff;
-
-  background: rgba(7, 20, 38, .96);
-
-  border: 2px solid #5c8dff;
-
-  border-radius: 20px;
-
-  box-shadow: 0 0 25px rgba(92,141,255,.2);
-
+  } catch(error) { toast("Could not clear all saved data."); }
 }
 
-.quiz-container h1 {
-
-  color: #a9d4ff;
-
-  text-align: center;
-
-  font-size: clamp(23px, 5vw, 36px);
-
-}
-
-.quiz-subtitle {
-
-  text-align: center;
-
-  color: #bdcce2;
-
-  line-height: 1.6;
-
-  margin-bottom: 25px;
-
-}
-
-#quiz-setup {
-
-  display: grid;
-
-  gap: 10px;
-
-}
-
-#quiz-setup label {
-
-  margin-top: 10px;
-
-  font-weight: bold;
-
-  color: #a9d4ff;
-
-}
-
-#quiz-setup select {
-
-  width: 100%;
-
-  padding: 13px;
-
-  border: 1px solid #42699c;
-
-  border-radius: 10px;
-
-  color: white;
-
-  background: #102746;
-
-  font-size: 15px;
-
-}
-
-.quiz-topbar {
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  gap: 14px;
-
-  margin: 24px 0;
-
-  padding: 14px;
-
-  border: 1px solid #29476e;
-
-  border-radius: 14px;
-
-  background: #091a30;
-
-}
-
-.quiz-timer-box {
-
-  display: flex;
-
-  flex-direction: column;
-
-  gap: 4px;
-
-  min-width: 75px;
-
-  color: #a9d4ff;
-
-}
-
-.quiz-timer-box strong {
-
-  font-size: 27px;
-
-  color: white;
-
-}
-
-#quiz-start,
-
-#quiz-results button {
-
-  padding: 13px 19px;
-
-  border: 0;
-
-  border-radius: 10px;
-
-  color: #071426;
-
-  background: #a9d4ff;
-
-  font-weight: bold;
-
-  cursor: pointer;
-
-}
-
-#quiz-start {
-
-  flex: 1;
-
-}
-
-#quiz-start:hover,
-
-#quiz-results button:hover {
-
-  background: #d5eaff;
-
-}
-
-.quiz-stats {
-
-  display: flex;
-
-  justify-content: space-between;
-
-  gap: 12px;
-
-  color: #a9d4ff;
-
-  margin-bottom: 12px;
-
-}
-
-.quiz-progress-track {
-
-  height: 8px;
-
-  overflow: hidden;
-
-  background: #182d4c;
-
-  border-radius: 10px;
-
-  margin-bottom: 24px;
-
-}
-
-#quiz-progress-fill {
-
-  width: 0%;
-
-  height: 100%;
-
-  background: linear-gradient(90deg,#5c8dff,#d16bff);
-
-  transition: width .25s;
-
-}
-
-#quiz-question {
-
-  line-height: 1.5;
-
-  margin-bottom: 20px;
-
-}
-
-#quiz-options {
-
-  display: grid;
-
-  gap: 11px;
-
-}
-
-.quiz-option {
-
-  width: 100%;
-
-  padding: 14px;
-
-  text-align: left;
-
-  color: white;
-
-  background: #102746;
-
-  border: 1px solid #42699c;
-
-  border-radius: 11px;
-
-  font-size: 15px;
-
-  cursor: pointer;
-
-}
-
-.quiz-option:hover:not(:disabled) {
-
-  background: #1d3d66;
-
-  border-color: #a9d4ff;
-
-}
-
-.quiz-option:disabled {
-
-  cursor: default;
-
-  opacity: 1;
-
-}
-
-.quiz-option.correct {
-
-  background: #164c3b;
-
-  border-color: #55e6a5;
-
-}
-
-.quiz-option.wrong {
-
-  background: #602b3a;
-
-  border-color: #ff8298;
-
-}
-
-#quiz-feedback {
-
-  min-height: 24px;
-
-  line-height: 1.5;
-
-  margin-top: 18px;
-
-}
-
-#quiz-auto-note {
-
-  color: #9eb5d4;
-
-  font-size: 13px;
-
-}
-
-#quiz-results {
-
-  text-align: center;
-
-  padding: 15px 0;
-
-}
-
-#quiz-results h2 {
-
-  color: #a9d4ff;
-
-}
-
-#quiz-results button {
-
-  margin-top: 15px;
-
-}
-
-@media(max-width: 480px) {
-
-  .quiz-container {
-
-    padding: 17px;
-
-  }
-
-  .quiz-topbar {
-
-    padding: 10px;
-
-    gap: 10px;
-
-  }
-
-  #quiz-start {
-
-    padding: 12px 8px;
-
-    font-size: 13px;
-
-  }
-
-}
-
-</style>
-
-<script>
-
+/* MULTIVERSE QUIZ QUESTION BANK */
 const multiverseQuestionBank = {
-
-  spider: [
-
-    {
-
-      q: "What is the real name of the original Spider-Man?",
-
-      a: ["Peter Parker", "Harry Osborn", "Eddie Brock", "Matt Murdock"],
-
-      c: 0,
-
-      e: "Peter Parker is the original Spider-Man."
-
-    },
-
-    {
-
-      q: "What is Miles Morales known for becoming?",
-
-      a: ["Iron Man", "Spider-Man", "Daredevil", "Doctor Strange"],
-
-      c: 1,
-
-      e: "Miles Morales becomes Spider-Man in his universe."
-
-    },
-
-    {
-
-      q: "What warns Spider-Man about nearby danger?",
-
-      a: ["Spider-Sense", "Super hearing", "Time travel", "Invisibility"],
-
-      c: 0,
-
-      e: "Spider-Sense alerts Spider-Man to danger."
-
-    },
-
-    {
-
-      q: "Who is known as Ghost-Spider?",
-
-      a: ["Gwen Stacy", "Felicia Hardy", "May Parker", "Jessica Jones"],
-
-      c: 0,
-
-      e: "Gwen Stacy is known as Ghost-Spider."
-
-    },
-
-    {
-
-      q: "What does Spider-Man commonly use to swing between buildings?",
-
-      a: ["Metal chains", "Webs", "Magnetic cables", "Parachutes"],
-
-      c: 1,
-
-      e: "Spider-Man swings using webs."
-
-    },
-
-    {
-
-      q: "What is the name of Miles Morales' uncle?",
-
-      a: ["Aaron Davis", "Ben Parker", "Tony Stark", "George Stacy"],
-
-      c: 0,
-
-      e: "Aaron Davis is Miles Morales' uncle."
-
-    },
-
-    {
-
-      q: "What is the name of Peter Parker's newspaper?",
-
-      a: ["Daily Bugle", "Daily Planet", "New York Times", "The Chronicle"],
-
-      c: 0,
-
-      e: "The Daily Bugle frequently employs Peter as a photographer."
-
-    },
-
-    {
-
-      q: "Which city is strongly associated with Spider-Man?",
-
-      a: ["New York City", "London", "Wakanda", "Gotham City"],
-
-      c: 0,
-
-      e: "New York City is Spider-Man's best-known home."
-
-    }
-
+  spider:[
+    {q:"What is the real name of the original Spider-Man?",a:["Peter Parker","Harry Osborn","Eddie Brock","Matt Murdock"],c:0,e:"Peter Parker is the original Spider-Man."},
+    {q:"What is Miles Morales known for becoming?",a:["Iron Man","Spider-Man","Daredevil","Doctor Strange"],c:1,e:"Miles Morales becomes Spider-Man in his universe."},
+    {q:"What warns Spider-Man about nearby danger?",a:["Spider-Sense","Super hearing","Time travel","Invisibility"],c:0,e:"Spider-Sense alerts Spider-Man to danger."},
+    {q:"Who is known as Ghost-Spider?",a:["Gwen Stacy","Felicia Hardy","May Parker","Jessica Jones"],c:0,e:"Gwen Stacy is known as Ghost-Spider."},
+    {q:"What does Spider-Man commonly use to swing between buildings?",a:["Metal chains","Webs","Magnetic cables","Parachutes"],c:1,e:"Spider-Man swings using webs."},
+    {q:"What is the name of Miles Morales' uncle?",a:["Aaron Davis","Ben Parker","Tony Stark","George Stacy"],c:0,e:"Aaron Davis is Miles Morales' uncle."},
+    {q:"What is the name of Peter Parker's newspaper?",a:["Daily Bugle","Daily Planet","New York Times","The Chronicle"],c:0,e:"The Daily Bugle frequently employs Peter as a photographer."},
+    {q:"Which city is strongly associated with Spider-Man?",a:["New York City","London","Wakanda","Gotham City"],c:0,e:"New York City is Spider-Man's best-known home."}
   ],
-
-  world: [
-
-    {
-
-      q: "Which household appliance is mainly used to keep food cold?",
-
-      a: ["Oven", "Refrigerator", "Kettle", "Toaster"],
-
-      c: 1,
-
-      e: "A refrigerator keeps food cool to slow spoilage."
-
-    },
-
-    {
-
-      q: "Which material is commonly used to make window panes?",
-
-      a: ["Glass", "Cotton", "Cardboard", "Wool"],
-
-      c: 0,
-
-      e: "Glass allows light to pass through a window."
-
-    },
-
-    {
-
-      q: "What should you do before crossing a road?",
-
-      a: ["Look both ways", "Close your eyes", "Run without checking", "Follow any stranger"],
-
-      c: 0,
-
-      e: "Check for traffic in both directions before crossing safely."
-
-    },
-
-    {
-
-      q: "Which item is best for measuring body temperature?",
-
-      a: ["Ruler", "Thermometer", "Compass", "Measuring cup"],
-
-      c: 1,
-
-      e: "A thermometer measures temperature."
-
-    },
-
-    {
-
-      q: "Which of these is a renewable energy source?",
-
-      a: ["Coal", "Sunlight", "Petrol", "Natural gas"],
-
-      c: 1,
-
-      e: "Sunlight is naturally replenished."
-
-    },
-
-    {
-
-      q: "Which bin is generally used for paper recycling where recycling is available?",
-
-      a: ["Paper recycling bin", "Food waste bin", "Toilet", "Sink"],
-
-      c: 0,
-
-      e: "Clean paper can often be recycled in a designated paper bin."
-
-    },
-
-    {
-
-      q: "Which tool is used to tighten a screw?",
-
-      a: ["Screwdriver", "Paintbrush", "Spoon", "Comb"],
-
-      c: 0,
-
-      e: "A screwdriver turns screws."
-
-    },
-
-    {
-
-      q: "What is the safest way to handle an unknown electrical fault?",
-
-      a: ["Touch exposed wires", "Pour water on it", "Keep away and tell an adult", "Pull wires out"],
-
-      c: 2,
-
-      e: "Keep clear and get help from a qualified person."
-
-    }
-
+  world:[
+    {q:"Which household appliance is mainly used to keep food cold?",a:["Oven","Refrigerator","Kettle","Toaster"],c:1,e:"A refrigerator keeps food cool to slow spoilage."},
+    {q:"Which material is commonly used to make window panes?",a:["Glass","Cotton","Cardboard","Wool"],c:0,e:"Glass allows light to pass through a window."},
+    {q:"What should you do before crossing a road?",a:["Look both ways","Close your eyes","Run without checking","Follow any stranger"],c:0,e:"Check for traffic in both directions before crossing safely."},
+    {q:"Which item is best for measuring body temperature?",a:["Ruler","Thermometer","Compass","Measuring cup"],c:1,e:"A thermometer measures temperature."},
+    {q:"Which of these is a renewable energy source?",a:["Coal","Sunlight","Petrol","Natural gas"],c:1,e:"Sunlight is naturally replenished."},
+    {q:"Which bin is generally used for paper recycling where recycling is available?",a:["Paper recycling bin","Food waste bin","Toilet","Sink"],c:0,e:"Clean paper can often be recycled in a designated paper bin."},
+    {q:"Which tool is used to tighten a screw?",a:["Screwdriver","Paintbrush","Spoon","Comb"],c:0,e:"A screwdriver turns screws."},
+    {q:"What is the safest way to handle an unknown electrical fault?",a:["Touch exposed wires","Pour water on it","Keep away and tell an adult","Pull wires out"],c:2,e:"Keep clear and get help from a qualified person."}
   ],
-
-  science: [
-
-    {
-
-      q: "Which planet is known as the Red Planet?",
-
-      a: ["Venus", "Mars", "Jupiter", "Mercury"],
-
-      c: 1,
-
-      e: "Iron-rich dust gives Mars its reddish appearance."
-
-    },
-
-    {
-
-      q: "Which gas do plants absorb during photosynthesis?",
-
-      a: ["Oxygen", "Carbon dioxide", "Helium", "Hydrogen"],
-
-      c: 1,
-
-      e: "Plants use carbon dioxide during photosynthesis."
-
-    },
-
-    {
-
-      q: "What is the boiling point of pure water at sea level?",
-
-      a: ["0°C", "50°C", "100°C", "200°C"],
-
-      c: 2,
-
-      e: "Pure water boils at about 100°C at standard atmospheric pressure."
-
-    },
-
-    {
-
-      q: "Which organ pumps blood around the human body?",
-
-      a: ["Lungs", "Heart", "Stomach", "Kidneys"],
-
-      c: 1,
-
-      e: "The heart pumps blood through the circulatory system."
-
-    },
-
-    {
-
-      q: "What force pulls objects towards Earth?",
-
-      a: ["Gravity", "Friction", "Magnetism", "Sound"],
-
-      c: 0,
-
-      e: "Gravity attracts objects with mass toward Earth."
-
-    },
-
-    {
-
-      q: "What is the basic unit of life?",
-
-      a: ["Atom", "Cell", "Organ", "Tissue"],
-
-      c: 1,
-
-      e: "Cells are the basic structural and functional units of living things."
-
-    },
-
-    {
-
-      q: "Which state of matter has a fixed volume but no fixed shape?",
-
-      a: ["Solid", "Liquid", "Gas", "Plasma only"],
-
-      c: 1,
-
-      e: "A liquid has a fixed volume and takes the shape of its container."
-
-    },
-
-    {
-
-      q: "Which part of a plant usually absorbs water from the soil?",
-
-      a: ["Flower", "Leaf", "Root", "Fruit"],
-
-      c: 2,
-
-      e: "Roots absorb water and minerals from the soil."
-
-    }
-
+  science:[
+    {q:"Which planet is known as the Red Planet?",a:["Venus","Mars","Jupiter","Mercury"],c:1,e:"Iron-rich dust gives Mars its reddish appearance."},
+    {q:"Which gas do plants absorb during photosynthesis?",a:["Oxygen","Carbon dioxide","Helium","Hydrogen"],c:1,e:"Plants use carbon dioxide during photosynthesis."},
+    {q:"What is the boiling point of pure water at sea level?",a:["0°C","50°C","100°C","200°C"],c:2,e:"Pure water boils at about 100°C at standard atmospheric pressure."},
+    {q:"Which organ pumps blood around the human body?",a:["Lungs","Heart","Stomach","Kidneys"],c:1,e:"The heart pumps blood through the circulatory system."},
+    {q:"What force pulls objects towards Earth?",a:["Gravity","Friction","Magnetism","Sound"],c:0,e:"Gravity attracts objects with mass toward Earth."},
+    {q:"What is the basic unit of life?",a:["Atom","Cell","Organ","Tissue"],c:1,e:"Cells are the basic structural and functional units of living things."},
+    {q:"Which state of matter has a fixed volume but no fixed shape?",a:["Solid","Liquid","Gas","Plasma only"],c:1,e:"A liquid has a fixed volume and takes the shape of its container."},
+    {q:"Which part of a plant usually absorbs water from the soil?",a:["Flower","Leaf","Root","Fruit"],c:2,e:"Roots absorb water and minerals from the soil."}
   ],
-
-  history: [
-
-    {
-
-      q: "In which year did South Africa become a democracy with its first inclusive national election?",
-
-      a: ["1910", "1948", "1994", "2004"],
-
-      c: 2,
-
-      e: "South Africa held its first inclusive democratic national election in 1994."
-
-    },
-
-    {
-
-      q: "Who was South Africa's first democratically elected president?",
-
-      a: ["Nelson Mandela", "Thabo Mbeki", "Oliver Tambo", "F. W. de Klerk"],
-
-      c: 0,
-
-      e: "Nelson Mandela became president in 1994."
-
-    },
-
-    {
-
-      q: "What is history mainly the study of?",
-
-      a: ["Past events", "Future weather", "Only mathematics", "Space travel"],
-
-      c: 0,
-
-      e: "History investigates and interprets the human past."
-
-    },
-
-    {
-
-      q: "Which source is a primary historical source?",
-
-      a: ["A diary written at the time", "A modern textbook summary", "A recent review of a film", "A fictional story written today"],
-
-      c: 0,
-
-      e: "A diary written during the period is a direct historical source."
-
-    },
-
-    {
-
-      q: "What was apartheid in South Africa?",
-
-      a: ["A system of racial segregation", "A voting system for everyone", "A farming tool", "A peace treaty"],
-
-      c: 0,
-
-      e: "Apartheid was a system of legally enforced racial segregation and discrimination."
-
-    },
-
-    {
-
-      q: "Which organisation led the struggle against apartheid and later became a governing party?",
-
-      a: ["African National Congress", "United Nations only", "League of Nations", "European Union"],
-
-      c: 0,
-
-      e: "The ANC was a major movement in the struggle against apartheid."
-
-    }
-
+  history:[
+    {q:"In which year did South Africa become a democracy with its first inclusive national election?",a:["1910","1948","1994","2004"],c:2,e:"South Africa held its first inclusive democratic national election in 1994."},
+    {q:"Who was South Africa's first democratically elected president?",a:["Nelson Mandela","Thabo Mbeki","Oliver Tambo","F. W. de Klerk"],c:0,e:"Nelson Mandela became president in 1994."},
+    {q:"What is history mainly the study of?",a:["Past events","Future weather","Only mathematics","Space travel"],c:0,e:"History investigates and interprets the human past."},
+    {q:"Which source is a primary historical source?",a:["A diary written at the time","A modern textbook summary","A recent review of a film","A fictional story written today"],c:0,e:"A diary written during the period is a direct historical source."},
+    {q:"What was apartheid in South Africa?",a:["A system of racial segregation","A voting system for everyone","A farming tool","A peace treaty"],c:0,e:"Apartheid was a system of legally enforced racial segregation and discrimination."},
+    {q:"Which organisation led the struggle against apartheid and later became a governing party?",a:["African National Congress","United Nations only","League of Nations","European Union"],c:0,e:"The ANC was a major movement in the struggle against apartheid."}
   ],
-
-  geography: [
-
-    {
-
-      q: "What is the capital city of South Africa where the Union Buildings are located?",
-
-      a: ["Pretoria", "Durban", "Gqeberha", "Kimberley"],
-
-      c: 0,
-
-      e: "Pretoria is the administrative capital and home of the Union Buildings."
-
-    },
-
-    {
-
-      q: "Which is the largest ocean on Earth?",
-
-      a: ["Atlantic", "Indian", "Pacific", "Arctic"],
-
-      c: 2,
-
-      e: "The Pacific Ocean is the largest."
-
-    },
-
-    {
-
-      q: "What does a map scale help you calculate?",
-
-      a: ["Real-world distance", "Air temperature", "Population age", "Rainfall colour"],
-
-      c: 0,
-
-      e: "A map scale relates map distances to actual distances."
-
-    },
-
-    {
-
-      q: "Which direction is opposite to north?",
-
-      a: ["East", "West", "South", "North-east"],
-
-      c: 2,
-
-      e: "South is opposite north."
-
-    },
-
-    {
-
-      q: "What is the imaginary line at 0° latitude called?",
-
-      a: ["Equator", "Prime Meridian", "Tropic of Capricorn", "Arctic Circle"],
-
-      c: 0,
-
-      e: "The Equator divides Earth into the Northern and Southern Hemispheres."
-
-    },
-
-    {
-
-      q: "Which instrument measures air pressure?",
-
-      a: ["Barometer", "Thermometer", "Rain gauge", "Compass"],
-
-      c: 0,
-
-      e: "A barometer measures atmospheric pressure."
-
-    }
-
+  geography:[
+    {q:"What is the capital city of South Africa where the Union Buildings are located?",a:["Pretoria","Durban","Gqeberha","Kimberley"],c:0,e:"Pretoria is the administrative capital and home of the Union Buildings."},
+    {q:"Which is the largest ocean on Earth?",a:["Atlantic","Indian","Pacific","Arctic"],c:2,e:"The Pacific Ocean is the largest."},
+    {q:"What does a map scale help you calculate?",a:["Real-world distance","Air temperature","Population age","Rainfall colour"],c:0,e:"A map scale relates map distances to actual distances."},
+    {q:"Which direction is opposite to north?",a:["East","West","South","North-east"],c:2,e:"South is opposite north."},
+    {q:"What is the imaginary line at 0° latitude called?",a:["Equator","Prime Meridian","Tropic of Capricorn","Arctic Circle"],c:0,e:"The Equator divides Earth into the Northern and Southern Hemispheres."},
+    {q:"Which instrument measures air pressure?",a:["Barometer","Thermometer","Rain gauge","Compass"],c:0,e:"A barometer measures atmospheric pressure."}
   ],
-
-  maths: [
-
-    {
-
-      q: "What is 12 × 8?",
-
-      a: ["86", "96", "108", "88"],
-
-      c: 1,
-
-      e: "12 × 8 = 96."
-
-    },
-
-    {
-
-      q: "A triangle has angles of 50° and 60°. What is the third angle?",
-
-      a: ["60°", "70°", "80°", "90°"],
-
-      c: 1,
-
-      e: "Triangle angles total 180°. 180° − 50° − 60° = 70°."
-
-    },
-
-    {
-
-      q: "Convert 250 cm³ to millilitres.",
-
-      a: ["25 mL", "250 mL", "2 500 mL", "0.25 mL"],
-
-      c: 1,
-
-      e: "One cubic centimetre is equal to one millilitre."
-
-    },
-
-    {
-
-      q: "What is the square root of 144?",
-
-      a: ["10", "11", "12", "14"],
-
-      c: 2,
-
-      e: "12 × 12 = 144."
-
-    },
-
-    {
-
-      q: "A rectangle is 7 cm long and 4 cm wide. What is its area?",
-
-      a: ["11 cm²", "22 cm²", "28 cm²", "14 cm²"],
-
-      c: 2,
-
-      e: "Area = length × width = 7 × 4 = 28 cm²."
-
-    },
-
-    {
-
-      q: "What is 3/4 written as a percentage?",
-
-      a: ["25%", "50%", "75%", "80%"],
-
-      c: 2,
-
-      e: "3 ÷ 4 = 0.75, which is 75%."
-
-    }
-
+  maths:[
+    {q:"What is 12 × 8?",a:["86","96","108","88"],c:1,e:"12 × 8 = 96."},
+    {q:"A triangle has angles of 50° and 60°. What is the third angle?",a:["60°","70°","80°","90°"],c:1,e:"Triangle angles total 180°. 180° − 50° − 60° = 70°."},
+    {q:"Convert 250 cm³ to millilitres.",a:["25 mL","250 mL","2 500 mL","0.25 mL"],c:1,e:"One cubic centimetre is equal to one millilitre."},
+    {q:"What is the square root of 144?",a:["10","11","12","14"],c:2,e:"12 × 12 = 144."},
+    {q:"A rectangle is 7 cm long and 4 cm wide. What is its area?",a:["11 cm²","22 cm²","28 cm²","14 cm²"],c:2,e:"Area = length × width = 7 × 4 = 28 cm²."},
+    {q:"What is 3/4 written as a percentage?",a:["25%","50%","75%","80%"],c:2,e:"3 ÷ 4 = 0.75, which is 75%."}
   ],
-
-  general: [
-
-    {
-
-      q: "How many days are there in a leap year?",
-
-      a: ["364", "365", "366", "367"],
-
-      c: 2,
-
-      e: "A leap year has 366 days."
-
-    },
-
-    {
-
-      q: "Which language is mainly spoken in Brazil?",
-
-      a: ["Spanish", "Portuguese", "French", "Italian"],
-
-      c: 1,
-
-      e: "Portuguese is Brazil's official language."
-
-    },
-
-    {
-
-      q: "Which instrument has keys, pedals and strings?",
-
-      a: ["Piano", "Flute", "Drum", "Trumpet"],
-
-      c: 0,
-
-      e: "A piano uses keys to operate hammers that strike strings."
-
-    },
-
-    {
-
-      q: "How many sides does a hexagon have?",
-
-      a: ["Five", "Six", "Seven", "Eight"],
-
-      c: 1,
-
-      e: "A hexagon has six sides."
-
-    },
-
-    {
-
-      q: "Which star is closest to Earth?",
-
-      a: ["Sirius", "The Sun", "Polaris", "Betelgeuse"],
-
-      c: 1,
-
-      e: "The Sun is the star closest to Earth."
-
-    },
-
-    {
-
-      q: "Which continent is South Africa part of?",
-
-      a: ["Asia", "Europe", "Africa", "South America"],
-
-      c: 2,
-
-      e: "South Africa is in Africa."
-
-    }
-
+  general:[
+    {q:"How many days are there in a leap year?",a:["364","365","366","367"],c:2,e:"A leap year has 366 days."},
+    {q:"Which language is mainly spoken in Brazil?",a:["Spanish","Portuguese","French","Italian"],c:1,e:"Portuguese is Brazil's official language."},
+    {q:"Which instrument has keys, pedals and strings?",a:["Piano","Flute","Drum","Trumpet"],c:0,e:"A piano uses keys to operate hammers that strike strings."},
+    {q:"How many sides does a hexagon have?",a:["Five","Six","Seven","Eight"],c:1,e:"A hexagon has six sides."},
+    {q:"Which star is closest to Earth?",a:["Sirius","The Sun","Polaris","Betelgeuse"],c:1,e:"The Sun is the star closest to Earth."},
+    {q:"Which continent is South Africa part of?",a:["Asia","Europe","Africa","South America"],c:2,e:"South Africa is in Africa."}
   ]
-
 };
 
 let multiverseQuestions = [];
-
 let multiverseIndex = 0;
-
 let multiverseScore = 0;
-
 let multiverseTimeLeft = 20;
-
 let multiverseTimer = null;
-
 let multiverseAdvanceTimer = null;
-
 let multiverseLocked = false;
-
 let multiverseSettings = {};
 
 function startMultiverseQuiz() {
-
   clearInterval(multiverseTimer);
-
   clearTimeout(multiverseAdvanceTimer);
 
-  const topic = document.getElementById("quiz-topic").value;
-
-  const length = Number(document.getElementById("quiz-length").value);
-
-  const seconds = Number(document.getElementById("quiz-seconds").value);
+  const topic = $("quiz-topic").value;
+  const length = Number($("quiz-length").value);
+  const seconds = Number($("quiz-seconds").value);
 
   let pool;
-
   if (topic === "mixed") {
-
-    pool = Object.keys(multiverseQuestionBank)
-
-      .flatMap(key => multiverseQuestionBank[key]);
-
+    pool = Object.keys(multiverseQuestionBank).flatMap(key => multiverseQuestionBank[key]);
   } else {
-
     pool = [...(multiverseQuestionBank[topic] || [])];
-
   }
 
-  // Shuffle the questions so each round feels different.
+  /* Shuffle questions */
+  for (let i=pool.length-1;i>0;i--) {
+    const j = Math.floor(Math.random() * (i+1));
+    [pool[i],pool[j]] = [pool[j],pool[i]];
+  }
 
-  pool = pool.sort(() => Math.random() - 0.5);
-
-  multiverseQuestions = pool.slice(0, Math.min(length, pool.length));
-
+  multiverseQuestions = pool.slice(0,Math.min(length,pool.length));
   multiverseIndex = 0;
-
   multiverseScore = 0;
+  multiverseSettings = {seconds};
 
-  multiverseSettings = { seconds };
+  if (!multiverseQuestions.length) {
+    toast("No questions found for this topic.");
+    return;
+  }
 
-  if (!multiverseQuestions.length) return;
-
-  document.getElementById("quiz-setup").hidden = true;
-
-  document.getElementById("quiz-game").hidden = false;
-
-  document.getElementById("quiz-results").hidden = true;
-
-  document.getElementById("quiz-start").textContent = "QUIZ RUNNING";
+  $("quiz-setup").hidden = true;
+  $("quiz-game").hidden = false;
+  $("quiz-results").hidden = true;
+  $("quiz-start").textContent = "QUIZ RUNNING";
+  $("quiz-start").disabled = true;
 
   showMultiverseQuestion();
-
 }
 
 function showMultiverseQuestion() {
-
   clearInterval(multiverseTimer);
-
   clearTimeout(multiverseAdvanceTimer);
 
   if (multiverseIndex >= multiverseQuestions.length) {
-
     finishMultiverseQuiz();
-
     return;
-
   }
 
   multiverseLocked = false;
-
   const item = multiverseQuestions[multiverseIndex];
 
-  document.getElementById("quiz-question").textContent = item.q;
+  $("quiz-question").textContent = item.q;
+  $("quiz-progress").textContent = `Question ${multiverseIndex+1} of ${multiverseQuestions.length}`;
+  $("quiz-score").textContent = `Score: ${multiverseScore}`;
+  $("quiz-progress-fill").style.width = `${(multiverseIndex/multiverseQuestions.length)*100}%`;
+  $("quiz-feedback").textContent = "";
+  $("quiz-auto-note").textContent = "Choose an answer. The next question loads automatically.";
 
-  document.getElementById("quiz-progress").textContent =
-
-    `Question ${multiverseIndex + 1} of ${multiverseQuestions.length}`;
-
-  document.getElementById("quiz-score").textContent =
-
-    `Score: ${multiverseScore}`;
-
-  document.getElementById("quiz-progress-fill").style.width =
-
-    `${(multiverseIndex / multiverseQuestions.length) * 100}%`;
-
-  document.getElementById("quiz-feedback").textContent = "";
-
-  document.getElementById("quiz-auto-note").textContent =
-
-    "Choose an answer. The next question loads automatically.";
-
-  const options = document.getElementById("quiz-options");
-
+  const options = $("quiz-options");
   options.innerHTML = "";
 
-  item.a.forEach((answer, index) => {
-
+  item.a.forEach((answer,index) => {
     const button = document.createElement("button");
-
     button.type = "button";
-
     button.className = "quiz-option";
-
-    button.textContent = `${String.fromCharCode(65 + index)}. ${answer}`;
-
-    button.addEventListener("click", () => answerMultiverseQuestion(index));
-
+    button.textContent = `${String.fromCharCode(65+index)}. ${answer}`;
+    button.addEventListener("click",() => answerMultiverseQuestion(index));
     options.appendChild(button);
-
   });
 
   multiverseTimeLeft = multiverseSettings.seconds;
-
   updateMultiverseTimer();
 
   if (multiverseTimeLeft > 0) {
-
     multiverseTimer = setInterval(() => {
-
       multiverseTimeLeft--;
-
       updateMultiverseTimer();
-
       if (multiverseTimeLeft <= 0) {
-
         clearInterval(multiverseTimer);
-
         answerMultiverseQuestion(-1);
-
       }
-
-    }, 1000);
-
+    },1000);
   }
-
 }
 
 function updateMultiverseTimer() {
-
-  document.getElementById("quiz-timer").textContent =
-
-    multiverseSettings.seconds === 0 ? "∞" : multiverseTimeLeft;
-
+  $("quiz-timer").textContent = multiverseSettings.seconds === 0 ? "∞" : multiverseTimeLeft;
 }
 
 function answerMultiverseQuestion(selected) {
-
   if (multiverseLocked) return;
-
   multiverseLocked = true;
-
   clearInterval(multiverseTimer);
 
   const item = multiverseQuestions[multiverseIndex];
-
   const buttons = document.querySelectorAll("#quiz-options .quiz-option");
 
-  buttons.forEach((button, index) => {
-
+  buttons.forEach((button,index) => {
     button.disabled = true;
-
     if (index === item.c) {
-
       button.classList.add("correct");
-
     } else if (index === selected) {
-
       button.classList.add("wrong");
-
     }
-
   });
 
   if (selected === item.c) {
-
     multiverseScore++;
-
-    document.getElementById("quiz-feedback").textContent =
-
-      "✅ Correct! " + item.e;
-
+    $("quiz-feedback").textContent = "✅ Correct! " + item.e;
   } else if (selected === -1) {
-
-    document.getElementById("quiz-feedback").textContent =
-
-      "⏰ Time's up! " + item.e;
-
+    $("quiz-feedback").textContent = "⏰ Time's up! " + item.e;
   } else {
-
-    document.getElementById("quiz-feedback").textContent =
-
-      "❌ Not quite. " + item.e;
-
+    $("quiz-feedback").textContent = "❌ Not quite. " + item.e;
   }
 
-  document.getElementById("quiz-score").textContent =
-
-    `Score: ${multiverseScore}`;
-
-  document.getElementById("quiz-auto-note").textContent =
-
-    "Moving to the next question...";
-
-  // Automatically move forward after showing feedback.
+  $("quiz-score").textContent = `Score: ${multiverseScore}`;
+  $("quiz-auto-note").textContent = "Moving to the next question...";
 
   multiverseAdvanceTimer = setTimeout(() => {
-
     multiverseIndex++;
-
     showMultiverseQuestion();
-
-  }, 1800);
-
+  },1800);
 }
 
 function finishMultiverseQuiz() {
-
   clearInterval(multiverseTimer);
-
   clearTimeout(multiverseAdvanceTimer);
-
-  document.getElementById("quiz-game").hidden = true;
-
-  document.getElementById("quiz-results").hidden = false;
-
-  document.getElementById("quiz-progress-fill").style.width = "100%";
-
-  document.getElementById("quiz-timer").textContent = "✓";
-
-  document.getElementById("quiz-start").textContent = "▶ START QUIZ";
+  $("quiz-game").hidden = true;
+  $("quiz-results").hidden = false;
+  $("quiz-progress-fill").style.width = "100%";
+  $("quiz-timer").textContent = "✓";
+  $("quiz-start").textContent = "▶ START QUIZ";
+  $("quiz-start").disabled = false;
 
   const total = multiverseQuestions.length;
+  const percentage = Math.round((multiverseScore/total)*100);
 
-  const percentage = Math.round((multiverseScore / total) * 100);
-
-  document.getElementById("quiz-final-score").textContent =
-
-    `You scored ${multiverseScore} out of ${total} questions.`;
-
-  document.getElementById("quiz-percentage").textContent =
-
-    `Accuracy: ${percentage}%`;
+  $("quiz-final-score").textContent = `You scored ${multiverseScore} out of ${total} questions.`;
+  $("quiz-percentage").textContent = `Accuracy: ${percentage}%`;
 
   let rank;
+  if (percentage >= 90) rank = "🕷️ Multiverse Legend";
+  else if (percentage >= 70) rank = "⚡ Elite Web-Slinger";
+  else if (percentage >= 50) rank = "🕸️ City Defender";
+  else rank = "🦸 Rookie Hero — train and try again!";
 
-  if (percentage >= 90) {
-
-    rank = "🕷️ Multiverse Legend";
-
-  } else if (percentage >= 70) {
-
-    rank = "⚡ Elite Web-Slinger";
-
-  } else if (percentage >= 50) {
-
-    rank = "🕸️ City Defender";
-
-  } else {
-
-    rank = "🦸 Rookie Hero — train and try again!";
-
-  }
-
-  document.getElementById("quiz-rank").textContent = rank;
-
+  $("quiz-rank").textContent = rank;
 }
 
 function resetMultiverseQuiz() {
-
   clearInterval(multiverseTimer);
-
   clearTimeout(multiverseAdvanceTimer);
-
-  document.getElementById("quiz-setup").hidden = false;
-
-  document.getElementById("quiz-game").hidden = true;
-
-  document.getElementById("quiz-results").hidden = true;
-
-  document.getElementById("quiz-start").textContent = "▶ START QUIZ";
-
-  document.getElementById("quiz-timer").textContent =
-
-    document.getElementById("quiz-seconds").value === "0"
-
-      ? "∞"
-
-      : document.getElementById("quiz-seconds").value;
-
+  multiverseLocked = false;
+  $("quiz-setup").hidden = false;
+  $("quiz-game").hidden = true;
+  $("quiz-results").hidden = true;
+  $("quiz-start").textContent = "▶ START QUIZ";
+  $("quiz-start").disabled = false;
+  $("quiz-timer").textContent = $("quiz-seconds").value === "0" ? "∞" : $("quiz-seconds").value;
+  $("quiz-progress-fill").style.width = "0%";
+  $("quiz-score").textContent = "Score: 0";
 }
 
+/* Update the timer display when its setting changes */
+$("quiz-seconds").addEventListener("change",() => {
+  if ($("quiz-game").hidden) {
+    $("quiz-timer").textContent = $("quiz-seconds").value === "0" ? "∞" : $("quiz-seconds").value;
+  }
+});
 </script>
+</body>
+</html>
