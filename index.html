@@ -1,1 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080808">
+  <title>My Spider-Verse</title>
 
+  <style>
+    :root {
+      --blue: #448aff;
+      --line: rgba(255,255,255,.2);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: #fff;
+      background: #080808;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* OPENING SCREEN */
+
+    .intro {
+      position: relative;
+      isolation: isolate;
+      min-height: 100vh;
+      min-height: 100svh;
+      padding: 30px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      text-align: center;
+      background: #080808;
+    }
+
+    .intro::before {
+      content: "";
+      position: absolute;
+      z-index: -2;
+      inset: -2%;
+      background:
+        linear-gradient(
+          rgba(0,0,0,.35),
+          rgba(0,0,0,.35) 45%,
+          rgba(0,0,0,.78)
+        ),
+        url("./Spiderman-background.jpeg") center / cover no-repeat;
+      animation: backgroundIn 1.2s ease-out both;
+    }
+
+    .intro::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(
+        ellipse at center,
+        transparent 15%,
+        rgba(0,0,0,.35) 100%
+      );
+    }
+
+    .intro-content {
+      width: 100%;
+      max-width: 1100px;
+      animation: fadeIn .9s ease-out both;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: #d1e1ff;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 5px;
+      text-shadow: 0 2px 12px #000;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(43px, 8vw, 82px);
+      font-weight: 950;
+      line-height: .95;
+      letter-spacing: -3px;
+      text-shadow: 0 5px 30px #000;
+    }
+
+    h1 span {
+      display: block;
+      margin-top: 8px;
+      color: transparent;
+      -webkit-text-stroke: 1.5px #fff;
+    }
+
+    /* ANIMATED PORTAL */
+
+    .portal-stage {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px auto 12px;
+      padding: 25px 0;
+    }
+
+    .portal {
+      position: absolute;
+      width: min(90vw, 850px);
+      height: 100%;
+      min-height: 150px;
+      max-height: 300px;
+      border: 1px solid rgba(68,138,255,.8);
+      border-radius: 50%;
+      box-shadow:
+        0 0 24px rgba(40,105,255,.45),
+        inset 0 0 30px rgba(40,105,255,.25);
+      animation: portalRotate 24s linear infinite;
+      pointer-events: none;
+    }
+
+    .portal::before,
+    .portal::after {
+      content: "";
+      position: absolute;
+      inset: 12%;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 50%;
+      transform: rotateX(55deg) rotate(25deg);
+    }
+
+    .portal::after {
+      inset: 22%;
+      border-color: rgba(68,138,255,.8);
+      transform: rotateY(55deg) rotate(-30deg);
+    }
+
+    /* CHARACTER LINEUP */
+
+    .character-line {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: clamp(2px, 1.2vw, 14px);
+      width: 100%;
+      padding: 0 2px;
+    }
+
+    .character {
+      display: block;
+      flex: 1 1 0;
+      min-width: 0;
+      max-width: 110px;
+      height: clamp(90px, 18vw, 180px);
+      object-fit: contain;
+      object-position: center bottom;
+      filter: drop-shadow(0 8px 8px rgba(0,0,0,.8));
+      animation: characterFloat 3.5s ease-in-out infinite;
+    }
+
+    .character:nth-child(2) { animation-delay: -.4s; }
+    .character:nth-child(3) { animation-delay: -.8s; }
+    .character:nth-child(4) { animation-delay: -1.2s; }
+    .character:nth-child(5) { animation-delay: -1.6s; }
+    .character:nth-child(6) { animation-delay: -2s; }
+    .character:nth-child(7) { animation-delay: -2.4s; }
+    .character:nth-child(8) { animation-delay: -2.8s; }
+    .character:nth-child(9) { animation-delay: -3.2s; }
+
+    .tagline {
+      margin: 14px 0 24px;
+      font-size: 11px;
+      line-height: 1.8;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 10px #000;
+    }
+
+    .enter-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      min-width: 225px;
+      min-height: 54px;
+      padding: 15px 24px;
+      border: 1px solid #fff;
+      border-radius: 4px;
+      background: #fff;
+      color: #080808;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: transform .2s, background .2s, box-shadow .2s;
+    }
+
+    .enter-button:hover {
+      transform: translateY(-3px);
+      background: #dbe8ff;
+      box-shadow: 0 0 28px rgba(68,138,255,.45);
+    }
+
+    .enter-button:active {
+      transform: scale(.97);
+    }
+
+    .bottom-label {
+      margin-top: 27px;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-shadow: 0 2px 8px #000;
+    }
+
+    /* CATEGORY MENU */
+
+    #website {
+      display: none;
+      min-height: 100vh;
+      background:
+        linear-gradient(rgba(0,0,0,.88), rgba(0,0,0,.96)),
+        url("./Spiderman-background.jpeg") center / cover fixed;
+    }
+
+    #website.visible {
+      display: block;
+      animation: fadeIn .45s ease-out both;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 16px 5%;
+      background: rgba(0,0,0,.92);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand {
+      display: inline-block;
+      margin-bottom: 14px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-decoration: none;
+    }
+
+    .brand span {
+      color: #8ab5ff;
+    }
+
+    .nav {
+      display: flex;
+      gap: 20px;
+      max-width: 100%;
+      overflow-x: auto;
+      white-space: nowrap;
+      font-size: 11px;
+    }
+
+    .nav a {
+      padding: 5px 0;
+      color: #ddd;
+      text-decoration: none;
+    }
+
+    .nav a:hover {
+      color: #8ab5ff;
+    }
+
+    .home {
+      max-width: 1150px;
+      margin: auto;
+      padding: 55px 5%;
+    }
+
+    .section-label {
+      color: #8ab5ff;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 3px;
+    }
+
+    .home h2 {
+      margin: 15px 0;
+      font-size: clamp(34px, 6vw, 60px);
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+
+    .home h2 span {
+      color: #8ab5ff;
+    }
+
+    .home-intro {
+      max-width: 560px;
+      color: #ccc;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 35px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      min-height: 165px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(15,15,15,.9);
+      color: #fff;
+      text-decoration: none;
+      transition: transform .2s, border-color .2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--blue);
+    }
+
+    .card-number {
+      color: #8ab5ff;
+      font-size: 10px;
+      letter-spacing: 2px;
+    }
+
+    .card h3 {
+      margin: 20px 0 8px;
+      font-size: 18px;
+    }
+
+    .card p {
+      margin: 0;
+      color: #bbb;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .card .open {
+      margin-top: auto;
+      padding-top: 18px;
+      color: #d3e2ff;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    footer {
+      padding: 25px;
+      border-top: 1px solid var(--line);
+      color: #aaa;
+      text-align: center;
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes backgroundIn {
+      from { transform: scale(1.07); }
+      to { transform: scale(1.02); }
+    }
+
+    @keyframes portalRotate {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes characterFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    @media (min-width: 900px) {
+      .character {
+        height: clamp(130px, 18vw, 180px);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .intro {
+        padding: 25px 7px;
+      }
+
+      .eyebrow {
+        letter-spacing: 3px;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+
+      .character-line {
+        gap: 2px;
+      }
+
+      .character {
+        height: clamp(65px, 17vw, 105px);
+      }
+
+      .portal {
+        width: 96vw;
+        min-height: 115px;
+        max-height: 210px;
+      }
+
+      .tagline {
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 360px) {
+      .character {
+        height: 62px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- OPENING SCREEN -->
+
+  <section class="intro" id="introScreen">
+    <div class="intro-content">
+
+      <p class="eyebrow">A DIFFERENT KIND OF UNIVERSE</p>
+
+      <h1>
+        MY SPIDER-
+        <span>VERSE.</span>
+      </h1>
+
+      <div class="portal-stage">
+        <div class="portal" aria-hidden="true"></div>
+
+        <div class="character-line">
+          <img class="character"
+            src="./Lego%20golden%20jaguar.jpeg"
+            alt="Golden Jaguar"
+            loading="eager">
+
+          <img class="character"
+            src="./Lego%20Black%20panther.jpeg"
+            alt="Black Panther"
+            loading="eager">
+
+          <img class="character"
+            src="./Lego%20doctor%20strange.jpeg"
+            alt="Doctor Strange"
+            loading="eager">
+
+          <img class="character"
+            src="./Lego%20Gwen%20spiderman.jpeg"
+            alt="Spider-Gwen"
+            loading="eager">
+
+          <img class="character"
+            src="./Lego%20ironman.jpeg"
+            alt="Iron Man"
+            loading="eager">
+
+          <img class="character"
+            src="./Lego%20war machine.jpeg"
+            alt="War Machine"
+            loading="eager">
+
+          <img class="character"
+            src="./Legospiderman%20upgraded%20suit.jpeg"
+            alt="Spider-Man upgraded suit"
+            loading="eager">
+
+          <img class="character"
+            src="./Lego%20Spiderman.jpeg"
+            alt="Spider-Man"
+            loading="eager">
+
+          <img class="character"
+            src="./Lego%20Venom.jpeg"
+            alt="Venom"
+            loading="eager">
+        </div>
+      </div>
+
+      <p class="tagline">
+        YOUR WORLD. YOUR STORY. YOUR RULES.
+      </p>
+
+      <button class="enter-button" id="enterButton" type="button">
+        ENTER THE VERSE <span aria-hidden="true">↗️</span>
+      </button>
+
+      <div class="bottom-label">TAP TO BEGIN YOUR JOURNEY</div>
+    </div>
+  </section>
+
+  <!-- CATEGORY MENU -->
+
+  <div id="website">
+
+    <header class="topbar">
+      <a class="brand" href="./index.html">
+        MY <span>SPIDER-VERSE</span>
+      </a>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a href="./index.html">HOME</a>
+        <a href="./story.html">STORY</a>
+        <a href="./music.html">MUSIC LAB</a>
+        <a href="./game.html">BOSS MODE</a>
+        <a href="./hero-lab.html">HERO LAB</a>
+        <a href="./missions.html">MISSIONS</a>
+        <a href="./settings.html">SETTINGS</a>
+        <a href="./confessions.html">CONFESSIONS</a>
+        <a href="./grammar.html">GRAMMAR LAB</a>
+      </nav>
+    </header>
+
+    <main class="home">
+      <div class="section-label">WELCOME TO YOUR UNIVERSE</div>
+
+      <h2>
+        Every universe has a story.<br>
+        <span>What's yours?</span>
+      </h2>
+
+      <p class="home-intro">
+        Explore stories, customise characters, discover music,
+        complete missions and enter the arena. This is your universe
+        to make your own.
+      </p>
+
+      <div class="grid">
+
+        <a class="card" href="./story.html">
+          <span class="card-number">01 / STORIES</span>
+          <h3>Story Archive</h3>
+          <p>Explore stories and chapters.</p>
+          <span class="open">OPEN STORIES ↗️</span>
+        </a>
+
+        <a class="card" href="./music.html">
+          <span class="card-number">02 / SOUND</span>
+          <h3>Music Lab</h3>
+          <p>Listen through supported music players.</p>
+          <span class="open">OPEN MUSIC LAB ↗️</span>
+        </a>
+
+        <a class="card" href="./game.html">
+          <span class="card-number">03 / COMBAT</span>
+          <h3>Boss Mode</h3>
+          <p>Enter the arena and challenge the Glitch.</p>
+          <span class="open">ENTER ARENA ↗️</span>
+        </a>
+
+        <a class="card" href="./hero-lab.html">
+          <span class="card-number">04 / IDENTITY</span>
+          <h3>Hero Lab</h3>
+          <p>Choose and customise your character.</p>
+          <span class="open">BUILD YOUR HERO ↗️</span>
+        </a>
+
+        <a class="card" href="./missions.html">
+          <span class="card-number">05 / OBJECTIVES</span>
+          <h3>Missions</h3>
+          <p>Explore challenges and creative activities.</p>
+          <span class="open">VIEW MISSIONS ↗️</span>
+        </a>
+
+        <a class="card" href="./settings.html">
+          <span class="card-number">06 / CONTROL</span>
+          <h3>Settings</h3>
+          <p>Personalise your experience and choose pictures.</p>
+          <span class="open">OPEN SETTINGS ↗️</span>
+        </a>
+
+        <a class="card" href="./confessions.html">
+          <span class="card-number">07 / YOUR SPACE</span>
+          <h3>Confessions</h3>
+          <p>A personal writing space for your thoughts.</p>
+          <span class="open">OPEN CONFESSIONS ↗️</span>
+        </a>
+
+        <a class="card" href="./grammar.html">
+          <span class="card-number">08 / WRITING</span>
+          <h3>Grammar Lab</h3>
+          <p>Improve spelling, grammar and clarity.</p>
+          <span class="open">OPEN GRAMMAR LAB ↗️</span>
+        </a>
+
+      </div>
+    </main>
+
+    <footer>
+      <strong>MY SPIDER-VERSE</strong>
+      <br>
+      An independent fan-made creative project.
+      <br>
+      Your universe. Your story. Your next move.
+    </footer>
+
+  </div>
+
+  <script>
+    const enterButton = document.getElementById("enterButton");
+    const introScreen = document.getElementById("introScreen");
+    const website = document.getElementById("website");
+
+    enterButton.addEventListener("click", function () {
+      introScreen.hidden = true;
+      website.classList.add("visible");
+      window.scrollTo(0, 0);
+    });
+  </script>
+
+</body>
+</html>
