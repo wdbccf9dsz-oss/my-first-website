@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Strange Signal | My Spider-Verse</title>
+<style>
+:root {
+  --ink: #20243a;
+  --paper: #fffaf0;
+  --red: #c92d46;
+  --blue: #236b9b;
+  --muted: #666b7d;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #101321;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  line-height: 1.75;
+}
+a { color: #8bd7ff; }
+.site-header {
+  max-width: 850px;
+  margin: auto;
+  padding: 18px;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+.site-header h1 {
+  color: #ff5268;
+  margin-bottom: 0;
+  letter-spacing: 2px;
+}
+.book {
+  width: min(100% - 24px, 760px);
+  margin: 0 auto 24px;
+  background: var(--paper);
+  box-shadow: 0 12px 40px #0008;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.book-page {
+  min-height: 570px;
+  padding: clamp(24px, 6vw, 60px);
+  display: flex;
+  flex-direction: column;
+}
+.cover {
+  color: white;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  background:
+    radial-gradient(ellipse at 50% 40%, #b7294d 0, transparent 42%),
+    linear-gradient(145deg, #101321, #182f53);
+}
+.cover .web {
+  font-size: 80px;
+  line-height: 1.3;
+}
+.cover h2 {
+  font-family: Arial, sans-serif;
+  font-size: clamp(34px, 8vw, 58px);
+  line-height: 1.1;
+  margin: 15px 0;
+  text-transform: uppercase;
+}
+.cover p { max-width: 400px; }
+.eyebrow {
+  color: var(--red);
+  font: bold 12px Arial, sans-serif;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+h2, h3 { line-height: 1.25; }
+h2 { font-size: 32px; }
+h3 { margin-top: 28px; }
+.page-heading {
+  border-bottom: 2px solid var(--red);
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+}
+.story-text p { margin: 0 0 18px; }
+.dialogue {
+  border-left: 4px solid var(--blue);
+  padding: 12px 16px;
+  margin: 16px 0;
+  background: #eaf3f8;
+}
+.dialogue p { margin: 0 0 9px; }
+.dialogue p:last-child { margin-bottom: 0; }
+.speaker { color: #174f76; font-weight: bold; }
+.contents-list {
+  list-style: none;
+  padding: 0;
+}
+.contents-list li {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px dotted #aaa;
+}
+.contents-list .num {
+  font-weight: bold;
+  color: var(--red);
+  min-width: 28px;
+}
+.page-footer {
+  margin-top: auto;
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font: 12px Arial, sans-serif;
+}
+.controls {
+  max-width: 760px;
+  margin: 0 auto 30px;
+  padding: 0 12px;
+  display: flex;
+  gap: 10px;
+  font-family: Arial, sans-serif;
+}
+button, select {
+  min-height: 46px;
+  border: 0;
+  border-radius: 7px;
+  padding: 10px 14px;
+  font-weight: bold;
+  font-size: 14px;
+}
+button {
+  background: var(--red);
+  color: white;
+  flex: 1;
+}
+button:disabled { opacity: .4; }
+select { max-width: 155px; }
+.progress {
+  max-width: 760px;
+  height: 4px;
+  margin: 0 auto 16px;
+  background: #3b4053;
+}
+#progressBar {
+  height: 100%;
+  width: 6.67%;
+  background: #ff5268;
+  transition: width .2s;
+}
+.back-link {
+  display: inline-block;
+  margin-bottom: 8px;
+}
+@media (max-width: 480px) {
+  .book-page { min-height: 570px; padding: 26px 22px; }
+  .controls { flex-wrap: wrap; }
+  select { flex: 1; max-width: none; }
+}
+@media print {
+  body { background: white; }
+  .site-header, .controls, .progress { display: none; }
+  .book { width: 100%; box-shadow: none; }
+  .book-page { page-break-after: always; }
+}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <a class="back-link" href="index.html">← My Spider-Verse home</a>
+  <h1>MY SPIDER-VERSE</h1>
+  <p>A digital graphic novel · Book 01</p>
+</header>
+
+<main>
+  <article class="book" aria-live="polite">
+    <section class="book-page cover" id="page">
+      <div class="web">✳</div>
+      <p>MY SPIDER-VERSE · BOOK ONE</p>
+      <h2>The Strange<br>Signal</h2>
+      <p>An adventure about unexpected allies, tangled worlds, and the connections that make a team.</p>
+      <p><strong>Written for the My Spider-Verse universe</strong></p>
+    </section>
+  </article>
+
+  <div class="progress"><div id="progressBar"></div></div>
+  <nav class="controls" aria-label="Book navigation">
+    <button id="previous" type="button">← Previous</button>
+    <select id="pageSelect" aria-label="Choose a page"></select>
+    <button id="next" type="button">Next →</button>
+  </nav>
+</main>
+
+<script>
+const pages = [
+{
+title: "Contents",
+type: "contents",
+body: `
+<p>Welcome to <em>The Strange Signal</em>. Turn through the pages to follow Maya and a team of unusual heroes as they investigate a mystery connecting different universes.</p>
+<ol class="contents-list">
+<li><span class="num">01</span><span>A Normal Evening</span></li>
+<li><span class="num">02</span><span>The Sky Answers</span></li>
+<li><span class="num">03</span><span>A Visitor</span></li>
+<li><span class="num">04</span><span>The Sorcerer's Warning</span></li>
+<li><span class="num">05</span><span>Unexpected Backup</span></li>
+<li><span class="num">06</span><span>The Team Meeting</span></li>
+<li><span class="num">07</span><span>A Joker in the Web</span></li>
+<li><span class="num">08</span><span>The First Portal</span></li>
+<li><span class="num">09</span><span>The Web Maze</span></li>
+<li><span class="num">10</span><span>A Different Kind of Power</span></li>
+<li><span class="num">11</span><span>The Plan</span></li>
+<li><span class="num">12</span><span>The Great Untangle</span></li>
+<li><span class="num">13</span><span>A Better Connection</span></li>
+<li><span class="num">14</span><span>To Be Continued</span></li>
+</ol>`
+},
+{
+title: "A Normal Evening",
+body: `<p>Maya was supposed to be finishing her homework. Her notebook lay open, her pencil was ready, and her science worksheet had exactly one answer written on it.</p>
+<p>That answer was “maybe.”</p>
+<p>Then a small symbol appeared on the last page of her sketchbook. It looked like a spiderweb drawn in silver light. Maya blinked. The symbol glowed brighter.</p>
+<div class="dialogue"><p><span class="speaker">MAYA:</span> Either my pencil is haunted, or homework has finally become interesting.</p></div>
+<p>She touched the page. A tiny pulse of blue light travelled across the paper and disappeared through the window.</p>
+<p>Far away, something answered.</p>`
+},
+{
+title: "The Sky Answers",
+body: `<p>At 9:17 p.m., the city lights flickered. Blue threads stretched between rooftops, crossing streets and wrapping around the tallest buildings without touching a single brick.</p>
+<p>For one impossible second, every window reflected a different skyline. One showed a city beneath two moons. Another showed buildings floating upside down.</p>
+<p>On a nearby rooftop, a masked web-slinging hero stopped mid-swing.</p>
+<div class="dialogue"><p><span class="speaker">SPIDER-HERO:</span> That is definitely not normal. And I once fought a robot wearing a tutu.</p></div>
+<p>His wrist device flashed with the same silver symbol Maya had seen. He looked toward the glow and launched another web.</p>
+<p>Whatever was happening, it had just invited him personally.</p>`
+},
+{
+title: "A Visitor",
+body: `<p>Maya was trying to decide whether to call someone when a web shot through her open window. A masked hero swung in, landed on the wall, and remained upside down.</p>
+<div class="dialogue"><p><span class="speaker">SPIDER-HERO:</span> Hi. Quick question: is your sketchbook doing the glowing thing too?</p><p><span class="speaker">MAYA:</span> You came through my window to ask that?</p><p><span class="speaker">SPIDER-HERO:</span> I was going to knock. Then the window was right there.</p></div>
+<p>Maya held up the sketchbook. The hero's joking expression disappeared when he saw the symbol.</p>
+<p>“I've seen that mark before,” he said. “In a place that isn't supposed to exist.”</p>
+<p>Before Maya could ask what he meant, golden light filled the room.</p>`
+},
+{
+title: "The Sorcerer's Warning",
+body: `<p>A circular portal opened above Maya's desk. Doctor Strange stepped through, carrying a map whose stars moved like living things.</p>
+<div class="dialogue"><p><span class="speaker">DOCTOR STRANGE:</span> The signal is connecting worlds that should never touch.</p><p><span class="speaker">SPIDER-HERO:</span> Could it connect us to a world where homework does itself?</p><p><span class="speaker">DOCTOR STRANGE:</span> I can close the portal if you'd prefer to find out alone.</p></div>
+<p>The hero raised both hands. “Teamwork it is.”</p>
+<p>Strange spread the map across the desk. Silver threads crossed its surface, all leading toward one pulsing point.</p>
+<p>“Someone is pulling the multiverse together,” he explained. “If those connections tangle, entire worlds could lose their way home.”</p>`
+},
+{
+title: "Unexpected Backup",
+body: `<p>A second portal opened with a pop. A small LEGO hero rolled out, followed by an armored warrior and a powerful protector in a black suit.</p>
+<p>The LEGO hero stood up and held out a biscuit as though it were a badge of office.</p>
+<div class="dialogue"><p><span class="speaker">LEGO HERO:</span> I brought emergency snacks!</p><p><span class="speaker">ARMORED HERO:</span> You brought three bricks and one biscuit.</p><p><span class="speaker">LEGO HERO:</span> Exactly. Emergency snacks.</p></div>
+<p>Maya laughed. Even Doctor Strange almost smiled.</p>
+<p>The armored warrior examined the map while the black-suited protector watched the glowing threads. Each of them had seen a different part of the strange event.</p>
+<p>For the first time that evening, Maya felt that the team might actually have a chance.</p>`
+},
+{
+title: "The Team Meeting",
+body: `<p>They gathered around Maya's desk. Strange's map showed a dozen glowing routes, each connecting a different universe.</p>
+<div class="dialogue"><p><span class="speaker">MAYA:</span> We follow the threads and find the source.</p><p><span class="speaker">SPIDER-HERO:</span> Simple plan.</p><p><span class="speaker">DOCTOR STRANGE:</span> It is almost certainly not simple.</p></div>
+<p>The armored hero traced a route with one metal finger. It led to a strange energy signature on the far side of the city.</p>
+<p>“I can track the machine,” he said. “But if we go in, we stay together.”</p>
+<p>Maya closed her sketchbook and tucked it under her arm. She wasn't a superhero, but the signal had started with her drawing.</p>
+<p>She was going with them.</p>`
+},
+{
+title: "A Joker in the Web",
+body: `<p>A laughing face appeared on the map. Behind it stood a giant machine, its arms pulling silver threads from the sky. The figure at the controls wore a bright, theatrical grin and a LEGO-sized purple coat.</p>
+<div class="dialogue"><p><span class="speaker">TRICKSTER:</span> Welcome to my little experiment!</p><p><span class="speaker">LEGO HERO:</span> Your machine is making my head spin.</p><p><span class="speaker">TRICKSTER:</span> Excellent! It has a spin setting.</p></div>
+<p>The trickster announced that he would connect every universe into one grand design. No one would ever be lost again, he claimed, because every world would become part of the same place.</p>
+<p>Maya noticed something he hadn't: some threads were already snapping under the strain.</p>
+<p>“He thinks he's fixing things,” she whispered. “But he's forcing them together.”</p>`
+},
+{
+title: "The First Portal",
+body: `<p>The team stepped through a portal into a city where trains ran upside down and the moon wore a ring of neon. Buildings leaned at impossible angles, yet their windows glowed warmly.</p>
+<p>A tiny robot train rolled past them on a track suspended in the air.</p>
+<div class="dialogue"><p><span class="speaker">SPIDER-HERO:</span> I vote we never complain about our city again.</p><p><span class="speaker">MAYA:</span> You said that last week.</p><p><span class="speaker">SPIDER-HERO:</span> And I meant it for almost a day.</p></div>
+<p>Strange pointed toward the skyline. A huge web-shaped machine towered over the central station.</p>
+<p>They had found the source. Unfortunately, the streets between them and the machine had begun rearranging themselves.</p>`
+},
+{
+title: "The Web Maze",
+body: `<p>The streets folded into a maze of glowing bridges. Every turn led somewhere new. Gwen, who had joined the team through a portal of her own, studied the lights pulsing across the walls.</p>
+<div class="dialogue"><p><span class="speaker">GWEN:</span> The threads pulse in groups of three. They're showing us a pattern.</p><p><span class="speaker">ARMORED HERO:</span> Then tell me where to stand. This bridge is heavier than it looks.</p></div>
+<p>The armored hero braced a tilting bridge while the others crossed. The LEGO hero placed three little bricks on the floor to mark the safe route.</p>
+<p>“Small bricks, big contribution,” he announced.</p>
+<p>Gwen smiled. “Actually, that's a pretty good system.”</p>
+<p>Working together, they crossed the maze without losing a single member of the team.</p>`
+},
+{
+title: "A Different Kind of Power",
+body: `<p>From a high platform, Maya could finally see the machine clearly. It was not firing weapons or tearing worlds apart. It was pulling their paths into one giant knot.</p>
+<p>Each thread carried a different colour, like a story written in light. Some were bright and steady. Others flickered as their worlds struggled against the pull.</p>
+<div class="dialogue"><p><span class="speaker">MAYA:</span> The signal isn't trying to erase anything. It's trying to connect everything.</p><p><span class="speaker">DOCTOR STRANGE:</span> A connection without balance can still cause chaos.</p></div>
+<p>Maya understood the trickster's mistake. He believed that keeping everyone together meant making every world the same.</p>
+<p>But friends didn't need to be identical. They needed room to be themselves, and a way to find one another when it mattered.</p>`
+},
+{
+title: "The Plan",
+body: `<p>The team gathered behind a tower overlooking the machine. Strange would open a stable portal. Gwen and the Spider-Hero would attach webs to the loose threads. The armored hero would hold the machine's outer frame steady.</p>
+<p>Maya would use her sketchbook to find the original signal and guide the threads back into their proper paths.</p>
+<div class="dialogue"><p><span class="speaker">GWEN:</span> We do this together.</p><p><span class="speaker">SPIDER-HERO:</span> Teamwork, courage, and snacks?</p><p><span class="speaker">LEGO HERO:</span> Finally, someone understands my strategy.</p></div>
+<p>Everyone took their positions. Maya opened the sketchbook. The silver symbol glowed, and for a moment she could hear the faint sounds of every connected world.</p>
+<p>“Ready?” she asked.</p>
+<p>Six heroes answered at once: “Ready.”</p>`
+},
+{
+title: "The Great Untangle",
+body: `<p>The machine roared to life. Red light swept across the skyline as the trickster pulled the final lever.</p>
+<p>Webs flew. Magic shields flashed. The armored hero held the frame while Gwen guided the threads into place. The LEGO hero crawled beneath the console and found a switch labelled “ABSOLUTELY DO NOT PRESS.”</p>
+<div class="dialogue"><p><span class="speaker">TRICKSTER:</span> You can't stop my masterpiece!</p><p><span class="speaker">MAYA:</span> We aren't breaking it. We're fixing it!</p><p><span class="speaker">LEGO HERO:</span> Should I press this suspicious button?</p><p><span class="speaker">EVERYONE:</span> NO!</p></div>
+<p>He pressed the switch beside it instead. The machine's power dropped, giving Maya the opening she needed.</p>
+<p>She drew one final line in the sketchbook. The silver threads loosened and returned to their proper routes, one by one.</p>`
+},
+{
+title: "A Better Connection",
+body: `<p>The red light faded. Above the city, the tangled web became a gentle constellation. Each universe returned to its own sky, but a few safe pathways remained between them.</p>
+<p>The trickster stared at the machine. “I only wanted everyone to stay together,” he admitted.</p>
+<div class="dialogue"><p><span class="speaker">MAYA:</span> You can bring people together without deciding where they belong.</p><p><span class="speaker">GWEN:</span> A connection should be a choice.</p></div>
+<p>Strange opened a portal home. The heroes said their goodbyes, promising to answer if the signal ever called again.</p>
+<p>As Maya stepped through, she realised she had begun the evening thinking she was just a person with a sketchbook. Now she knew that noticing a problem, asking questions, and bringing people together could be powerful too.</p>`
+},
+{
+title: "To Be Continued",
+body: `<p>Sunrise painted the city gold. Maya sat at her desk with a fresh notebook and a much shorter homework list. The sketchbook lay open beside her.</p>
+<p>The silver web symbol had faded, but a new star had appeared beside it. Beneath the star, three words shimmered into view:</p>
+<h3>YOUR TURN NEXT.</h3>
+<div class="dialogue"><p><span class="speaker">SPIDER-HERO:</span> So... breakfast?</p><p><span class="speaker">GWEN:</span> Only if you aren't paying with LEGO bricks.</p><p><span class="speaker">LEGO HERO:</span> I have a coupon.</p></div>
+<p>Maya laughed. The worlds were safe, her friends were only a portal away, and a new adventure was waiting to be written.</p>
+<p>Different worlds. Different stories. One enormous universe of possibilities.</p>
+<p><strong>THE END... FOR NOW.</strong></p>`
+}
+];
+
+const pageEl = document.getElementById("page");
+const select = document.getElementById("pageSelect");
+const prev = document.getElementById("previous");
+const next = document.getElementById("next");
+const progress = document.getElementById("progressBar");
+let current = -1;
+
+const cover = {
+title: "The Strange Signal",
+body: `<p>A My Spider-Verse original adventure</p>
+<p>One mysterious symbol. Several connected worlds. A team that never expected to work together.</p>
+<p><strong>Written for the My Spider-Verse digital book collection.</strong></p>`
+};
+
+const allPages = [cover, ...pages];
+
+allPages.forEach((p, i) => {
+  const option = document.createElement("option");
+  option.value = i;
+  option.textContent = i === 0 ? "Cover" : `Page ${i}`;
+  select.appendChild(option);
+});
+
+function render() {
+  const p = allPages[current + 1];
+  const isCover = current === -1;
+  const pageNumber = current + 2;
+  pageEl.className = "book-page" + (isCover ? " cover" : "");
+  pageEl.innerHTML = isCover
+    ? `<div class="web">✳</div><p class="eyebrow">MY SPIDER-VERSE · BOOK ONE</p>
+       <h2>The Strange<br>Signal</h2>${p.body}`
+    : `<p class="eyebrow">THE STRANGE SIGNAL · CHAPTER ${current + 1}</p>
+       <div class="page-heading"><h2>${p.title}</h2></div>
+       <div class="story-text">${p.body}</div>
+       <div class="page-footer"><span>MY SPIDER-VERSE</span><span>${pageNumber}</span></div>`;
+  select.value = current + 1;
+  prev.disabled = current === -1;
+  next.disabled = current === pages.length - 1;
+  progress.style.width = `${((current + 2) / allPages.length) * 100}%`;
+  select.options[0].textContent = "Cover";
+  document.title = `${p.title} | My Spider-Verse`;
+}
+
+function turn(amount) {
+  current = Math.max(-1, Math.min(pages.length - 1, current + amount));
+  render();
+}
+function goTo(value) {
+  current = Number(value) - 1;
+  render();
+}
+prev.addEventListener("click", () => turn(-1));
+next.addEventListener("click", () => turn(1));
+select.addEventListener("change", () => goTo(select.value));
+
+let startX = null;
+pageEl.addEventListener("touchstart", e => {
+  startX = e.changedTouches[0].clientX;
+}, {passive: true});
+pageEl.addEventListener("touchend", e => {
+  if (startX === null) return;
+  const dx = e.changedTouches[0].clientX - startX;
+  if (Math.abs(dx) > 50) turn(dx < 0 ? 1 : -1);
+  startX = null;
+}, {passive: true});
+
+document.addEventListener("keydown", e => {
+  if (e.key === "ArrowRight") turn(1);
+  if (e.key === "ArrowLeft") turn(-1);
+});
+
+render();
+</script>
+</body>
+</html>
